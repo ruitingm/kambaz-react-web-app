@@ -166,7 +166,8 @@ export default function Lab1() {
         <img
           id="wd-starship"
           width="400px"
-          src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1 _Starship-gap2.jpg"
+          // src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1 _Starship-gap2.jpg"
+          src="https://insights.greyb.com/wp-content/uploads/2024/06/Starship.jpg"
         />
         <br />
         Loading a local image:
@@ -232,11 +233,14 @@ export default function Lab1() {
           <input type="radio" name="radio-genre" id="wd-radio-scifi" />
           <label htmlFor="wd-radio-scifi">Science Fiction</label>
           <br />
-          <input type="radio" name="radio-genere" id="wd-radio-fantasy" />
+          <input type="radio" name="radio-genre" id="wd-radio-fantasy" />
           <label htmlFor="wd-radio-fantasy">Fantasy</label>
+          <br />
           <h5 id="wd-checkboxes">Checkboxes</h5>
           <label>Favorite movie genre:</label>
           <br />
+          <input type="checkbox" name="check-genre" id="wd-chkbox-comedy" />
+          <label htmlFor="wd-chkbox-comedy">Comedy</label>
           <br />
           <input type="checkbox" name="check-genre" id="wd-chkbox-drama" />
           <label htmlFor="wd-chkbox-drama">Drama</label>
@@ -262,17 +266,18 @@ export default function Lab1() {
         <h5>Select many</h5>
         <label htmlFor="wd-select-many-genre"> Favorite movie genres: </label>
         <br />
+        <h5>Select many</h5>
+        <label htmlFor="wd-select-many-genre"> Favorite movie genres: </label>
+        <br />
         <select multiple id="wd-select-many-genre">
           <option value="COMEDY" selected>
-            {" "}
-            Comedy{" "}
+            Comedy
           </option>
-          <option value="DRAMA"> Drama </option>
+          <option value="DRAMA">Drama</option>
           <option value="SCIFI" selected>
-            {" "}
-            Science Fiction{" "}
+            Science Fiction
           </option>
-          <option value="FANTASY"> Fantasy </option>
+          <option value="FANTASY">Fantasy</option>
         </select>
         <h4>Other HTML field types</h4>
         <label htmlFor="wd-text-fields-email">Email:</label>
@@ -287,7 +292,7 @@ export default function Lab1() {
           type="number"
           value="100000"
           placeholder="1000"
-          id="wd-text-fields-rating"
+          id="wd-text-fields-salary-start"
         />
         <br />
         <label htmlFor="wd-text-fields-rating"> Rating: </label>
@@ -312,8 +317,8 @@ export default function Lab1() {
       <br />
       Link to my{" "}
       <a
-        href="https://github.com/ruitingm/cs5610-s25-web-dev"
-        id="wd-my-github"
+        href="https://github.com/ruitingm/cs5610-kambaz-react-web-app"
+        id="wd-github"
       >
         Github repo
       </a>
