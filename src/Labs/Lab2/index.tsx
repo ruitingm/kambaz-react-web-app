@@ -10,10 +10,18 @@ import Zindex from "./Zindex";
 import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
+import ReactIcons from "./ReactIcons";
+import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
 
 export default function Lab2() {
   return (
-    <div>
+    // container-fluid: maintains margin when resizing
+    <div className="container">
       <h2>Lab 2 - Cascading Stkle Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <p>
@@ -97,6 +105,27 @@ export default function Lab2() {
       </div>
       <div id="wd-css-flex">
         <Flex />
+      </div>
+      <div id="wd-react-icons">
+        <ReactIcons />
+      </div>
+      <div id="wd-bs-grid">
+        <BootstrapGrids />
+      </div>
+      <div id="wd-screen-size-label">
+        <ScreenSizeLabel />
+      </div>
+      <div id="wd-bootstrap-tb">
+        <BootstrapTables />
+      </div>
+      <div id="wd-bootstrap-lists">
+        <BootstrapLists />
+      </div>
+      <div id="wd-bootstrap-form">
+        <BootstrapForms />
+      </div>
+      <div id="wd-bootstrap-nav">
+        <BootstrapNavigation />
       </div>
     </div>
   );
