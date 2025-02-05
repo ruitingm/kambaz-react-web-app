@@ -29,11 +29,10 @@ export default function BootstrapNavigation() {
       <div id="wd-css-navigating-with-cards">
         <h2>Cards</h2>
         <div className="card" style={{ width: "18rem" }}>
-          <img src="images/stacked.jpg" className="card-img-top"></img>
+          <img src="/images/stacked.jpg" className="card-img-top"></img>
           <div className="card-body">
             <h5 className="card-title">Stacking Startship</h5>
             <p className="card-text">
-              {" "}
               Stacking the most powerful rocket in history, Mars or bust!
             </p>
             <a href="#" className="btn btn-primary">
