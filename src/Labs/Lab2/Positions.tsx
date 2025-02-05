@@ -13,23 +13,25 @@ export default function Positions() {
       </div>
       <div id="wd-css-position-absolute">
         <h2>Absolute position</h2>
-        <div className="wd-pos-absolute-10-10 wd-bg-color-yellow wd-dimension-portrait">
-          Portrait
+        <div className="wd-pos-relative">
+          <div className="wd-pos-absolute-10-10 wd-bg-color-yellow wd-dimension-portrait">
+            Portrait
+          </div>
+          <div className="wd-pos-absolute-50-50 wd-bg-color-blue wd-fg-color-white wd-dimension-landscape">
+            Landscape
+          </div>
+          <div className="wd-pos-absolute-120-20 wd-bg-color-red wd-dimension-square">
+            Square
+          </div>
         </div>
-        <div className="wd-pos-absolute-50-50 wd-bg-color-blue wd-fg-color-white wd-dimension-landscape">
-          Landscape
-        </div>
-        <div className="wd-pos-absolute-120-20 wd-bg-color-red wd-dimension-square">
-          Square
-        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div id="wd-css-position-fixed">
         <h2>Fixed position</h2>
         Cehckout the blue square that says "Fixed position" struck all the way

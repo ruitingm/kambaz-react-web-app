@@ -32,12 +32,8 @@ export default function BootstrapForms() {
       </div>
       <div id="wd-css-styling-switches">
         <h3>Switches</h3>
-        <div className="form-check form-swtich">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="switch1"
-          ></input>
+        <div className="form-check form-switch">
+          <input className="form-check-input" type="checkbox" id="switch1" />
           <label className="form-check-label" htmlFor="switch1">
             Default switch checkbox input
           </label>

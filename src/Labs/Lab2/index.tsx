@@ -17,12 +17,13 @@ import BootstrapTables from "./BootstrapTables";
 import BootstrapLists from "./BootstrapLists";
 import BootstrapForms from "./BootstrapForms";
 import BootstrapNavigation from "./BootstrapNavigation";
+import Dimensions from "./Dimensions";
 
 export default function Lab2() {
   return (
-    // container-fluid: maintains margin when resizing
     <div className="container">
       <h2>Lab 2 - Cascading Stkle Sheets</h2>
+      <br />
       <h3>Styling with the STYLE attribute</h3>
       <p>
         Style attribute allows configuring look and feel right on the element.
@@ -73,57 +74,79 @@ export default function Lab2() {
           </div>
         </div>
       </div>
+      <br />
       <div id="wd-css-foreground-colors">
         <ForegroundColors />
       </div>
+      <br />
       <div id="wd-css-background-colors">
         <BackgroundColors />
       </div>
+      <br />
       <div id="wd-css-borders">
         <Borders />
       </div>
+      <br />
       <div id="wd-css-paddings">
         <Padding />
       </div>
+      <br />
       <div id="wd-css-margins">
         <Margins />
       </div>
+      <br />
       <div id="wd-css-browsers">
         <Browser />
       </div>
+      <br />
+      <div id="wd-css-dimensions">
+        <Dimensions />
+      </div>
+      <br />
       <div id="wd-css-positions">
         <Positions />
       </div>
+      <br />
       <div id="wd-z-index">
         <Zindex />
       </div>
+      <br />
       <div id="wd-float-divs">
         <Float />
       </div>
+      <br />
       <div id="wd-css-grid-layout">
         <GridLayout />
       </div>
+      <br />
       <div id="wd-css-flex">
         <Flex />
       </div>
+      <br />
       <div id="wd-react-icons">
         <ReactIcons />
       </div>
+      <br />
       <div id="wd-bs-grid">
         <BootstrapGrids />
       </div>
+      <br />
       <div id="wd-screen-size-label">
         <ScreenSizeLabel />
       </div>
+      <br />
       <div id="wd-bootstrap-tb">
         <BootstrapTables />
       </div>
+      <br />
       <div id="wd-bootstrap-lists">
         <BootstrapLists />
       </div>
+      <br />
       <div id="wd-bootstrap-form">
         <BootstrapForms />
       </div>
+      <br />
       <div id="wd-bootstrap-nav">
         <BootstrapNavigation />
       </div>

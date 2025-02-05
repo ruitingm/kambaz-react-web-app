@@ -17,7 +17,7 @@ export default function AssignmentControls() {
           placeholder="Search..."
         ></input>
       </div>
-      <div id="wd-add-assignment">
+      <div id="wd-add-assignment" className="d-none d-sm-block">
         <button className=" float-end btn btn-lg btn-danger fs-5 ms-2 rounded-1 text-white border border-0 text-center pt-1 pb-1">
           <BsPlus
             className="position-relative me-1 fs-3"
@@ -26,7 +26,7 @@ export default function AssignmentControls() {
           Assignment
         </button>
       </div>
-      <div id="wd-add-assignment-group">
+      <div id="wd-add-assignment-group" className="d-none d-sm-block">
         <button className="float-end btn btn-lg btn-secondary fs-5 text-black border border-0 text-center rounded-1 pt-1 pb-1">
           <BsPlus
             className="position-relative me-1 fs-3"

@@ -172,7 +172,7 @@ export default function AssignmentEditor() {
               </div>
             </div>
             <div className="row mb-1">
-              <div className="col-sm-4 text-end pt-2">Submission Type</div>
+              <div className="col-sm-4 text-end pt-2">Assign</div>
               <div className="col-sm-8 border p-0 rounded-1">
                 <div className="row mt-3 pb-0 col-11 ms-3">
                   <label
