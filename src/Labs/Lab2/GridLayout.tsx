@@ -4,9 +4,7 @@ export default function GridLayout() {
       <div id="wd-css-left-right-layout">
         <h2>Grid layout</h2>
         <div className="wd-grid-row">
-          <div className="wd-grid-col-half-page wd-bg-color-yellow">
-            <h3>Left half</h3>
-          </div>
+          <div className="wd-grid-col-half-page wd-bg-color-yellow"></div>
           <div className="wd-grid-col-half-page wd-bg-color-blue wd-fg-color-white">
             <h3>Right half</h3>
           </div>
@@ -20,7 +18,7 @@ export default function GridLayout() {
           <h3>Right two thirds</h3>
         </div>
       </div>
-      <div id="wd-css-side-bar" className="wd-grid-row">
+      <div id="wd-css-side-bars" className="wd-grid-row">
         <div className="wd-grid-col-left-sidebar wd-bg-color-yellow">
           <h3>Side bar</h3>
           <p>This is the left sidebar</p>
@@ -29,12 +27,12 @@ export default function GridLayout() {
           <h3>Main content</h3>
           <p>
             This is the main content. This is the main content. This is the main
-            content
+            content.
           </p>
         </div>
-        <div className="wd-grid-col-right-sidebar wd-bg-color-green wd-fg-color-whitekkkkkkkkk">
-          <h3>Sidebar</h3>
-          <p>This is the right bar</p>
+        <div className="wd-grid-col-right-sidebar wd-bg-color-green wd-fg-color-white">
+          <h3>Side bar</h3>
+          <p>This is the right sidebar</p>
         </div>
       </div>
     </div>

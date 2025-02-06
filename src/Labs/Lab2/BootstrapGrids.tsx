@@ -1,6 +1,6 @@
 export default function BootstrapGrids() {
   return (
-    <>
+    <div>
       <h2>Bootstrap</h2>
       <div id="wd-bs-grid-system">
         <h2>Grid system</h2>
@@ -90,6 +90,6 @@ export default function BootstrapGrids() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

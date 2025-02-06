@@ -70,9 +70,6 @@ export default function Profile() {
           Signout
         </a>
       </div>
-      <div>
-        <Link to="/Kambaz/Account/Signin">Sign out</Link>
-      </div>
     </div>
   );
 }
