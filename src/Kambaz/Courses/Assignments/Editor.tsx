@@ -185,9 +185,7 @@ export default function AssignmentEditor() {
                     <option selected value="EVERYONE">
                       Everyone
                     </option>
-                    <option selected value="TA">
-                      Teaching Assistants
-                    </option>
+                    <option value="TA">Teaching Assistants</option>
                   </select>
                 </div>
                 <div className="row mt-2 pb-0 col-11 ms-3">
@@ -196,7 +194,7 @@ export default function AssignmentEditor() {
                   </label>
                   <input type="date" className="form-control"></input>
                 </div>
-                <div className="row mt-2 pb-0 col-11 ms-3">
+                <div className="row mt-2 pb-0 col-11 ms-3 mb-3">
                   <div className="col-6 p-0">
                     <label
                       htmlFor="wd-available-from"
