@@ -8,18 +8,13 @@ import Kambaz from "../Kambaz";
 export default function Labs() {
   return (
     <div id="wd-labs">
+      <br />
       <h1>Labs</h1>
-      <h3>Name: Ruiting Ma </h3>
-      <h3>Section: 01 Tuesdays 3-6pm</h3>
-      <h3>
-        <a
-          href="https://github.com/ruitingm/cs5610-kambaz-react-web-app"
-          id="wd-github"
-        >
-          Github Repo
-        </a>{" "}
-      </h3>
+      <h4>Name: Ruiting Ma </h4>
+      <h4>Section: 01</h4>
+      <br />
       <TOC />
+      <br />
       <Routes>
         <Route path="/" element={<Navigate to="Lab1" />}></Route>
         <Route path="Lab1" element={<Lab1 />}></Route>
