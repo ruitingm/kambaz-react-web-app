@@ -7,7 +7,7 @@ import Kambaz from "../Kambaz";
 
 export default function Labs() {
   return (
-    <div id="wd-labs">
+    <div id="wd-labs" className="ms-2">
       <br />
       <h1>Labs</h1>
       <h4>Name: Ruiting Ma </h4>
