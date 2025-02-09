@@ -46,6 +46,7 @@ export default function hrefC() {
           id="wd-github"
           href="https://github.com/ruitingm/cs5610-kambaz-react-web-app"
           className="nav-link"
+          target="_blank"
         >
           My GitHub
         </a>
