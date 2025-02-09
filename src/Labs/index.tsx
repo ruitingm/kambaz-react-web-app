@@ -19,7 +19,7 @@ export default function Labs() {
         <Route path="/" element={<Navigate to="Lab1" />}></Route>
         <Route path="Lab1" element={<Lab1 />}></Route>
         <Route path="Lab2" element={<Lab2 />}></Route>
-        <Route path="Lab3" element={<Lab3 />}></Route>
+        <Route path="Lab3/*" element={<Lab3 />}></Route>
         <Route path="Kambaz" element={<Kambaz />}></Route>
       </Routes>
     </div>
