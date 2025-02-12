@@ -14,7 +14,7 @@ export default function Dashboard() {
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <div className="card rounded-3 overflow-hidden">
                 <Link
-                  to="/Kambaz/Courses/${course._id}/Home"
+                  to={`/Kambaz/Courses/${course._id}/Home`}
                   className="wd-dashboard-course-link text-decoration-none text-dark"
                 >
                   <img src={course.img} width="100%" height={160}></img>

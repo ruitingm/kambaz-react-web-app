@@ -3,7 +3,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox } from "react-icons/fa";
-import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
+import { IoCalendarOutline } from "react-icons/io5";
 export default function KambazNavigation() {
   const { pathname } = useLocation();
   const links = [

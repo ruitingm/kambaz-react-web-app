@@ -4,7 +4,6 @@ import AssignmentControls from "./AssignmentControls";
 import { FaCaretDown } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import LessonControlButtons from "../Modules/LessonControlButtons";
-
 export default function Assignments() {
   return (
     <div id="wd-assignments">

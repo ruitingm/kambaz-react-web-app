@@ -155,7 +155,7 @@ export default function AssignmentEditor() {
                     </div>
                     <div className="form-check mb-3">
                       <input
-                        id="wd-file"
+                        id="wd-file-upload"
                         className="form-check-input wd-entry-options"
                         type="checkbox"
                         name="wd-online-entry-options"
