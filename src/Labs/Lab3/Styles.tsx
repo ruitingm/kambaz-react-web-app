@@ -3,7 +3,7 @@ export default function Styles() {
   const padding10px = { padding: "10px" };
   const bgBlue = {
     backgroundColor: "lightblue",
-    color: "black",
+    ...colorBlack,
     ...padding10px,
   };
   const bgRed = {
