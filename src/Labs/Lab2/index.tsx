@@ -57,7 +57,7 @@ export default function Lab2() {
           <div className="wd-selector-2">
             Selectors can be combined to refer elements in particualr palces in
             the document
-            <p className="wd-slector-3">
+            <p className="wd-selector-3">
               This paragraph's red background is referenced as
               <br />
               .selector-2 .selector-3
