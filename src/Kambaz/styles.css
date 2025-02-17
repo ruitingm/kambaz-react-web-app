@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 body * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif, "Arial";
 }
 
 @media (min-width: 768px) {
@@ -16,4 +16,182 @@ body * {
   color: black;
   background-color: white;
   border-left: 3px solid black !important;
+}
+
+/* Pazza CSS */
+/* PazzaNavigation */
+.wd-pazza-nav-bar {
+  height: 60px;
+  position: sticky;
+}
+
+.wd-pazza-logo {
+  font-family: "Lucida Grande";
+  font-size: 18pt;
+  font-weight: 500;
+  padding-left: 1%;
+  vertical-align: middle;
+}
+
+.wd-pazza-nav-tab {
+  font-family: "Lucida Grande";
+  font-size: 13pt;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  vertical-align: middle;
+  text-wrap: nowrap;
+}
+
+.wd-pazza-flex-items {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+}
+
+.wd-pazza-active-underline {
+  text-decoration: underline;
+}
+
+.wd-text-no-decor {
+  text-decoration: none;
+}
+
+/* FolderFilter */
+.wd-pazza-folder-filter-bar {
+  background-color: #e7e8ea;
+  height: 30px;
+  position: sticky;
+}
+
+.wd-pazza-folder-filter-tab {
+  color: #8a8a8a;
+  font-family: monospace;
+  font-size: 12pt;
+  text-decoration: none;
+  vertical-align: middle;
+  text-wrap: nowrap;
+}
+
+.wd-pazza-active-bold {
+  font-weight: bolder;
+}
+
+/* List of Post Controls */
+.wd-pazza-lopc-bar {
+  background-color: #e7e8ea;
+  height: 28px;
+  display: flex;
+  direction: row;
+  position: sticky;
+}
+
+.wd-pazza-lopc-tab {
+  font-size: 10pt;
+  color: #7f7f7f;
+}
+
+/* Post Controls*/
+.wd-pazza-np-bar {
+  display: felx;
+  direction: row;
+  flex-grow: 1;
+  height: 40px;
+  background-color: #7f7f7f;
+}
+
+.wd-pazza-np-button {
+  color: white;
+  background-color: #3973a1;
+  font-size: 11pt;
+  vertical-align: center;
+  height: 85%;
+}
+
+.wd-pazza-search-box {
+  height: 85%;
+  vertical-align: center;
+  display: flex;
+  direction: row;
+  font-size: 11pt;
+}
+
+/* List of Posts */
+.wd-pazza-lop-info-bar {
+  background-color: #e7e8ea;
+  color: #7f7f7f;
+  display: flex;
+  direction: row;
+  font-size: 9pt;
+  font-weight: bold;
+  height: 18px;
+  font-family: "Arial";
+}
+
+.wd-pazza-lop-content-box {
+  color: #7f7f7f;
+  background-color: white;
+  font-size: 9pt;
+}
+.wd-pazza-lop-content-subject {
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  max-height: 16px;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.wd-pazza-lop-content-body {
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  max-height: 48px;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Pazza Colors */
+.wd-pazza-blue {
+  color: #3973a1;
+}
+
+.wd-pazza-yellow {
+  color: #faae40;
+}
+
+.wd-pazza-dark-grey {
+  color: #7f7f7f;
+}
+
+.wd-pazza-green {
+  color: #008800;
+}
+
+/* Pazza Background Colors*/
+.wd-pazza-bg-dark-grey {
+  background-color: #7f7f7f;
+}
+
+.wd-pazza-bg-blue {
+  background-color: #3973a1;
+}
+
+.wd-pazza-bg-blue-grey {
+  background-color: #eaeef4;
+}
+
+.wd-pazza-bg-light-grey {
+  background-color: #e7e8ea;
+}
+/* Pazza Font */
+.wd-pazza-font-10pt {
+  font-size: 10pt;
+}
+
+.wd-pazza-font-arial {
+  font-family: "Arial";
 }

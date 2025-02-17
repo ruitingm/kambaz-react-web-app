@@ -7,8 +7,7 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import PeopleTable from "./People/Table";
 import { courses } from "../Database";
-
-
+import Pazza from "./Piazza";
 
 export default function Courses() {
   const { cid } = useParams();
@@ -32,6 +31,7 @@ export default function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            <Route path="Pazza/*" element={<Pazza />} />
             <Route path="People" element={<PeopleTable />} />
           </Routes>
         </div>
