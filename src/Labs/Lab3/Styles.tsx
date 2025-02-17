@@ -3,13 +3,13 @@ export default function Styles() {
   const padding10px = { padding: "10px" };
   const bgBlue = {
     backgroundColor: "lightblue",
-    ...colorBlack,
+    color: "black",
     ...padding10px,
   };
   const bgRed = {
     backgroundColor: "lightcoral",
-    color: "black",
-    padding: "10px",
+    ...colorBlack,
+    ...padding10px,
   };
   return (
     <div id="wd-styles">

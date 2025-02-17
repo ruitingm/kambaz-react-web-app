@@ -20,7 +20,7 @@ export default function VariableTypes() {
       isString = {isString}
       <br />
       isBoolean = {isBoolean}
-      <br />
+      <hr />
     </div>
   );
 }

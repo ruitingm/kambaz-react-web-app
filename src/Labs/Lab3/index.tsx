@@ -30,6 +30,7 @@ import Add from "./Add";
 import Square from "./Square";
 import Highlight from "./Highlight";
 import PathParameters from "./PathParameters";
+import VariableTypes from "./VariableTypes";
 
 export default function Lab3() {
   console.log("Hello World");
@@ -37,6 +38,7 @@ export default function Lab3() {
     <div id="wd-lab3" className="ms-3 container">
       <h3>Lab 3: JavaScript</h3>
       <VariablesAndConstants />
+      <VariableTypes />
       <BooleanVariables />
       <IfElse />
       <TernaryOperator />
