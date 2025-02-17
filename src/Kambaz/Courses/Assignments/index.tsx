@@ -32,9 +32,9 @@ export default function Assignments() {
                 <li className="wd-assignment-list-item list-group-item p-0">
                   <div className="container-fluid ms-0">
                     <div className="row">
-                      <div className="col-1 ps-2 pe-2 p-4 align-content-center d-none d-md-block">
-                        <BsGripVertical className="fs-3" />
-                        <CgNotes className="fs-3 text-success me-4" />
+                      <div className="col-1 ps-2 pe-1 p-4 align-content-center d-none d-md-block text-nowrap">
+                        <BsGripVertical className="fs-3 me-0 pe-0" />
+                        <CgNotes className="fs-3 text-success" />
                       </div>
                       <div className="col-10 align-content-center p-0 pt-2 pb-2">
                         <a

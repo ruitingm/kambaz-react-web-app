@@ -1,56 +1,54 @@
+import Nav from "react-bootstrap/Nav";
 import { useLocation } from "react-router";
-
-export default function hrefC() {
+import { Link } from "react-router-dom";
+export default function TOC() {
   const { pathname } = useLocation();
   return (
-    <ul className="nav nav-pills">
-      <li className="nav-item">
-        <a id="wd-a" href="#/Labs" className="nav-link">
-          Labs
-        </a>
-      </li>
-      <li className="nav-item">
-        <a
+    <Nav variant="pills" id="wd-toc">
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          to="/Labs/Lab1"
           id="wd-a1"
-          href="#/Labs/Lab1"
-          className={`nav-link ${pathname.includes("Lab1") ? "active" : ""}`}
+          active={pathname.includes("Lab1")}
         >
           Lab 1
-        </a>
-      </li>
-      <li className="nav-item">
-        <a
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          to="/Labs/Lab2"
           id="wd-a2"
-          href="#/Labs/Lab2"
-          className={`nav-link ${pathname.includes("Lab2") ? "active" : ""}`}
+          active={pathname.includes("Lab2")}
         >
           Lab 2
-        </a>
-      </li>
-      <li className="nav-item">
-        <a
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          as={Link}
+          to="/Labs/Lab3"
           id="wd-a3"
-          href="#/Labs/Lab3"
-          className={`nav-link ${pathname.includes("Lab3") ? "active" : ""}`}
+          active={pathname.includes("Lab3")}
         >
           Lab 3
-        </a>
-      </li>
-      <li className="nav-item">
-        <a id="wd-k" href="#/Kambaz" className="nav-link">
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/Kambaz" id="wd-a3">
           Kambaz
-        </a>
-      </li>
-      <li className="nav-item">
-        <a
-          id="wd-github"
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
           href="https://github.com/ruitingm/cs5610-kambaz-react-web-app"
-          className="nav-link"
-          target="_blank"
+          target="_
+blank"
         >
           My GitHub
-        </a>
-      </li>
-    </ul>
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
   );
 }
