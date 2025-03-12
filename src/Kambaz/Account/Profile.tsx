@@ -97,6 +97,7 @@ export default function Profile() {
           role="button"
           type="submit"
           className="btn btn-danger text-white text-center col-12 "
+          onClick={signout}
         >
           Signout
         </a>
