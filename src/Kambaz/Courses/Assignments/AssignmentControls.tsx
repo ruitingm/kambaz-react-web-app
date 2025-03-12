@@ -1,7 +1,13 @@
 import { BsPlus } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
+import { Link, useParams } from "react-router";
 
-export default function AssignmentControls() {
+export default function AssignmentControls({
+  assignmentId,
+}: {
+  assignmentId: any;
+}) {
+  const { cid } = useParams();
   return (
     <div id="wd-assignment-ctrl" className="text-nowrap">
       <div
@@ -18,13 +24,15 @@ export default function AssignmentControls() {
         ></input>
       </div>
       <div id="wd-add-assignment" className="d-none d-sm-block">
-        <button className=" float-end btn btn-lg btn-danger fs-5 ms-2 rounded-1 text-white border border-0 text-center pt-1 pb-1">
-          <BsPlus
-            className="position-relative me-1 fs-3"
-            style={{ bottom: "1px" }}
-          ></BsPlus>
-          Assignment
-        </button>
+        <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignmentId}`}>
+          <button className=" float-end btn btn-lg btn-danger fs-5 ms-2 rounded-1 text-white border border-0 text-center pt-1 pb-1">
+            <BsPlus
+              className="position-relative me-1 fs-3"
+              style={{ bottom: "1px" }}
+            ></BsPlus>
+            Assignment
+          </button>
+        </Link>
       </div>
       <div id="wd-add-assignment-group" className="d-none d-sm-block">
         <button className="float-end btn btn-lg btn-secondary fs-5 text-black border border-0 text-center rounded-1 pt-1 pb-1">
