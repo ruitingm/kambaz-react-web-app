@@ -19,100 +19,130 @@ export default function Dashboard({
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
+  const isFaculty = currentUser.role === "FACULTY";
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h5 className="align-self-center m-0">
-        New Course
-        <button
-          className="btn btn-primary float-end"
-          id="wd-add-new-course-click"
-          onClick={addNewCourse}
-        >
-          Add
-        </button>
-        <button
-          className="btn btn-warning float-end me-2"
-          onClick={updateCourse}
-        >
-          Update
-        </button>
-      </h5>
-      <br />
-      <input
-        value={course.name}
-        className="form-control mb-2"
-        onChange={(e) => setCourse({ ...course, name: e.target.value })}
-      />
-      <textarea
-        value={course.name}
-        className="from-control col-12"
-        onChange={(e) => setCourse({ ...course, description: e.target.value })}
-      />
-      <hr />
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
-      <hr />
-      <div id="wd-dashboard-courses">
-        <Row xs={1} md={5} className="g-4">
-          {courses
-            .filter((course) =>
-              enrollments.some(
-                (enrollment) =>
-                  enrollment.user === currentUser._id &&
-                  enrollment.course === course._id
-              )
+      {isFaculty && (
+        <>
+          <h5 className="align-self-center m-0">
+            New Course
+            <button
+              className="btn btn-primary float-end"
+              id="wd-add-new-course-click"
+              onClick={addNewCourse}
+            >
+              Add
+            </button>
+            <button
+              className="btn btn-warning float-end me-2"
+              onClick={updateCourse}
+            >
+              Update
+            </button>
+          </h5>
+          <br />
+          <input
+            value={course.name}
+            className="form-control mb-2"
+            onChange={(e) => setCourse({ ...course, name: e.target.value })}
+          />
+          <textarea
+            value={course.description}
+            className="from-control col-12"
+            onChange={(e) =>
+              setCourse({ ...course, description: e.target.value })
+            }
+          />
+          <hr />
+        </>
+      )}
+      {
+        <>
+          <h2 id="wd-dashboard-published">
+            Published Courses (
+            {
+              courses.filter((course) =>
+                enrollments.some(
+                  (enrollment) =>
+                    enrollment.user === currentUser._id &&
+                    enrollment.course === course._id
+                )
+              ).length
+            }
             )
-            .map((course) => (
-              <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-                <Card>
-                  <Link
-                    to={`/Kambaz/Courses/${course._id}/Home`}
-                    className="wd-dashboard-course-link text-decoration-none text-dark"
+          </h2>
+          <hr />
+          <div id="wd-dashboard-courses">
+            <Row xs={1} md={5} className="g-4">
+              {courses
+                .filter((course) =>
+                  enrollments.some(
+                    (enrollment) =>
+                      enrollment.user === currentUser._id &&
+                      enrollment.course === course._id
+                  )
+                )
+                .map((course) => (
+                  <Col
+                    className="wd-dashboard-course"
+                    style={{ width: "300px" }}
                   >
-                    <Card.Img
-                      src={course.img}
-                      variant="top"
-                      width="100%"
-                      height={160}
-                    />
-                    <Card.Body className="card-body">
-                      <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
-                        {course.name}
-                      </Card.Title>
-                      <Card.Text
-                        className="wd-dashboard-course-description overflow-hidden"
-                        style={{ height: "100px" }}
+                    <Card>
+                      <Link
+                        to={`/Kambaz/Courses/${course._id}/Home`}
+                        className="wd-dashboard-course-link text-decoration-none text-dark"
                       >
-                        {course.description}
-                      </Card.Text>
-                      <Button variant="primary"> Go </Button>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          deleteCourse(course._id);
-                        }}
-                        className="btn btn-danger float-end"
-                        id="wd-delete-course-click"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        id="wd-edit-course-click"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setCourse(course);
-                        }}
-                        className="btn btn-warning me-2 float-end"
-                      >
-                        Edit
-                      </button>
-                    </Card.Body>
-                  </Link>
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      </div>
+                        <Card.Img
+                          src={course.img}
+                          variant="top"
+                          width="100%"
+                          height={160}
+                        />
+                        <Card.Body className="card-body">
+                          <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">
+                            {course.name}
+                          </Card.Title>
+                          <Card.Text
+                            className="wd-dashboard-course-description overflow-hidden"
+                            style={{ height: "100px" }}
+                          >
+                            {course.description}
+                          </Card.Text>
+                          <Button variant="primary"> Go </Button>
+                          {isFaculty && (
+                            <>
+                              <button
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  deleteCourse(course._id);
+                                }}
+                                className="btn btn-danger float-end"
+                                id="wd-delete-course-click"
+                              >
+                                Delete
+                              </button>
+                              <button
+                                id="wd-edit-course-click"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setCourse(course);
+                                }}
+                                className="btn btn-warning me-2 float-end"
+                              >
+                                Edit
+                              </button>
+                            </>
+                          )}
+                        </Card.Body>
+                      </Link>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+          </div>
+        </>
+      }
     </div>
   );
 }

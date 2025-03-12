@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 export default function ModuleEditor({
   dialogTitle,
   moduleName,
@@ -43,7 +45,7 @@ export default function ModuleEditor({
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-ba-dismiss="modal"
+                data-bs-dismiss="modal"
               >
                 Cancel
               </button>

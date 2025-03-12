@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate, useParams } from "react-router";
 import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KambazNavigation from "./Navigation";
@@ -8,8 +8,11 @@ import * as db from "./Database";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import { useSelector } from "react-redux";
 
 export default function Kambaz() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
   const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -22,6 +25,10 @@ export default function Kambaz() {
   });
   const addNewCourse = () => {
     setCourses([...courses, { ...course, _id: uuidv4() }]);
+    setEnrollments([
+      ...enrollments,
+      { _id: uuidv4(), user: currentUser._id, course: course.number },
+    ]);
   };
   const deleteCourse = (courseId: any) => {
     setCourses(courses.filter((course) => course._id !== courseId));

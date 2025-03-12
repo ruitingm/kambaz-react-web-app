@@ -1,18 +1,22 @@
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentControlButton from "./AssignmentControlButton";
 import AssignmentControls from "./AssignmentControls";
-import { FaCaretDown } from "react-icons/fa";
+import { FaCaretDown, FaTrash } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { useParams } from "react-router";
-import * as db from "../../Database";
+import { useDispatch, useSelector } from "react-redux";
+import { editAssignment } from "./reducer";
+import { v4 as uuidv4 } from "uuid";
+import DeleteDialog from "./DeleteDialog";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
   return (
     <div id="wd-assignments">
-      <AssignmentControls />
+      <AssignmentControls assignmentId={uuidv4()} />
       <br />
       <br />
       <br />
@@ -41,18 +45,27 @@ export default function Assignments() {
                           href={`#/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
                           className="wd-assignment-link text-black col-1"
                           style={{ textDecoration: "none" }}
+                          onClick={() =>
+                            dispatch(editAssignment(assignment._id))
+                          }
                         >
                           <b>{assignment.title}</b>
                         </a>
                         <p className="h6">
                           <span className="text-danger">Multiple Modules </span>
                           |<b> Not available until </b>
-                          May 6 at 12:00 am | <br />
+                          {assignment.until} at 12:00 am | <br />
                           <b>Due </b>
-                          May 13 at 11:59pm | 100 pts
+                          {assignment.due} at 11:59pm | {assignment.points} pts
                         </p>
                       </div>
                       <div className="col-1 align-content-center d-none d-md-block">
+                        <FaTrash
+                          className="text-danger me-1 "
+                          data-bs-toggle="modal"
+                          data-bs-target="#wd-add-assignment-dialog"
+                        />
+                        <DeleteDialog assignmentId={assignment._id} />
                         <LessonControlButtons />
                       </div>
                     </div>
