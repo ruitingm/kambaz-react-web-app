@@ -10,6 +10,7 @@ export type Assignment = {
   until: string;
   editing?: boolean;
   points: string;
+  description?: string;
 };
 
 const initialState = {
@@ -28,6 +29,7 @@ const assignmentsSlice = createSlice({
         available: assignment.available,
         until: assignment.until,
         points: assignment.points,
+        description: assignment.description,
       };
       state.assignments = [...state.assignments, newAssignment];
     },

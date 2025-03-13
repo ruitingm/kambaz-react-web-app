@@ -36,6 +36,9 @@ export default function AssignmentEditor() {
   const [assignmentUntilDate, setAssignmentUntilDate] = useState(
     assignment?.until ?? formatDate(new Date())
   );
+  const [assignmentDescription, setAssignmentDescription] = useState(
+    assignment?.description ?? "Assignment Description"
+  );
 
   return (
     <div id="wd-assignments-editor">
@@ -45,11 +48,13 @@ export default function AssignmentEditor() {
         assignmentAvailableDate={assignmentAvailableDate}
         assignmentUntilDate={assignmentUntilDate}
         assignmentPoints={assignmentPoints}
+        assignmentDescription={assignmentDescription}
         setAssignmentTitle={setAssignmentTitle}
         setAssignmentDueDate={setAssignmentDueDate}
         setAssignmentUntilDate={setAssignmentUntilDate}
         setAssignmentAvailableDate={setAssignmentAvailableDate}
         setAssignmentPoints={setAssignmentPoints}
+        setAssignmentDescription={setAssignmentDescription}
       />
       <div>
         {assignment?.editing && (
@@ -65,6 +70,7 @@ export default function AssignmentEditor() {
                     available: assignmentAvailableDate,
                     until: assignmentUntilDate,
                     points: assignmentPoints,
+                    description: assignmentDescription,
                     editing: false,
                   })
                 );
@@ -96,6 +102,7 @@ export default function AssignmentEditor() {
                     until: assignmentUntilDate,
                     course: cid,
                     points: assignmentPoints,
+                    description: assignmentDescription,
                     editing: false,
                   })
                 );

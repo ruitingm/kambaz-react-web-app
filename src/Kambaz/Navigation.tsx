@@ -4,7 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
-export default function KambazNavigation() {
+export default function KambazNavigation({
+  onLinkClick,
+}: {
+  onLinkClick: () => void;
+}) {
   const { pathname } = useLocation();
   const links = [
     { label: "Dashboard", path: "/Kambaz/Dashboard", icon: AiOutlineDashboard },
@@ -54,6 +58,7 @@ export default function KambazNavigation() {
                     ? "text-danger bg-white"
                     : "text-white bg-black"
                 }`}
+          onClick={onLinkClick}
         >
           {link.icon({ className: "fs-1 text-danger" })}
           <br />
