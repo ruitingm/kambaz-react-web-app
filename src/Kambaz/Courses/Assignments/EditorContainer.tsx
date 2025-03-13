@@ -4,22 +4,26 @@ export default function AssignmentEditorContainer({
   assignmentAvailableDate,
   assignmentUntilDate,
   assignmentPoints,
+  assignmentDescription,
   setAssignmentTitle,
   setAssignmentDueDate,
   setAssignmentUntilDate,
   setAssignmentAvailableDate,
   setAssignmentPoints,
+  setAssignmentDescription,
 }: {
   assignmentTitle: string;
   assignmentDueDate: string;
   assignmentAvailableDate: string;
   assignmentUntilDate: string;
   assignmentPoints: string;
+  assignmentDescription: string;
   setAssignmentTitle: (name: string) => void;
   setAssignmentPoints: (points: string) => void;
   setAssignmentDueDate: (date: string) => void;
   setAssignmentUntilDate: (date: string) => void;
   setAssignmentAvailableDate: (date: string) => void;
+  setAssignmentDescription: (description: string) => void;
 }) {
   return (
     <div>
@@ -34,25 +38,14 @@ export default function AssignmentEditorContainer({
           onChange={(e) => setAssignmentTitle(e.target.value)}
         />
         <div id="wd-description" className="border w-75 pt-3 p-2 mb-3">
-          <p>
-            This assignment is
-            <span className="text-danger"> available online</span>
-          </p>
-          <p>
-            Submit a link to the landing page of your Web application running on
-            Netlify.
-          </p>
-          <p>The landing page should include the following:</p>
-          <ul>
-            <li>Your full name and section </li>
-            <li>Links to each of the lab assignments</li>
-            <li>Link to the Kambaz application</li>
-            <li>Links to all relevant source code repositories</li>
-          </ul>
-          <p>
-            The Kambaz application should include a link to navigate back to the
-            landing page.
-          </p>
+          <textarea
+            id="wd-assignment-description"
+            className="col-12 form-control"
+            placeholder="This is a sample assignment description. This assignment is available online. Submit a link to the landing page of your Web application running on Netlify."
+            onChange={(e) => setAssignmentDescription(e.target.value)}
+          >
+            {assignmentDescription}
+          </textarea>
         </div>
         <div className="w-75">
           <form>

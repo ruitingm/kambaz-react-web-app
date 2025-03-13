@@ -39,7 +39,6 @@ export default function DeleteDialog({
             <button
               onClick={() => {
                 dispatch(deleteAssignment(assignmentId));
-                console.log(assignmentId);
               }}
               type="button"
               data-bs-dismiss="modal"

@@ -44,9 +44,10 @@ export default function Kambaz() {
       })
     );
   };
+  const [numberClicks, setNumberClicks] = useState(0);
   return (
     <div id="wd-kambaz">
-      <KambazNavigation />
+      <KambazNavigation onLinkClick={() => setNumberClicks(0)} />
       <div className="wd-main-content-offset p-3">
         <Routes>
           <Route path="/" element={<Navigate to="Account" />} />
@@ -62,6 +63,8 @@ export default function Kambaz() {
                   addNewCourse={addNewCourse}
                   deleteCourse={deleteCourse}
                   updateCourse={updateCourse}
+                  numberClicks={numberClicks}
+                  setNumberClicks={setNumberClicks}
                 />
               </ProtectedRoute>
             }
