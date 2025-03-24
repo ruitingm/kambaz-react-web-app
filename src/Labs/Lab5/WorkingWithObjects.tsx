@@ -18,10 +18,6 @@ export default function WorkingWithObjects() {
     course: "CS5610",
   });
   const MODULE_API_URL = `${REMOTE_SERVER}/lab5/module`;
-  const [completedStatus, setCompletedStatus] = useState(assignment.completed);
-  const changeCompleteStatus = (status: boolean) => {
-    setCompletedStatus(status);
-  };
   return (
     <div id="wd-working-with-objects">
       <h3>Working With Objects</h3>
@@ -47,7 +43,7 @@ export default function WorkingWithObjects() {
       <a
         type="button"
         className="btn btn-danger mb-2"
-        href={`${REMOTE_SERVER}/lab5/score`}
+        href={`${REMOTE_SERVER}/lab5/assignment/score`}
       >
         Get Score
       </a>
@@ -72,7 +68,7 @@ export default function WorkingWithObjects() {
       <br />
       <a
         id="wd-update-assignment-score"
-        className="btn btn-danger float-end"
+        className="btn btn-primary float-end"
         href={`${ASSIGNMENT_API_URL}/score/${assignment.score}`}
       >
         Update Score
@@ -87,23 +83,30 @@ export default function WorkingWithObjects() {
         }
       />
       <br />
-      <label className="me-2 fs-4" htmlFor="wd-assignment-completed">
-        Update Complete Status:
-      </label>
-      <input
-        type="checkbox"
-        id="wd-assignment-completed"
-        className="me-2 ms-2"
-        defaultChecked={completedStatus}
-        onClick={() => changeCompleteStatus(!completedStatus)}
-      />
-      <a
-        id="wd-check-assignment-completed"
-        className="btn btn-warning float-end mb-2"
-        href={`${ASSIGNMENT_API_URL}/completed/${completedStatus}`}
-      >
-        Check Complete Status
-      </a>
+      <div className="d-flex">
+        <label
+          className="me-1 form-label align-content-center"
+          htmlFor="wd-assignment-completed"
+        >
+          Update Complete Status
+        </label>
+        <input
+          type="checkbox"
+          id="wd-assignment-completed"
+          className="me-2 ms-2 form-check"
+          defaultChecked={assignment.completed}
+          onChange={(e) =>
+            setAssignment({ ...assignment, completed: e.target.checked })
+          }
+        />
+        <a
+          id="wd-check-assignment-completed"
+          className="btn btn-primary float-end"
+          href={`${ASSIGNMENT_API_URL}/completed/${assignment.completed}`}
+        >
+          Check Complete Status
+        </a>
+      </div>
       <hr />
       <h4>Modules</h4>
       <a
