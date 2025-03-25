@@ -2,17 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { setCurrentUser } from "./reducer";
-
+import * as client from "./client";
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
   const fetchProfile = () => {
     if (!currentUser) return navigate("/Kambaz/Account/Signin");
     setProfile(currentUser);
   };
-  const signout = () => {
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     navigate("/Kambaz/Account/Signin");
   };
@@ -92,6 +97,9 @@ export default function Profile() {
         </select>
       </div>
       <div className="col-2 mb-2">
+        <button onClick={updateProfile} className="btn btn-primary mb-1 col-12">
+          Update
+        </button>
         <a
           href="#/Kambaz/Account/Signin"
           role="button"

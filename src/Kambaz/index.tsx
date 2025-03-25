@@ -9,7 +9,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
-
+import Session from "./Account/Session";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
@@ -46,41 +46,43 @@ export default function Kambaz() {
   };
   const [numberClicks, setNumberClicks] = useState(0);
   return (
-    <div id="wd-kambaz">
-      <KambazNavigation onLinkClick={() => setNumberClicks(0)} />
-      <div className="wd-main-content-offset p-3">
-        <Routes>
-          <Route path="/" element={<Navigate to="Account" />} />
-          <Route path="/Account/*" element={<Account />} />
-          <Route
-            path="/Dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard
-                  courses={courses}
-                  course={course}
-                  setCourse={setCourse}
-                  addNewCourse={addNewCourse}
-                  deleteCourse={deleteCourse}
-                  updateCourse={updateCourse}
-                  numberClicks={numberClicks}
-                  setNumberClicks={setNumberClicks}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/Courses/:cid/*"
-            element={
-              <ProtectedRoute>
-                <Courses courses={courses} />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/Calendar" element={<h1>Calendar</h1>} />
-          <Route path="/Inbox" element={<h1>Inbox</h1>} />
-        </Routes>
+    <Session>
+      <div id="wd-kambaz">
+        <KambazNavigation onLinkClick={() => setNumberClicks(0)} />
+        <div className="wd-main-content-offset p-3">
+          <Routes>
+            <Route path="/" element={<Navigate to="Account" />} />
+            <Route path="/Account/*" element={<Account />} />
+            <Route
+              path="/Dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard
+                    courses={courses}
+                    course={course}
+                    setCourse={setCourse}
+                    addNewCourse={addNewCourse}
+                    deleteCourse={deleteCourse}
+                    updateCourse={updateCourse}
+                    numberClicks={numberClicks}
+                    setNumberClicks={setNumberClicks}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/Courses/:cid/*"
+              element={
+                <ProtectedRoute>
+                  <Courses courses={courses} />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/Calendar" element={<h1>Calendar</h1>} />
+            <Route path="/Inbox" element={<h1>Inbox</h1>} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Session>
   );
 }
