@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addEnrollment, deleteEnrollment, Enrollment } from "./reducer";
+import { addEnrollment, deleteEnrollment } from "./reducer";
 export default function Dashboard({
   courses,
   course,
@@ -22,18 +22,9 @@ export default function Dashboard({
   setNumberClicks: (num: number) => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector(
-    (state: any) => state.enrollmentsReducer
-  ) as { enrollments: Enrollment[] };
   const dispatch = useDispatch();
   const isFaculty = currentUser.role === "FACULTY";
   const isStudent = currentUser.role === "STUDENT";
-  const enrolledCourses = courses.filter((course) =>
-    enrollments.some(
-      (enrollment) =>
-        enrollment.user === currentUser._id && enrollment.course === course._id
-    )
-  );
   return (
     <div id="wd-dashboard">
       {isStudent && numberClicks < 2 && (
@@ -121,7 +112,7 @@ export default function Dashboard({
                           {course.description}
                         </Card.Text>
                         <Button variant="primary"> Go </Button>
-                        {enrolledCourses.includes(course) ? (
+                        {courses.includes(course) ? (
                           <Button
                             variant="danger"
                             className="float-end"
@@ -172,12 +163,12 @@ export default function Dashboard({
         (!isStudent && !isFaculty)) && (
         <>
           <h2 id="wd-dashboard-published">
-            Published Courses ({enrolledCourses.length})
+            Published Courses ({courses.length})
           </h2>
           <hr />
           <div id="wd-dashboard-courses">
             <Row xs={1} md={5} className="g-4">
-              {enrolledCourses.map((course) => (
+              {courses.map((course) => (
                 <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                   <Card>
                     <Link

@@ -4,16 +4,14 @@ import Dashboard from "./Dashboard";
 import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import "./styles.css";
-import * as db from "./Database";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Session from "./Account/Session";
+import * as userClient from "./Account/client";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
-  const [courses, setCourses] = useState<any[]>(db.courses);
+  const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>({
     _id: "1234",
     name: "New Course",
@@ -23,12 +21,20 @@ export default function Kambaz() {
     description: "New Course Description",
     img: "/images/reactjs.png",
   });
-  const addNewCourse = () => {
-    setCourses([...courses, { ...course, _id: uuidv4() }]);
-    setEnrollments([
-      ...enrollments,
-      { _id: uuidv4(), user: currentUser._id, course: course.number },
-    ]);
+  const fetchCourses = async () => {
+    try {
+      const courses = await userClient.findMyCourses();
+      setCourses(courses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+  const addNewCourse = async () => {
+    const newCourse = await userClient.createCourse(course);
+    setCourses([...courses, newCourse]);
   };
   const deleteCourse = (courseId: any) => {
     setCourses(courses.filter((course) => course._id !== courseId));
