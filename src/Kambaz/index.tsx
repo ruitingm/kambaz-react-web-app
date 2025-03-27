@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Session from "./Account/Session";
+import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const [numberClicks, setNumberClicks] = useState(0);
   const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -29,17 +31,16 @@ export default function Kambaz() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    fetchCourses();
-  }, [currentUser]);
   const addNewCourse = async () => {
     const newCourse = await userClient.createCourse(course);
     setCourses([...courses, newCourse]);
   };
-  const deleteCourse = (courseId: any) => {
+  const deleteCourse = async (courseId: string) => {
+    const status = await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
-  const updateCourse = () => {
+  const updateCourse = async () => {
+    await courseClient.updateCourse(course);
     setCourses(
       courses.map((c) => {
         if (c._id === course._id) {
@@ -50,7 +51,9 @@ export default function Kambaz() {
       })
     );
   };
-  const [numberClicks, setNumberClicks] = useState(0);
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
   return (
     <Session>
       <div id="wd-kambaz">
