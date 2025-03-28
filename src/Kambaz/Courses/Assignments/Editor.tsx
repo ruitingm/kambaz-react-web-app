@@ -1,8 +1,10 @@
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentEditorContainer from "./EditorContainer";
-import { addAssignment, Assignment, updateAssignment } from "./reducer";
+import { addAssignment, updateAssignment } from "./reducer";
 import { useState } from "react";
+import * as courseClient from "../client";
+import * as assignmentClient from "./client";
 
 const formatDate = (date: Date) => {
   const month = date.getMonth() + 1;
@@ -11,14 +13,13 @@ const formatDate = (date: Date) => {
   const padDate = day < 10 ? "0" + day : day.toString();
   return `${date.getFullYear()}-${padMonth}-${padDate}`;
 };
-
 export default function AssignmentEditor() {
   const { aid } = useParams();
   const { cid } = useParams();
   const navigate = useNavigate();
   const { assignments } = useSelector(
     (state: any) => state.assignmentsReducer
-  ) as { assignments: Assignment[] };
+  ) as { assignments: any[] };
   const dispatch = useDispatch();
   const assignment = assignments.find((a) => a._id === aid);
   const [assignmentPoints, setAssignmentPoints] = useState(
@@ -39,7 +40,28 @@ export default function AssignmentEditor() {
   const [assignmentDescription, setAssignmentDescription] = useState(
     assignment?.description ?? "Assignment Description"
   );
-
+  const createAssignmentForCourse = async () => {
+    if (!cid) return;
+    const newAssignment = {
+      course: cid,
+      _id: aid,
+      points: assignmentPoints,
+      title: assignmentTitle,
+      due: assignmentDueDate,
+      available: assignmentAvailableDate,
+      until: assignmentUntilDate,
+      description: assignmentDescription,
+    };
+    const assignment = await courseClient.createAssignmentForCourse(
+      cid,
+      newAssignment
+    );
+    dispatch(addAssignment(assignment));
+  };
+  const saveAssignment = async (assignment: any) => {
+    await assignmentClient.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
   return (
     <div id="wd-assignments-editor">
       <AssignmentEditorContainer
@@ -62,18 +84,16 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-danger text-center text-white float-end me-2"
               onClick={() => {
-                dispatch(
-                  updateAssignment({
-                    ...assignment,
-                    title: assignmentTitle,
-                    due: assignmentDueDate,
-                    available: assignmentAvailableDate,
-                    until: assignmentUntilDate,
-                    points: assignmentPoints,
-                    description: assignmentDescription,
-                    editing: false,
-                  })
-                );
+                saveAssignment({
+                  ...assignment,
+                  title: assignmentTitle,
+                  due: assignmentDueDate,
+                  description: assignmentDescription,
+                  until: assignmentUntilDate,
+                  available: assignmentAvailableDate,
+                  points: assignmentPoints,
+                  editing: false,
+                });
                 navigate(`/Kambaz/Courses/${cid}/Assignments`);
               }}
             >
@@ -94,18 +114,7 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-danger text-center text-white float-end me-2"
               onClick={() => {
-                dispatch(
-                  addAssignment({
-                    title: assignmentTitle,
-                    due: assignmentDueDate,
-                    available: assignmentAvailableDate,
-                    until: assignmentUntilDate,
-                    course: cid,
-                    points: assignmentPoints,
-                    description: assignmentDescription,
-                    editing: false,
-                  })
-                );
+                createAssignmentForCourse();
                 navigate(`/Kambaz/Courses/${cid}/Assignments`);
               }}
             >
@@ -114,12 +123,7 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-secondary text-center text-black float-end me-1"
               onClick={() => {
-                dispatch(
-                  updateAssignment({
-                    ...assignment,
-                    editing: false,
-                  })
-                );
+                saveAssignment({ ...assignment, editing: false });
                 navigate(`/Kambaz/Courses/${cid}/Assignments`);
               }}
             >

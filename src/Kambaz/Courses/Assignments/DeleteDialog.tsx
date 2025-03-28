@@ -1,11 +1,16 @@
 import { useDispatch } from "react-redux";
 import { deleteAssignment } from "./reducer";
+import * as assignmentClient from "./client";
 export default function DeleteDialog({
   assignmentId,
 }: {
   assignmentId: string;
 }) {
   const dispatch = useDispatch();
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
   return (
     <div
       id="wd-add-assignment-dialog"
@@ -38,7 +43,7 @@ export default function DeleteDialog({
             </button>
             <button
               onClick={() => {
-                dispatch(deleteAssignment(assignmentId));
+                removeAssignment(assignmentId);
               }}
               type="button"
               data-bs-dismiss="modal"
