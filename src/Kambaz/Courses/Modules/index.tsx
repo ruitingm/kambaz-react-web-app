@@ -40,7 +40,6 @@ export default function Modules() {
   useEffect(() => {
     fetchModules();
   }, []);
-  console.log(modules);
   return (
     <div>
       <ModulesControls
