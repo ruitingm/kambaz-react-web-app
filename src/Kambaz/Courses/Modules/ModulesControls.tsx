@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 export default function ModulesControls({
   moduleName,
   setModuleName,
-  addModule,
+  createModuleForCourse,
 }: {
   moduleName: string;
   setModuleName: (title: string) => void;
-  addModule: () => void;
+  createModuleForCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role === "FACULTY";
@@ -84,7 +84,7 @@ export default function ModulesControls({
             dialogTitle="Add Module"
             moduleName={moduleName}
             setModuleName={setModuleName}
-            addModule={addModule}
+            createModuleForCourse={createModuleForCourse}
           />
         </>
       )}

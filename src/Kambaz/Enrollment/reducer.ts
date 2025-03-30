@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { enrollments } from "./Database";
 import { v4 as uuidv4 } from "uuid";
 export type Enrollment = {
   _id?: string;
@@ -7,7 +6,7 @@ export type Enrollment = {
   course: string;
 };
 const initialState = {
-  enrollments: enrollments as Enrollment[],
+  enrollments: [] as Enrollment[],
 };
 const enrollmentsSlice = createSlice({
   name: "enrollments",

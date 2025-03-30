@@ -12,6 +12,7 @@ export default function Signup() {
     dispatch(setCurrentUser(currentUser));
     navigate("/Kambaz/Account/Profile");
   };
+
   return (
     <div id="wd-signup-screen">
       <h3>Sign up</h3>
