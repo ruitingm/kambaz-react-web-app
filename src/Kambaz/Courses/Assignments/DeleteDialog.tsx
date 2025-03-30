@@ -31,7 +31,7 @@ export default function DeleteDialog({
             ></button>
           </div>
           <div className="modal-body">
-            <p>Are you sure you want to delete this assignment?</p>
+            <p>Are you sure you want to delete assignment {assignmentId}?</p>
           </div>
           <div className="modal-footer">
             <button

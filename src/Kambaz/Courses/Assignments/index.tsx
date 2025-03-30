@@ -10,12 +10,16 @@ import { setAssignments, editAssignment } from "./reducer";
 import { v4 as uuidv4 } from "uuid";
 import DeleteDialog from "./DeleteDialog";
 import * as courseClient from "../client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
+  const [selectedAssignment, setSelectedAssignment] = useState("");
+  const handleDeleteClick = (assignmentId: string) => {
+    setSelectedAssignment(assignmentId);
+  };
   const fetchAssignments = async () => {
     const assignments = await courseClient.findAssignmentsForCourse(
       cid as string
@@ -42,7 +46,10 @@ export default function Assignments() {
           </div>
           <ul className="wd-assignment-list list-group rounded-0">
             {assignments.map((assignment: any) => (
-              <li className="wd-assignment-list-item list-group-item p-0">
+              <li
+                key={assignment._id}
+                className="wd-assignment-list-item list-group-item p-0"
+              >
                 <div className="container-fluid ms-0">
                   <div className="row">
                     <div className="col-1 ps-2 pe-1 p-4 align-content-center d-none d-md-block text-nowrap">
@@ -71,8 +78,11 @@ export default function Assignments() {
                         className="text-danger me-1 "
                         data-bs-toggle="modal"
                         data-bs-target="#wd-add-assignment-dialog"
+                        onClick={() => {
+                          handleDeleteClick(assignment._id);
+                        }}
                       />
-                      <DeleteDialog assignmentId={assignment._id} />
+                      <DeleteDialog assignmentId={selectedAssignment} />
                       <LessonControlButtons />
                     </div>
                   </div>
