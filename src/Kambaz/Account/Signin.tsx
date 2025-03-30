@@ -13,6 +13,7 @@ export default function Signin() {
     dispatch(setCurrentUser(user));
     navigate("/Kambaz/Dashboard");
   };
+
   return (
     <div id="wd-signin-screen">
       <h3>Sign in</h3>

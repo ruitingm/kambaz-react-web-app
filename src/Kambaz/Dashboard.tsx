@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addEnrollment, deleteEnrollment, Enrollment } from "./reducer";
+import {
+  addEnrollment,
+  deleteEnrollment,
+  Enrollment,
+} from "./Enrollment/reducer";
+import * as userClient from "./Account/client";
 export default function Dashboard({
   courses,
   course,
   setCourse,
+  allCourses,
   addNewCourse,
   deleteCourse,
   updateCourse,
@@ -15,25 +21,30 @@ export default function Dashboard({
   courses: any[];
   course: any;
   setCourse: (course: any) => void;
+  allCourses: any[];
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
   numberClicks: number;
   setNumberClicks: (num: number) => void;
 }) {
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector(
-    (state: any) => state.enrollmentsReducer
-  ) as { enrollments: Enrollment[] };
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role === "FACULTY";
   const isStudent = currentUser.role === "STUDENT";
-  const enrolledCourses = courses.filter((course) =>
-    enrollments.some(
-      (enrollment) =>
-        enrollment.user === currentUser._id && enrollment.course === course._id
-    )
-  );
+  const enrollCourse = async (courseId: string) => {
+    await userClient.enrollCourse(courseId);
+    const newEnrollment: Enrollment = {
+      user: currentUser._id as string,
+      course: courseId as string,
+    };
+    dispatch(addEnrollment(newEnrollment));
+  };
+  const unenrollCourse = async (courseId: string) => {
+    await userClient.unenrollCourse(courseId);
+    dispatch(deleteEnrollment({ user: currentUser._id, course: courseId }));
+    console.log("try to unenroll:", courseId);
+  };
   return (
     <div id="wd-dashboard">
       {isStudent && numberClicks < 2 && (
@@ -78,12 +89,14 @@ export default function Dashboard({
           <br />
           <input
             value={course.name}
+            id="wd-dashboard-course-name"
             className="form-control mb-2"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <textarea
             value={course.description}
-            className="from-control col-12"
+            id="wd-dashboard-course-description"
+            className="form-control col-12"
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
             }
@@ -93,13 +106,13 @@ export default function Dashboard({
       )}
       {isStudent && numberClicks === 1 && (
         <>
-          <h2 id="wd-dashboard-published">All Courses({courses.length})</h2>
+          <h2 id="wd-dashboard-published">All Courses({allCourses.length})</h2>
           <hr />
           <div id="wd-dashboard-all-courses">
             <Row xs={1} md={5} className="g-4">
-              {courses.map((course) => (
+              {allCourses.map((course) => (
                 <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-                  <Card>
+                  <Card key={course._id}>
                     <Link
                       to={`/Kambaz/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -121,18 +134,13 @@ export default function Dashboard({
                           {course.description}
                         </Card.Text>
                         <Button variant="primary"> Go </Button>
-                        {enrolledCourses.includes(course) ? (
+                        {courses.some((c) => c._id === course._id) ? (
                           <Button
                             variant="danger"
                             className="float-end"
                             onClick={(e) => {
                               e.preventDefault();
-                              dispatch(
-                                deleteEnrollment({
-                                  user: currentUser._id,
-                                  course: course._id,
-                                })
-                              );
+                              unenrollCourse(course._id);
                             }}
                           >
                             Unenroll
@@ -143,12 +151,7 @@ export default function Dashboard({
                             className="float-end"
                             onClick={(e) => {
                               e.preventDefault();
-                              dispatch(
-                                addEnrollment({
-                                  user: currentUser._id,
-                                  course: course._id,
-                                })
-                              );
+                              enrollCourse(course._id);
                             }}
                           >
                             Enroll
@@ -172,14 +175,14 @@ export default function Dashboard({
         (!isStudent && !isFaculty)) && (
         <>
           <h2 id="wd-dashboard-published">
-            Published Courses ({enrolledCourses.length})
+            Published Courses ({courses.length})
           </h2>
           <hr />
           <div id="wd-dashboard-courses">
             <Row xs={1} md={5} className="g-4">
-              {enrolledCourses.map((course) => (
+              {courses.map((course) => (
                 <Col className="wd-dashboard-course" style={{ width: "300px" }}>
-                  <Card>
+                  <Card key={course._id}>
                     <Link
                       to={`/Kambaz/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark"

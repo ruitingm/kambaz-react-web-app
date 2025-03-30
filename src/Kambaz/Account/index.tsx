@@ -11,7 +11,7 @@ export default function Account() {
       <div>
         <div className="d-flex">
           <div className="d-none d-md-block">
-            <AccountNavigation />
+            <AccountNavigation currentUser={currentUser} />
           </div>
           <div className="flex-fill ms-3">
             <Routes>

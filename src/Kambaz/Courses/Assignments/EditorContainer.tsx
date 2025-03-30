@@ -35,7 +35,9 @@ export default function AssignmentEditorContainer({
           id="wd-name"
           className="form-control w-75 mb-3"
           defaultValue={assignmentTitle}
-          onChange={(e) => setAssignmentTitle(e.target.value)}
+          onChange={(e) => {
+            setAssignmentTitle(e.target.value);
+          }}
         />
         <div id="wd-description" className="border w-75 pt-3 p-2 mb-3">
           <textarea
@@ -43,9 +45,8 @@ export default function AssignmentEditorContainer({
             className="col-12 form-control"
             placeholder="This is a sample assignment description. This assignment is available online. Submit a link to the landing page of your Web application running on Netlify."
             onChange={(e) => setAssignmentDescription(e.target.value)}
-          >
-            {assignmentDescription}
-          </textarea>
+            defaultValue={assignmentDescription}
+          ></textarea>
         </div>
         <div className="w-75">
           <form>

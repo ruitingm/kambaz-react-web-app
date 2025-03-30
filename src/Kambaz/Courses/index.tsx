@@ -6,7 +6,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import PeopleTable from "./People/Table";
-import Pazza from "./Piazza";
+import Pazza from "./Pazza";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();

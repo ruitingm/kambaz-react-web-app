@@ -2,12 +2,12 @@ export default function ModuleEditor({
   dialogTitle,
   moduleName,
   setModuleName,
-  addModule,
+  createModuleForCourse,
 }: {
   dialogTitle: string;
   moduleName: string;
   setModuleName: (name: string) => void;
-  addModule: () => void;
+  createModuleForCourse: () => void;
 }) {
   return (
     <div
@@ -51,7 +51,7 @@ export default function ModuleEditor({
                 type="button"
                 className="btn btn-danger"
                 data-bs-dismiss="modal"
-                onClick={addModule}
+                onClick={createModuleForCourse}
               >
                 Add Module
               </button>
