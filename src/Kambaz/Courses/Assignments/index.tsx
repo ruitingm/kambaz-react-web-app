@@ -6,7 +6,7 @@ import { CgNotes } from "react-icons/cg";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setAssignments, editAssignment, addAssignment } from "./reducer";
+import { setAssignments, editAssignment } from "./reducer";
 import { v4 as uuidv4 } from "uuid";
 import DeleteDialog from "./DeleteDialog";
 import * as courseClient from "../client";

@@ -240,6 +240,3 @@ export default function Dashboard({
     </div>
   );
 }
-function dispatch(arg0: Promise<void>) {
-  throw new Error("Function not implemented.");
-}
