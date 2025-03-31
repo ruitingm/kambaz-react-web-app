@@ -12,8 +12,8 @@ import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const [numberClicks, setNumberClicks] = useState(0);
-  const [allCourses, setAllCourses] = useState<any[]>([]);
   const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -24,14 +24,6 @@ export default function Kambaz() {
     description: "New Course Description",
     img: "/images/reactjs.png",
   });
-  const fetchAllCourses = async () => {
-    try {
-      const allCourses = await courseClient.fetchAllCourses();
-      setAllCourses(allCourses);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const fetchCourses = async () => {
     try {
       const courses = await userClient.findMyCourses();
@@ -61,9 +53,8 @@ export default function Kambaz() {
     );
   };
   useEffect(() => {
-    fetchAllCourses();
     fetchCourses();
-  }, [currentUser, courses]);
+  }, [currentUser, enrollments]);
   return (
     <Session>
       <div id="wd-kambaz">
@@ -80,7 +71,6 @@ export default function Kambaz() {
                     courses={courses}
                     course={course}
                     setCourse={setCourse}
-                    allCourses={allCourses}
                     addNewCourse={addNewCourse}
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}

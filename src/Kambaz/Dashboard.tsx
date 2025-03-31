@@ -7,11 +7,12 @@ import {
   Enrollment,
 } from "./Enrollment/reducer";
 import * as userClient from "./Account/client";
+import * as courseClient from "./Courses/client";
+import { useState, useEffect } from "react";
 export default function Dashboard({
   courses,
   course,
   setCourse,
-  allCourses,
   addNewCourse,
   deleteCourse,
   updateCourse,
@@ -21,7 +22,6 @@ export default function Dashboard({
   courses: any[];
   course: any;
   setCourse: (course: any) => void;
-  allCourses: any[];
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
@@ -32,6 +32,15 @@ export default function Dashboard({
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role === "FACULTY";
   const isStudent = currentUser.role === "STUDENT";
+  const [allCourses, setAllCourses] = useState<any[]>([]);
+  const fetchAllCourses = async () => {
+    try {
+      const allCourses = await courseClient.fetchAllCourses();
+      setAllCourses(allCourses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const enrollCourse = async (courseId: string) => {
     await userClient.enrollCourse(courseId);
     const newEnrollment: Enrollment = {
@@ -43,8 +52,10 @@ export default function Dashboard({
   const unenrollCourse = async (courseId: string) => {
     await userClient.unenrollCourse(courseId);
     dispatch(deleteEnrollment({ user: currentUser._id, course: courseId }));
-    console.log("try to unenroll:", courseId);
   };
+  useEffect(() => {
+    fetchAllCourses();
+  }, [currentUser]);
   return (
     <div id="wd-dashboard">
       {isStudent && numberClicks < 2 && (
