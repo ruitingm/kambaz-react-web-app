@@ -52,6 +52,5 @@ export const unenrollCourse = async (courseId: string) => {
   const { data } = await axiosWithCredentials.delete(
     `${USERS_API}/current/enrollments/${courseId}`
   );
-  console.log("client received:", data);
   return data;
 };
