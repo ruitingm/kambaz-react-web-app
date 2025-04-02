@@ -1,24 +1,21 @@
 import { CiSearch } from "react-icons/ci";
 import { BsFileEarmarkPost } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function PostButton() {
   const { cid } = useParams();
   return (
     <div id="wd-pazza-np" className="d-flex wd-pazza-np-bar">
       <div id="wd-pazza-np-button" className="align-content-center">
-        <button
+        <a
           id="wd-np-button"
-          className="btn wd-pazza-np-button align-content-center ms-1"
+          type="button"
+          className="btn wd-pazza-np-button ms-1 d-flex pt-2"
+          href={`/Kambaz/Courses/${cid}/Pazza/NewPost`}
         >
-          <BsFileEarmarkPost className="fs-6 me-1 mb-1" />
-          <Link
-            to={`/Kambaz/Courses/${cid}/Pazza/NewPost`}
-            className="text-white wd-text-no-decor text-nowrap"
-          >
-            New Post
-          </Link>
-        </button>
+          <BsFileEarmarkPost className="me-1 mb-1 align-self-center text-nowrap" />
+          <span className="wd-pazza-font-9pt">New Post</span>
+        </a>
       </div>
       <div
         id="wd-pazza-np-spf"
@@ -29,7 +26,7 @@ export default function PostButton() {
         </span>
         <input
           type="text"
-          className="form-control border border-start-0 rounded-start-0 align-self-center p-1"
+          className="form-control border border-start-0 rounded-start-0 align-self-center p-1 wd-pazza-font-10pt h-100"
           placeholder="Search or add a post..."
         ></input>
       </div>

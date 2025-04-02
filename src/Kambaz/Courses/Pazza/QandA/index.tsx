@@ -1,3 +1,4 @@
+import PostScreen from "../Post/PostScreen";
 import ListOfPostControls from "./ListOfPostControls";
 import ListOfPosts from "./ListOfPosts";
 import PostControls from "./PostControls";
@@ -7,7 +8,7 @@ export default function PazzaQandA() {
     <div id="wd-pazza-qa" className="d-flex wd-pazza-bg-blue-grey">
       <div
         id="wd-pazza-lops"
-        className="col-4 border border-1 border-bottom-0 border-top-0 border-secondary-subtle"
+        className="col-3 border border-1 border-bottom-0 border-top-0 border-secondary-subtle"
       >
         <ListOfPostControls />
         <PostControls />
@@ -16,9 +17,9 @@ export default function PazzaQandA() {
         </div>
         <ListOfPosts />
       </div>
-      <div className="col-8">
+      <div className="col-9">
         <div id="wd-pazza-ps" className="container-fluid p-0 flex-fill">
-          <div>&nbsp;Posts</div>
+          <PostScreen />
         </div>
       </div>
     </div>

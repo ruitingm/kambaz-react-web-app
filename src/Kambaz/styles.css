@@ -8,7 +8,7 @@ body * {
 
 @media (min-width: 768px) {
   #wd-kambaz .wd-main-content-offset {
-    padding-left: 140px !important;
+    padding-left: 130px !important;
   }
 }
 
@@ -187,11 +187,23 @@ body * {
 .wd-pazza-bg-light-grey {
   background-color: #e7e8ea;
 }
+.wd-pazza-bg-light-blue {
+  background-color: #cedfee;
+}
+
 /* Pazza Font */
+.wd-pazza-font-9pt {
+  font-size: 9pt;
+}
 .wd-pazza-font-10pt {
   font-size: 10pt;
 }
-
+.wd-pazza-font-11pt {
+  font-size: 11pt;
+}
 .wd-pazza-font-arial {
   font-family: "Arial";
+}
+.wd-pazza-font-lucida {
+  font-family: "Lucida Grande";
 }
