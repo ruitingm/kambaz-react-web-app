@@ -2,7 +2,7 @@ import RTE from "./RTE";
 
 export default function PostDetail() {
   return (
-    <div id="wd-pazza-post-detail-screeen" className="mt-2">
+    <div id="wd-pazza-post-detail-screeen" className="mt-3 pe-3">
       <div className="d-flex">
         <div className="ms-4">
           <input

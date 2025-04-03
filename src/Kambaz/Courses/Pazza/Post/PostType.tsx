@@ -9,6 +9,7 @@ export default function PostType() {
           id="wd-pazza-post-type-question"
           type="radio"
           className="form-check-input me-2"
+          name="post-type"
         />
         <label htmlFor="wd-pazza-post-type-question">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -24,6 +25,7 @@ export default function PostType() {
           id="wd-pazza-post-type-note"
           type="radio"
           className="form-check-input me-2"
+          name="post-type"
         />
         <label htmlFor="wd-pazza-post-type-note">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -39,6 +41,7 @@ export default function PostType() {
           id="wd-pazza-post-type-poll"
           type="radio"
           className="form-check-input me-2"
+          name="post-type"
         />
         <label htmlFor="wd-pazza-post-type-poll">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">

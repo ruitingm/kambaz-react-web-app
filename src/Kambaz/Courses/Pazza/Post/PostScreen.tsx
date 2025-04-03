@@ -50,12 +50,14 @@ export default function PostScreen() {
               </label>
             </td>
             <td>
-              <input
-                id="wd-pazza-post-summary"
-                type="text"
-                className="form-control mt-2 h-100 pazza-font-11pt"
-                placeholder="Enter a one line summary, 100 characters or less"
-              />
+              <div className="pe-3">
+                <input
+                  id="wd-pazza-post-summary"
+                  type="text"
+                  className="form-control mt-2 pazza-font-11pt"
+                  placeholder="Enter a one line summary, 100 characters or less"
+                />
+              </div>
             </td>
           </tr>
           <tr>
@@ -70,12 +72,12 @@ export default function PostScreen() {
           </tr>
           <tr>
             <td>
-              <div className="wd-pazza-dark-grey wd-pazza-font-11pt me-2 text-nowrap float-end">
+              <div className="wd-pazza-dark-grey wd-pazza-font-11pt pe-2 text-nowrap float-end">
                 <b>Posting Options</b>
               </div>
             </td>
             <td>
-              <div className="d-flex">
+              <div className="d-flex mt-3">
                 <input
                   id="wd-pazza-posting-option"
                   type="checkbox"
@@ -97,14 +99,14 @@ export default function PostScreen() {
           <tr>
             <td></td>
             <td>
-              <div className="d-flex">
-                <button className="btn wd-pazza-bg-blue border border-1 rounded-1 text-white wd-pazza-font-lucida">
+              <div className="d-flex mt-3">
+                <button className="btn wd-pazza-bg-blue border border-1 rounded-1 text-white wd-pazza-font-lucida wd-pazza-border-dark-grey">
                   Post My Question to Class
                 </button>
-                <button className="btn border border-1 rounded-1 text-black wd-pazza-font-lucida ms-3">
+                <button className="btn border border-1 rounded-1 text-black wd-pazza-font-lucida ms-3 wd-pazza-bg-light-grey wd-pazza-border-dark-grey">
                   Save Draft
                 </button>
-                <button className="btn border border-1 rounded-1 text-black wd-pazza-font-lucida ms-3">
+                <button className="btn border border-1 rounded-1 text-black wd-pazza-font-lucida ms-3 wd-pazza-bg-light-grey wd-pazza-border-dark-grey">
                   Cancel
                 </button>
               </div>

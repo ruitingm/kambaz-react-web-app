@@ -13,8 +13,8 @@ export default function PostButton() {
           className="btn wd-pazza-np-button ms-1 d-flex pt-2"
           href={`/Kambaz/Courses/${cid}/Pazza/NewPost`}
         >
-          <BsFileEarmarkPost className="me-1 mb-1 align-self-center text-nowrap" />
-          <span className="wd-pazza-font-9pt">New Post</span>
+          <BsFileEarmarkPost className="me-1 mb-1 align-self-center" />
+          <span className="wd-pazza-font-9pt text-nowrap">New Post</span>
         </a>
       </div>
       <div

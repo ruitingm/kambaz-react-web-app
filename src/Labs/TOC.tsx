@@ -66,7 +66,16 @@ export default function TOC() {
           target="_
 blank"
         >
-          My GitHub
+          React GitHub
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          href="https://github.com/ruitingm/cs5610-kambaz-node-server-app"
+          target="_
+blank"
+        >
+          Node Github
         </Nav.Link>
       </Nav.Item>
     </Nav>

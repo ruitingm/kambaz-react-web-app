@@ -9,6 +9,7 @@ export default function PostTo() {
           id="wd-pazza-post-to-class"
           type="radio"
           className="form-check-input me-2"
+          name="post-to"
         />
         <label
           htmlFor="wd-pazza-post-to-class"
@@ -22,6 +23,7 @@ export default function PostTo() {
           id="wd-pazza-post-to-individual-instructor"
           type="radio"
           className="form-check-input me-2"
+          name="post-to"
         />
         <label
           htmlFor="wd-pazza-post-to-individual-instructor"

@@ -54,7 +54,7 @@ export default function PazzaNavigation() {
       >
         <Link to={`/Kambaz/Courses/${cid}/Pazza/Profile`}>
           <img
-            src="/images/default_profile.svg"
+            src="/images/default_profile.png"
             width="28px"
             className="border border-2 me-2"
           />
