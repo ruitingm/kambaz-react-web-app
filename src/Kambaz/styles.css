@@ -12,10 +12,25 @@ body * {
   }
 }
 
+.list-group.wd > .list-group-item {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  border-radius: 0%;
+  font-size: 14pt;
+}
 .list-group.wd > .list-group-item.active {
   color: black !important;
   background-color: white;
   border-left: 3px solid black !important;
+  border-radius: 0%;
+  font-size: 14pt;
+  outline: none;
+}
+
+.wd-activity-profile-size {
+  height: 100px;
+  width: 100px;
 }
 
 /* Pazza CSS */
