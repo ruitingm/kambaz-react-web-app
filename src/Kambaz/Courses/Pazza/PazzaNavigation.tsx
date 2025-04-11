@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useParams, useLocation, Link } from "react-router";
 export default function PazzaNavigation() {
   const { cid } = useParams();
@@ -8,6 +9,7 @@ export default function PazzaNavigation() {
     { path: "Statistics", label: "Statistics" },
     { path: "ManageClass", label: "Manage Class" },
   ];
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   return (
     <div
       id="wd-pazza-navigation"
@@ -62,7 +64,7 @@ export default function PazzaNavigation() {
             to={`/Kambaz/Courses/${cid}/Pazza/Profile`}
             className="wd-pazza-nav-tab"
           >
-            FirstName LastName
+            {currentUser.firstName} {currentUser.lastName}
           </Link>
         </Link>
       </div>

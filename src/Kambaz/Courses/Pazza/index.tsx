@@ -10,8 +10,8 @@ export default function Pazza() {
       <div className="flex-fill">
         <Routes>
           <Route path="/" element={<Navigate to="QandA" />} />
-          <Route path="QandA" element={<PazzaQandA />} />
-          <Route path="ManageClass" element={<ManageClassScreen />} />
+          <Route path="QandA/*" element={<PazzaQandA />} />
+          <Route path="ManageClass/*" element={<ManageClassScreen />} />
         </Routes>
       </div>
     </div>

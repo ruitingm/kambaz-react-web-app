@@ -1,23 +1,33 @@
-import { GiPin } from "react-icons/gi";
 import { GoTriangleDown } from "react-icons/go";
 import { BiSolidInfoSquare } from "react-icons/bi";
-// import { CgNotes } from "react-icons/cg";
+import { Link, Route, Routes, useParams } from "react-router";
+import InstructorLogo from "./InstructorLogo";
+import { useState } from "react";
+import { CgNotes } from "react-icons/cg";
+import PrivateLogo from "./PrivateLogo";
+import posts from "../../../Database/pazzaposts.json";
+import PostContent from "../ViewPost/PostContent";
 export default function ListOfPosts() {
+  const { cid } = useParams();
   const dateInfo = [
-    "PINNED",
     "TODAY",
     "YESTERDAY",
     "LAST WEEK",
     "LAST MONTH",
     "LAST YEAR",
   ];
-  const role = ["student", "instructor"];
-  const postType = ["note", "question"];
-  //   const instructorLiked = [true, false];
-
+  const postDate = (dateString: string) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year.slice(2)}`;
+  };
+  const [instructorLiked, setInstructorLiked] = useState(false);
+  const toggleInstructorLiked = () => {
+    setInstructorLiked(!instructorLiked);
+  };
+  const coursePosts = posts.filter((post) => post.course === cid);
   return (
     <div id="wd-pazza-lop">
-      {dateInfo.map((date) => (
+      {coursePosts.map((coursePost) => (
         <div>
           <div id="wd-pazza-lop-info" className="wd-pazza-lop-info-bar">
             <button
@@ -26,52 +36,55 @@ export default function ListOfPosts() {
             >
               <GoTriangleDown className="align-self-center ms-1 me-1" />
             </button>
-            {date.includes("PINNED") ? (
-              <div className="flex-grow-1">
-                {date} <GiPin className="float-end mt-1" />
-              </div>
-            ) : (
-              <div>{date}</div>
-            )}
+            {dateInfo[0]}
           </div>
-          <div
-            id="wd-pazza-lop-content"
-            className="container-fluid wd-pazza-lop-content-box ps-4"
+          <Link
+            to={`/Kambaz/Courses/${cid}/Pazza/QandA/Post/${coursePost._id}`}
+            className="wd-text-no-decor"
           >
-            <div id="wd-pazza-lop-subject-line" className="d-flex">
-              <div
-                id="wd-pazza-lop-subject"
-                className="fw-bold text-dark wd-pazza-lop-content-subject col-10 pe-1"
-              >
-                Subject Subject Subject Subject Subject Subject Subject Subject
-              </div>
-              <div id="wd-pazza-lop-date" className="text-end col-2">
-                1/3/25
-              </div>
-            </div>
-            <div id="wd-pazza-lop-body" className="d-flex">
-              <div
-                id="wd-pazza-lop-body-text"
-                className="wd-pazza-lop-content-body col-10"
-              >
-                Question about assignment 1 Kambaz application and lab 1.
-                Questions about Kambaz application. Questions about final
-                project Pazza final project Pazza application. Question about
-                assignment 2 Kambaz application.
-              </div>
-              <div id="wd-pazza-content-mark" className="col-2 text-end">
-                <BiSolidInfoSquare className="wd-pazza-yellow fs-4 rounded-1" />
-              </div>
-            </div>
             <div
-              id="wd-pazza-lop-instructor-note"
-              className="wd-pazza-green fw-bold pb-1"
+              id="wd-pazza-lop-content"
+              className="container-fluid wd-pazza-lop-content-box ps-4"
             >
-              <li>
-                An {role[1]} thinks this is a good {postType[0]}
-              </li>
+              <div id="wd-pazza-lop-subject-line" className="d-flex pt-1">
+                <div
+                  id="wd-pazza-lop-subject"
+                  className="fw-bold text-dark wd-pazza-lop-content-subject col-10 pe-1"
+                >
+                  {coursePost.subject}
+                </div>
+                <div id="wd-pazza-lop-date" className="text-end col-2">
+                  {postDate(coursePost.date)}
+                </div>
+              </div>
+              <div id="wd-pazza-lop-body" className="d-flex pb-1">
+                <div
+                  id="wd-pazza-lop-body-text"
+                  className="wd-pazza-lop-content-body col-10"
+                >
+                  {coursePost.private && <PrivateLogo />}
+                  {coursePost.role === "FACULTY" && <InstructorLogo />}
+                  <p>{coursePost.post}</p>
+                </div>
+                <div id="wd-pazza-content-mark" className="col-2 text-end">
+                  {coursePost.type === "note" && (
+                    <CgNotes className="wd-pazza-dark-grey fs-5" />
+                  )}
+                  {coursePost.type === "question" && (
+                    <BiSolidInfoSquare className="wd-pazza-yellow fs-4 rounded-1" />
+                  )}
+                </div>
+              </div>
+              {coursePost.liked && (
+                <div
+                  id="wd-pazza-lop-instructor-note"
+                  className="wd-pazza-green fw-bold pb-1 wd-pazza-font-8pt"
+                >
+                  <li>An instructor thinks this is a good {coursePost.type}</li>
+                </div>
+              )}
             </div>
-          </div>
+          </Link>
         </div>
       ))}
     </div>

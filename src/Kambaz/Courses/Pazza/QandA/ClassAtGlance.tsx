@@ -1,0 +1,80 @@
+import { BsCheckSquareFill, BsFillExclamationSquareFill } from "react-icons/bs";
+import { FaUnlockAlt } from "react-icons/fa";
+import { GoTriangleDown } from "react-icons/go";
+import { Link, useParams } from "react-router";
+export default function ClassAtGlance() {
+  const { cid } = useParams();
+  return (
+    <div id="wd-pazza-class-at-glance-screen" className="wd-pazza-full-screen">
+      <div
+        id="wd-pazza-class-at-glance-tile"
+        className="wd-pazza-dark-grey mt-2 ms-3"
+      >
+        <div className="d-flex align-items-center">
+          <FaUnlockAlt />
+          <GoTriangleDown />
+          <h4 className="m-0 ms-2">
+            <b>Class at a Glance</b>
+          </h4>
+        </div>
+        <div className="d-flex mt-0 me-3 wd-pazza-font-10pt justify-content-between">
+          <div>
+            <i>Updated 10 seconds ago.&nbsp;</i>
+            <Link
+              to={`/Kambaz/Courses/${cid}/Pazza`}
+              className="wd-text-no-decor wd-pazza-blue"
+            >
+              Reload
+            </Link>
+          </div>
+          <div className="wd-pazza-blue">Go to Live Q&A</div>
+        </div>
+      </div>
+      <div
+        id="wd-pazza-class-at-glance-info"
+        className="bg-white m-1 rounded-1 d-flex pb-3"
+      >
+        <div className="col-6 ms-4 mt-4">
+          <div className="d-flex mb-1">
+            <BsFillExclamationSquareFill className="wd-pazza-red fs-4 me-2" />
+            <b>10 unread posts</b>
+          </div>
+          <div className="d-flex mb-1">
+            <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
+            <b>no unanswered questions</b>
+          </div>
+          <div className="d-flex">
+            <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
+            <b>no unanswered followups</b>
+          </div>
+        </div>
+        <div className="col-6 mt-4">
+          <tr>
+            <td className="text-end pe-3 fw-bold">license status</td>
+            <td>active instructor license</td>
+          </tr>
+          <tr>
+            <td className="text-end pe-3 fw-bold">39</td>
+            <td>total posts</td>
+          </tr>
+          <tr>
+            <td className="text-end pe-3 fw-bold">39</td>
+            <td>total contributions</td>
+          </tr>
+          <tr>
+            <td className="text-end pe-3 fw-bold">39</td>
+            <td>instructors' responses</td>
+          </tr>
+          <tr>
+            <td className="text-end pe-3 fw-bold">39</td>
+            <td>students' responses</td>
+          </tr>
+          <tr>
+            <td className="text-end pe-3 fw-bold">39</td>
+            <td>avg. response time</td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -3,9 +3,12 @@ import { FaStar } from "react-icons/fa";
 import { IoMdLink } from "react-icons/io";
 import { PiQuestionMarkFill } from "react-icons/pi";
 import ActionButton from "./ActionButton";
+import posts from "../../../Database/pazzaposts.json";
+import { useParams } from "react-router";
 
 export default function PostContent() {
-  const links = ["hw1"];
+  const { pid } = useParams();
+  const post = posts.find((p) => p._id === pid);
   return (
     <div
       id="wd-pazza-view-post"
@@ -33,25 +36,16 @@ export default function PostContent() {
         </div>
         <div className="pt-4 pe-3">
           <h4 id="wd-pazza-question-title">
-            <b>Viewing and Replying to Posts</b>
+            <b>{post?.subject}</b>
           </h4>
           <div id="wd-pazza-question-content" className="mt-3">
-            Now, let's explore the requirements for the screen where users can
-            view and post answers to questions within the Pazza platform. This
-            screen allows instructors and students to provide responses to
-            queries posted by other students. Upon clicking a post in the List
-            of Posts (LOP), it is displayed in the Post Screen (PS) as shown in
-            the provided screenshot. Here, the original question is prominently
-            displayed at the top of the PS, with its summary highlighted as a
-            bold header for easy reference. Below is a detailed list of
-            requirements that define how this screen should function, ensuring a
-            seamless and effective interaction for answering questions.
+            {post?.post}
           </div>
           <a
-            key={links[0]}
+            key={post?.category}
             className="wd-pazza-blue wd-pazza-font-lucida wd-pazza-font-11pt wd-pazza-bg-light-blue rounded-1 wd-text-no-decor btn ps-2 pe-2 pt-1 pb-1 mt-4"
           >
-            {links[0]}
+            {post?.category}
           </a>
         </div>
       </div>
@@ -73,7 +67,7 @@ export default function PostContent() {
         </span>
         <span className="wd-pazza-dark-grey wd-pazza-font-11pt ms-2">0</span>
         <span className="wd-pazza-dark-grey wd-pazza-font-10pt float-end pt-2 me-2">
-          Updated 11 seconds ago by USER NAME
+          Updated 11 seconds ago by {post?.user}
         </span>
       </div>
     </div>

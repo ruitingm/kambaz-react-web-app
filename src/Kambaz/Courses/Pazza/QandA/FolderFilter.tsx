@@ -1,5 +1,5 @@
 import { FaFolder } from "react-icons/fa";
-import { useParams, useLocation } from "react-router";
+import { useParams, useLocation, Link } from "react-router";
 
 export default function FolderFilter() {
   const { cid } = useParams();
@@ -54,14 +54,15 @@ export default function FolderFilter() {
         className="wd-pazza-flex-items flex-grow-1 border border-1 border-top-0 border-start-0 border-secondary-subtle pt-1 align-content-center"
       >
         {links.map((link) => (
-          <a
+          <Link
+            key={link}
             className={`wd-pazza-folder-filter-tab wd-text-no-decor align-content-center ${
               pathname.includes(link) ? "wd-pazza-active-bold" : ""
             }`}
-            href={`#/Kambaz/Courses/${cid}/Pazza/${link}`}
+            to={`/Kambaz/Courses/${cid}/Pazza/QandA/${link}`}
           >
             {link}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
