@@ -18,6 +18,8 @@ export default function Dashboard({
   updateCourse,
   numberClicks,
   setNumberClicks,
+  enrolling,
+  setEnrolling,
 }: {
   courses: any[];
   course: any;
@@ -27,6 +29,8 @@ export default function Dashboard({
   updateCourse: () => void;
   numberClicks: number;
   setNumberClicks: (num: number) => void;
+  enrolling: boolean;
+  setEnrolling: (enrolling: boolean) => void;
 }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
