@@ -40,25 +40,26 @@ export default function AssignmentEditor() {
   const [assignmentDescription, setAssignmentDescription] = useState(
     assignment?.description ?? "Assignment Description"
   );
-  const createAssignmentForCourse = async () => {
-    if (!cid) return;
-    const newAssignment = {
-      course: cid,
+  const addAssignmentHandler = async () => {
+    const newAssignment = await courseClient.createAssignmentForCourse(cid!, {
       _id: aid,
-      points: assignmentPoints,
       title: assignmentTitle,
-      due: assignmentDueDate,
-      available: assignmentAvailableDate,
-      until: assignmentUntilDate,
+      course: cid,
       description: assignmentDescription,
-    };
-    const assignment = await courseClient.createAssignmentForCourse(
-      cid,
-      newAssignment
-    );
-    dispatch(addAssignment(assignment));
+      due: assignmentDueDate,
+      until: assignmentUntilDate,
+      available: assignmentAvailableDate,
+      points: assignmentPoints,
+    });
+    dispatch(addAssignment(newAssignment));
+    setAssignmentTitle("");
+    setAssignmentDescription("");
+    setAssignmentDueDate("");
+    setAssignmentAvailableDate("");
+    setAssignmentDueDate("");
+    setAssignmentPoints("");
   };
-  const saveAssignment = async (assignment: any) => {
+  const updateAssignmentHandler = async (assignment: any) => {
     await assignmentClient.updateAssignment(assignment);
     dispatch(updateAssignment(assignment));
   };
@@ -84,7 +85,7 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-danger text-center text-white float-end me-2"
               onClick={() => {
-                saveAssignment({
+                updateAssignmentHandler({
                   ...assignment,
                   title: assignmentTitle,
                   due: assignmentDueDate,
@@ -114,7 +115,7 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-danger text-center text-white float-end me-2"
               onClick={() => {
-                createAssignmentForCourse();
+                addAssignmentHandler();
                 navigate(`/Kambaz/Courses/${cid}/Assignments`);
               }}
             >
@@ -123,7 +124,7 @@ export default function AssignmentEditor() {
             <button
               className="btn btn-secondary text-center text-black float-end me-1"
               onClick={() => {
-                saveAssignment({ ...assignment, editing: false });
+                updateAssignmentHandler({ ...assignment, editing: false });
                 navigate(`/Kambaz/Courses/${cid}/Assignments`);
               }}
             >

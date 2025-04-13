@@ -20,15 +20,13 @@ export default function Assignments() {
   const handleDeleteClick = (assignmentId: string) => {
     setSelectedAssignment(assignmentId);
   };
-  const fetchAssignments = async () => {
-    const assignments = await courseClient.findAssignmentsForCourse(
-      cid as string
-    );
+  const fetchAssignmentsForCourse = async () => {
+    const assignments = await courseClient.findAssignmentsForCourse(cid!);
     dispatch(setAssignments(assignments));
   };
   useEffect(() => {
-    fetchAssignments();
-  }, []);
+    fetchAssignmentsForCourse();
+  }, [cid]);
   return (
     <div id="wd-assignments">
       <AssignmentControls assignmentId={uuidv4()} />
@@ -73,7 +71,7 @@ export default function Assignments() {
                         {assignment.due} at 11:59pm | {assignment.points} pts
                       </p>
                     </div>
-                    <div className="col-1 align-content-center d-none d-md-block">
+                    <div className="col-1 align-content-center d-none d-md-block ps-0">
                       <FaTrash
                         className="text-danger me-1 "
                         data-bs-toggle="modal"

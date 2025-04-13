@@ -10,10 +10,10 @@ import { GoTriangleDown } from "react-icons/go";
 import { IoIosSettings } from "react-icons/io";
 import { RxTriangleLeft, RxTriangleRight } from "react-icons/rx";
 import { useState } from "react";
-import PostContent from "../ViewPost/PostContent";
+// import PostContent from "../ViewPost/PostContent";
 
 export default function PazzaQandA() {
-  const pid = "1";
+  // const pid = "1";
   const category = "hw1";
   const lops = ["Unread", "Updated", "Unresovled"];
   const [sideBar, setSideBar] = useState(true);

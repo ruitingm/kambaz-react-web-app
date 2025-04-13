@@ -7,7 +7,7 @@ export default function DeleteDialog({
   assignmentId: string;
 }) {
   const dispatch = useDispatch();
-  const removeAssignment = async (assignmentId: string) => {
+  const deleteAssignmentHandler = async (assignmentId: string) => {
     await assignmentClient.deleteAssignment(assignmentId);
     dispatch(deleteAssignment(assignmentId));
   };
@@ -43,7 +43,7 @@ export default function DeleteDialog({
             </button>
             <button
               onClick={() => {
-                removeAssignment(assignmentId);
+                deleteAssignmentHandler(assignmentId);
               }}
               type="button"
               data-bs-dismiss="modal"

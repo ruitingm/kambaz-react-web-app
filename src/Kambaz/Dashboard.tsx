@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addEnrollment,
-  deleteEnrollment,
-  Enrollment,
-} from "./Enrollment/reducer";
-import * as userClient from "./Account/client";
-import * as courseClient from "./Courses/client";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 export default function Dashboard({
   courses,
   course,
@@ -30,22 +23,8 @@ export default function Dashboard({
   setEnrolling: (enrolling: boolean) => void;
   updateEnrollment: (courseId: string, enrolled: boolean) => void;
 }) {
-  const dispatch = useDispatch();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role === "FACULTY";
-  const isStudent = currentUser.role === "STUDENT";
-  const enrollCourse = async (courseId: string) => {
-    await userClient.enrollCourse(courseId);
-    const newEnrollment: Enrollment = {
-      user: currentUser._id as string,
-      course: courseId as string,
-    };
-    dispatch(addEnrollment(newEnrollment));
-  };
-  const unenrollCourse = async (courseId: string) => {
-    await userClient.unenrollCourse(courseId);
-    dispatch(deleteEnrollment({ user: currentUser._id, course: courseId }));
-  };
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">

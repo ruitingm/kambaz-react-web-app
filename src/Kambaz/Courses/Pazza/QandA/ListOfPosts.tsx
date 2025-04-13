@@ -1,12 +1,12 @@
 import { GoTriangleDown } from "react-icons/go";
 import { BiSolidInfoSquare } from "react-icons/bi";
-import { Link, Route, Routes, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import InstructorLogo from "./InstructorLogo";
-import { useState } from "react";
+// import { useState } from "react";
 import { CgNotes } from "react-icons/cg";
 import PrivateLogo from "./PrivateLogo";
 import posts from "../../../Database/pazzaposts.json";
-import PostContent from "../ViewPost/PostContent";
+// import PostContent from "../ViewPost/PostContent";
 export default function ListOfPosts() {
   const { cid } = useParams();
   const dateInfo = [
@@ -20,10 +20,10 @@ export default function ListOfPosts() {
     const [year, month, day] = dateString.split("-");
     return `${day}/${month}/${year.slice(2)}`;
   };
-  const [instructorLiked, setInstructorLiked] = useState(false);
-  const toggleInstructorLiked = () => {
-    setInstructorLiked(!instructorLiked);
-  };
+  // const [instructorLiked, setInstructorLiked] = useState(false);
+  // const toggleInstructorLiked = () => {
+  //   setInstructorLiked(!instructorLiked);
+  // };
   const coursePosts = posts.filter((post) => post.course === cid);
   return (
     <div id="wd-pazza-lop">
