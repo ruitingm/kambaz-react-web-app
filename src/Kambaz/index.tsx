@@ -12,8 +12,6 @@ import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const [numberClicks, setNumberClicks] = useState(0);
   const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -29,18 +27,19 @@ export default function Kambaz() {
     try {
       const courses = await userClient.findCoursesForUser(currentUser._id);
       setCourses(courses);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
   const fetchCourses = async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
+
       const enrolledCourses = await userClient.findCoursesForUser(
         currentUser._id
       );
       const courses = allCourses.map((course: any) => {
-        if (enrolledCourses.find((c: any) => c._id === course.id)) {
+        if (enrolledCourses.find((c: any) => c._id === course._id)) {
           return { ...course, enrolled: true };
         } else {
           return course;
@@ -50,6 +49,22 @@ export default function Kambaz() {
     } catch (error) {
       console.error(error);
     }
+  };
+  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
+    if (enrolled) {
+      await userClient.enrollIntoCourse(currentUser._id, courseId);
+    } else {
+      await userClient.unenrollFromCourse(currentUser._id, courseId);
+    }
+    setCourses(
+      courses.map((course) => {
+        if (course._id === courseId) {
+          return { ...course, enrolled: enrolled };
+        } else {
+          return course;
+        }
+      })
+    );
   };
   const addNewCourse = async () => {
     const newCourse = await courseClient.createCourse(course);
@@ -81,7 +96,7 @@ export default function Kambaz() {
   return (
     <Session>
       <div id="wd-kambaz">
-        <KambazNavigation onLinkClick={() => setNumberClicks(0)} />
+        <KambazNavigation />
         <div className="wd-main-content-offset p-3">
           <Routes>
             <Route path="/" element={<Navigate to="Account" />} />
@@ -97,8 +112,9 @@ export default function Kambaz() {
                     addNewCourse={addNewCourse}
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}
-                    numberClicks={numberClicks}
-                    setNumberClicks={setNumberClicks}
+                    enrolling={enrolling}
+                    setEnrolling={setEnrolling}
+                    updateEnrollment={updateEnrollment}
                   />
                 </ProtectedRoute>
               }

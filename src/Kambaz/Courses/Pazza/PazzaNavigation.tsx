@@ -29,7 +29,7 @@ export default function PazzaNavigation() {
       </div>
       <div
         id="wd-pazza-nav-course"
-        className="wd-pazza-nav-tab align-content-center text-center pt-2 col-md-1"
+        className="wd-pazza-nav-tab align-content-center text-center pt-2 col-md-1 overflow-hidden"
       >
         {cid}
       </div>
