@@ -5,7 +5,7 @@ import InstructorLogo from "./InstructorLogo";
 // import { useState } from "react";
 import { CgNotes } from "react-icons/cg";
 import PrivateLogo from "./PrivateLogo";
-import posts from "../../../Database/pazzaposts.json";
+import posts from "../../../Database/pazzaPosts.json";
 // import PostContent from "../ViewPost/PostContent";
 export default function ListOfPosts() {
   const { cid } = useParams();

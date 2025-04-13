@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { IoMdLink } from "react-icons/io";
 import { PiQuestionMarkFill } from "react-icons/pi";
 import ActionButton from "./ActionButton";
-import posts from "../../../Database/pazzaposts.json";
+import posts from "../../../Database/pazzaPosts.json";
 import { useParams } from "react-router";
 
 export default function PostContent() {
