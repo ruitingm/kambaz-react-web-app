@@ -2,8 +2,56 @@ import PostDetail from "./PostDetail";
 import PostTo from "./PostTo";
 import PostType from "./PostType";
 import SelectFolders from "./SelectFolders";
-
+import * as coursesClient from "../../client";
+import { useNavigate, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { addPost } from "../postReducer";
 export default function PostScreen() {
+  const { cid } = useParams();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [subject, setSubject] = useState("");
+  const [type, setType] = useState("");
+  const [privatePost, setPrivatePost] = useState(false);
+  const [post, setPost] = useState("");
+  const [category, setCategory] = useState("");
+  const [today, setToday] = useState("");
+  const getToday = () => {
+    const date = new Date();
+    const formatedDate = `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10 ? 0 : ""
+    }${date.getMonth() + 1}-${date.getDate() + 1 < 10 ? 0 : ""}${
+      date.getDate() + 1
+    }`;
+    setToday(formatedDate);
+  };
+  const addPostHandler = async () => {
+    const newPost = await coursesClient.createPostForCourse(cid!, {
+      user: currentUser,
+      course: cid,
+      subject: subject,
+      type: type,
+      private: privatePost,
+      post: post,
+      date: today,
+      liked: false,
+      role: currentUser.role,
+      category: category,
+      read: false,
+      answered: false,
+    });
+    dispatch(addPost(newPost));
+    setSubject("");
+    setType("");
+    setPrivatePost(false);
+    setPost("");
+    setCategory("");
+  };
+  useEffect(() => {
+    getToday();
+  }, []);
   return (
     <div id="wd-pazza-post-screen">
       <table>
@@ -15,7 +63,7 @@ export default function PostScreen() {
               </div>
             </th>
             <th>
-              <PostType />
+              <PostType setType={setType} />
             </th>
           </tr>
         </thead>
@@ -27,7 +75,7 @@ export default function PostScreen() {
               </div>
             </td>
             <td>
-              <PostTo />
+              <PostTo setPrivatePost={setPrivatePost} />
             </td>
           </tr>
           <tr>
@@ -37,7 +85,7 @@ export default function PostScreen() {
               </div>
             </td>
             <td>
-              <SelectFolders />
+              <SelectFolders setCategory={setCategory} />
             </td>
           </tr>
           <tr>
@@ -56,6 +104,7 @@ export default function PostScreen() {
                   type="text"
                   className="form-control mt-2 pazza-font-11pt"
                   placeholder="Enter a one line summary, 100 characters or less"
+                  onChange={(e) => setSubject(e.target.value)}
                 />
               </div>
             </td>
@@ -67,7 +116,7 @@ export default function PostScreen() {
               </div>
             </td>
             <td>
-              <PostDetail />
+              <PostDetail setPost={setPost} />
             </td>
           </tr>
           <tr>
@@ -100,7 +149,14 @@ export default function PostScreen() {
             <td></td>
             <td>
               <div className="d-flex mt-3">
-                <button className="btn wd-pazza-bg-blue border border-1 rounded-1 text-white wd-pazza-font-lucida wd-pazza-border-dark-grey">
+                <button
+                  onClick={() => {
+                    addPostHandler();
+                    navigate(-1);
+                    // navigate(`/Kambaz/Courses/${cid}/Pazza/QandA`);
+                  }}
+                  className="btn wd-pazza-bg-blue border border-1 rounded-1 text-white wd-pazza-font-lucida wd-pazza-border-dark-grey"
+                >
                   Post My Question to Class
                 </button>
                 <button className="btn border border-1 rounded-1 text-black wd-pazza-font-lucida ms-3 wd-pazza-bg-light-grey wd-pazza-border-dark-grey">

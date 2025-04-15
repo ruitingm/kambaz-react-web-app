@@ -1,5 +1,5 @@
 import { BiSolidInfoSquare } from "react-icons/bi";
-import ActionButton from "./ActionButton";
+import ActionButton from "./ButtonAction";
 
 export default function FollowupReply() {
   return (

@@ -1,7 +1,7 @@
-import DiscussionResolveButton from "./DiscussionResolveButton";
+import DiscussionResolveButton from "./ButtonResolve";
 import { IoMdLink } from "react-icons/io";
-import FollowupReply from "./FollowupReply";
-import ActionButton from "./ActionButton";
+import FollowupReply from "./ReplyFollowup";
+import ActionButton from "./ButtonAction";
 export default function FollowupDiscussion() {
   return (
     <div id="wd-pazza-follow-up-screen" className="border border-1 rounded-1">
@@ -9,7 +9,7 @@ export default function FollowupDiscussion() {
         id="wd-pazza-follow-up-title"
         className="wd-pazza-font-11pt border border-bottom-1 bg-white ps-2 pb-1 align pt-1"
       >
-        <b>followup discussions</b>
+        <b>followup discussions&nbsp;</b>
         <span className="fst-italic wd-pazza-font-10pt">
           for lingering questions and comments
         </span>

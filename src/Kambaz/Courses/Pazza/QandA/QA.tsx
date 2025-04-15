@@ -1,7 +1,7 @@
-import { Navigate, Route, Routes } from "react-router";
-import PostScreen from "../Post/PostScreen";
-import ViewPostScreen from "../ViewPost/ViewPostScreen";
-import ClassAtGlance from "./ClassAtGlance";
+import { Navigate, Route, Routes, useParams } from "react-router";
+import PostScreen from "../Post/NewPost";
+import ViewPostScreen from "../ViewPost/PostScreen";
+import ClassAtGlance from "../ViewPost/ClassAtGlance";
 import FolderFilter from "./FolderFilter";
 import ListOfPosts from "./ListOfPosts";
 import PostControls from "./PostControls";
@@ -9,17 +9,27 @@ import { BiSolidInfoSquare } from "react-icons/bi";
 import { GoTriangleDown } from "react-icons/go";
 import { IoIosSettings } from "react-icons/io";
 import { RxTriangleLeft, RxTriangleRight } from "react-icons/rx";
-import { useState } from "react";
-// import PostContent from "../ViewPost/PostContent";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPosts } from "../postReducer";
+import * as coursesClient from "../../client";
 
 export default function PazzaQandA() {
-  // const pid = "1";
   const category = "hw1";
   const lops = ["Unread", "Updated", "Unresovled"];
   const [sideBar, setSideBar] = useState(true);
   const toggleSideBar = () => {
     setSideBar(!sideBar);
   };
+  const { cid } = useParams();
+  const dispatch = useDispatch();
+  const fetchPostsForCourse = async () => {
+    const posts = await coursesClient.findPostsForCourse(cid as string);
+    dispatch(setPosts(posts));
+  };
+  useEffect(() => {
+    fetchPostsForCourse();
+  }, [cid]);
   return (
     <div id="wd-pazza-qa" className="wd-pazza-full-screen">
       <FolderFilter />

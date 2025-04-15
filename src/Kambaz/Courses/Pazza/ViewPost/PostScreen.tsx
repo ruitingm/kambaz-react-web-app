@@ -1,4 +1,4 @@
-import FollowUpDiscussion from "./FollowupDiscussion";
+import FollowUpDiscussion from "./DiscussionFollowup";
 import PostContent from "./PostContent";
 export default function ViewPostScreen() {
   return (

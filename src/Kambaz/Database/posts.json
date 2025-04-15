@@ -7,11 +7,12 @@
     "type": "note",
     "private": false,
     "post": "123 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application.  Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-04-10",
-    "replies": ["999", "998"],
+    "date": "2025-04-14",
     "liked": true,
     "role": "FACULTY",
-    "category": "hw1"
+    "category": "hw1",
+    "read": false,
+    "answered": true
   },
   {
     "_id": "2",
@@ -22,9 +23,11 @@
     "private": true,
     "post": "Now, let's explore the requirements for the screen where users can view and post answers to questions within the Pazza platform. This screen allows instructors and students to provide responses to queries posted by other students. Upon clicking a post in the List of Posts (LOP), it is displayed in the Post Screen (PS) as shown in the provided screenshot.",
     "date": "2025-03-10",
-    "replies": ["997", "996"],
+    "liked": false,
     "role": "STUDENT",
-    "category": "hw2"
+    "category": "hw2",
+    "read": false,
+    "answered": true
   },
   {
     "_id": "3",
@@ -35,9 +38,11 @@
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
     "date": "2025-03-20",
-    "replies": ["998", "996"],
+    "liked": false,
     "role": "TA",
-    "category": "hw1"
+    "category": "hw1",
+    "read": false,
+    "answered": true
   },
   {
     "_id": "4",
@@ -48,9 +53,11 @@
     "private": false,
     "post": "456 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
     "date": "2025-02-20",
-    "replies": ["999", "997"],
+    "liked": true,
     "role": "STUDENT",
-    "category": "hw1"
+    "category": "hw1",
+    "read": false,
+    "answered": true
   },
   {
     "_id": "5",
@@ -61,9 +68,11 @@
     "private": false,
     "post": "567 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
     "date": "2025-03-22",
-    "replies": ["998", "997"],
+    "liked": false,
     "role": "STUDENT",
-    "category": "hw2"
+    "category": "hw2",
+    "read": false,
+    "answered": false
   },
   {
     "_id": "6",
@@ -74,9 +83,11 @@
     "private": false,
     "post": "234 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
     "date": "2025-04-10",
-    "replies": ["999", "998"],
+    "liked": false,
     "role": "STUDENT",
-    "category": "hw2"
+    "category": "hw2",
+    "read": false,
+    "answered": false
   },
   {
     "_id": "7",
@@ -87,9 +98,11 @@
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
     "date": "2025-03-20",
-    "replies": ["998", "996"],
+    "liked": false,
     "role": "TA",
-    "category": "hw1"
+    "category": "hw1",
+    "read": false,
+    "answered": false
   },
   {
     "_id": "8",
@@ -100,9 +113,11 @@
     "private": false,
     "post": "456 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
     "date": "2025-02-20",
-    "replies": ["999", "997"],
+    "liked": true,
     "role": "STUDENT",
-    "category": "hw2"
+    "category": "hw2",
+    "read": false,
+    "answered": false
   },
   {
     "_id": "9",
@@ -113,8 +128,10 @@
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
     "date": "2025-04-10",
-    "replies": ["999", "998"],
+    "liked": true,
     "role": "FACULTY",
-    "category": "hw1"
+    "category": "hw1",
+    "read": false,
+    "answered": false
   }
 ]

@@ -34,7 +34,6 @@ export default function Kambaz() {
   const fetchCourses = async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
-
       const enrolledCourses = await userClient.findCoursesForUser(
         currentUser._id
       );

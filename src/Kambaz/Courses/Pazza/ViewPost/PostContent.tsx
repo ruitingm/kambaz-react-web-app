@@ -2,12 +2,15 @@ import { CiUnlock } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoMdLink } from "react-icons/io";
 import { PiQuestionMarkFill } from "react-icons/pi";
-import ActionButton from "./ActionButton";
-import posts from "../../../Database/pazzaPosts.json";
+import ActionButton from "./ButtonAction";
 import { useParams } from "react-router";
-
+import { useSelector } from "react-redux";
+import { Post } from "../postReducer";
 export default function PostContent() {
   const { pid } = useParams();
+  const { posts } = useSelector((state: any) => state.postsReducer) as {
+    posts: Post[];
+  };
   const post = posts.find((p) => p._id === pid);
   return (
     <div

@@ -1,4 +1,15 @@
-export default function PostTo() {
+export default function PostTo({
+  setPrivatePost,
+}: {
+  setPrivatePost: (privatePost: boolean) => void;
+}) {
+  const handleChange = (e: any) => {
+    if (e.target.value === "class") {
+      setPrivatePost(false);
+    } else {
+      setPrivatePost(true);
+    }
+  };
   return (
     <div
       id="wd-pazza-post-to-screen"
@@ -10,6 +21,8 @@ export default function PostTo() {
           type="radio"
           className="form-check-input me-2"
           name="post-to"
+          value="class"
+          onChange={handleChange}
         />
         <label
           htmlFor="wd-pazza-post-to-class"
@@ -24,6 +37,8 @@ export default function PostTo() {
           type="radio"
           className="form-check-input me-2"
           name="post-to"
+          value="individual"
+          onChange={handleChange}
         />
         <label
           htmlFor="wd-pazza-post-to-individual-instructor"

@@ -1,9 +1,19 @@
 import { BsCheckSquareFill, BsFillExclamationSquareFill } from "react-icons/bs";
 import { FaUnlockAlt } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
+import { Post } from "../postReducer";
 export default function ClassAtGlance() {
   const { cid } = useParams();
+  const { posts } = useSelector((state: any) => state.postsReducer) as {
+    posts: Post[];
+  };
+  const totalPost = posts.length;
+  const unreadPosts = posts.filter((p) => p.read === false).length;
+  const unanweredPosts = posts.filter((p) => p.answered === false).length;
+  const instructorResponses = posts.filter((p) => p.role === "FACULTY").length;
+  const studentResponses = totalPost - instructorResponses;
   return (
     <div id="wd-pazza-class-at-glance-screen" className="wd-pazza-full-screen">
       <div
@@ -36,12 +46,32 @@ export default function ClassAtGlance() {
       >
         <div className="col-6 ms-4 mt-4">
           <div className="d-flex mb-1">
-            <BsFillExclamationSquareFill className="wd-pazza-red fs-4 me-2" />
-            <b>10 unread posts</b>
+            {unreadPosts === 0 && (
+              <>
+                <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
+                <b> no unread posts</b>
+              </>
+            )}
+            {unreadPosts > 0 && (
+              <>
+                <BsFillExclamationSquareFill className="wd-pazza-red fs-4 me-2" />
+                <b>{unreadPosts} unread posts</b>
+              </>
+            )}
           </div>
           <div className="d-flex mb-1">
-            <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
-            <b>no unanswered questions</b>
+            {unreadPosts === 0 && (
+              <>
+                <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
+                <b>no unanswered questions</b>
+              </>
+            )}
+            {unreadPosts > 0 && (
+              <>
+                <BsFillExclamationSquareFill className="wd-pazza-red fs-4 me-2" />
+                <b>{unanweredPosts} unanswered questions</b>
+              </>
+            )}
           </div>
           <div className="d-flex">
             <BsCheckSquareFill className="wd-pazza-green fs-4 me-2" />
@@ -54,23 +84,23 @@ export default function ClassAtGlance() {
             <td>active instructor license</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">39</td>
+            <td className="text-end pe-3 fw-bold">{totalPost}</td>
             <td>total posts</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">39</td>
+            <td className="text-end pe-3 fw-bold">{totalPost}</td>
             <td>total contributions</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">39</td>
+            <td className="text-end pe-3 fw-bold">{instructorResponses}</td>
             <td>instructors' responses</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">39</td>
+            <td className="text-end pe-3 fw-bold">{studentResponses}</td>
             <td>students' responses</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">39</td>
+            <td className="text-end pe-3 fw-bold">1 hr 20 min</td>
             <td>avg. response time</td>
           </tr>
         </div>
