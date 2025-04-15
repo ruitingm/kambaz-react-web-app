@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes, useParams } from "react-router";
-import PostScreen from "../Post/NewPost";
-import ViewPostScreen from "../ViewPost/PostScreen";
+import PostScreen from "../ViewPost/PostScreen";
 import ClassAtGlance from "../ViewPost/ClassAtGlance";
 import FolderFilter from "./FolderFilter";
 import ListOfPosts from "./ListOfPosts";
@@ -13,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPosts } from "../postReducer";
 import * as coursesClient from "../../client";
-
+import NewPost from "../Post/NewPost";
 export default function PazzaQandA() {
   const category = "hw1";
   const lops = ["Unread", "Updated", "Unresovled"];
@@ -24,9 +23,25 @@ export default function PazzaQandA() {
   const { cid } = useParams();
   const dispatch = useDispatch();
   const fetchPostsForCourse = async () => {
-    const posts = await coursesClient.findPostsForCourse(cid as string);
-    dispatch(setPosts(posts));
+    try {
+      const posts = await coursesClient.findPostsForCourse(cid as string);
+      dispatch(setPosts(posts));
+    } catch (err) {
+      console.error(err);
+    }
   };
+  const [users, setUsers] = useState<any[]>([]);
+  const fetchUsersForCourse = async () => {
+    try {
+      const users = await coursesClient.findUsersForCourse(cid!);
+      setUsers(users);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    fetchUsersForCourse();
+  }, []);
   useEffect(() => {
     fetchPostsForCourse();
   }, [cid]);
@@ -88,8 +103,8 @@ export default function PazzaQandA() {
               <Route path="/" element={<Navigate to="ClassAtGlance" />} />
               <Route path={category} element={<ClassAtGlance />} />
               <Route path="ClassAtGlance" element={<ClassAtGlance />} />
-              <Route path="Post/:pid" element={<ViewPostScreen />} />
-              <Route path="NewPost" element={<PostScreen />} />
+              <Route path="Post/:pid" element={<PostScreen users={users} />} />
+              <Route path="NewPost" element={<NewPost />} />
             </Routes>
           </div>
         </div>

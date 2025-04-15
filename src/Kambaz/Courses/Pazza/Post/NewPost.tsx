@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addPost } from "../postReducer";
-export default function PostScreen() {
+export default function NewPost() {
   const { cid } = useParams();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();

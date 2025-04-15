@@ -38,13 +38,7 @@ const postsSlice = createSlice({
         p._id === post._id ? post : p
       ) as Post[];
     },
-    editPost: (state, { payload: postId }: { payload: String }) => {
-      state.posts = state.posts.map((p: Post) =>
-        p._id === postId ? { ...p, editing: true } : p
-      ) as Post[];
-    },
   },
 });
-export const { setPosts, addPost, deletePost, updatePost, editPost } =
-  postsSlice.actions;
+export const { setPosts, addPost, deletePost, updatePost } = postsSlice.actions;
 export default postsSlice.reducer;

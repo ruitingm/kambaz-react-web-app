@@ -6,9 +6,10 @@ export type FollowUp = {
 };
 export type Reply = {
   _id: string;
+  post: string;
   user: string;
   reply: string;
-  followup: FollowUp;
+  followup: FollowUp[];
 };
 
 const initialState = {
@@ -32,13 +33,8 @@ const repliesSlice = createSlice({
         r._id === reply._id ? reply : r
       ) as Reply[];
     },
-    editReply: (state, { payload: replyId }: { payload: String }) => {
-      state.replies = state.replies.map((r: Reply) =>
-        r._id === replyId ? { ...r, editing: true } : r
-      ) as Reply[];
-    },
   },
 });
-export const { setReplies, addReply, deleteReply, updateReply, editReply } =
+export const { setReplies, addReply, deleteReply, updateReply } =
   repliesSlice.actions;
 export default repliesSlice.reducer;
