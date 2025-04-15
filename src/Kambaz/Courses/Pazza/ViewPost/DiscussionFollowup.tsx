@@ -32,7 +32,7 @@ export default function FollowupDiscussion({ users }: { users: any[] }) {
               </div>
               <DiscussionResolveButton />
               <span className="wd-pazza-blue ms-1">
-                <b>@1</b>
+                <b>@{reply._id}</b>
               </span>
               <IoMdLink className="wd-pazza-blue ms-1 fs-5" />
             </div>
@@ -66,6 +66,15 @@ export default function FollowupDiscussion({ users }: { users: any[] }) {
           </div>
         </>
       ))}
+      <div className="mt-1 ms-3 me-3 wd-pazza-font-11pt">
+        <span className="ms-1">Start a new followup discussion</span>
+        <input
+          id="wd-pazza-reply-followup"
+          type="text"
+          placeholder="Compose a new followup discussion"
+          className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1"
+        />
+      </div>
     </div>
   );
 }

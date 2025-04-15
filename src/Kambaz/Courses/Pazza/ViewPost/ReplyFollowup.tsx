@@ -1,6 +1,5 @@
 import { BiSolidInfoSquare } from "react-icons/bi";
 import ActionButton from "./ButtonAction";
-import { useEffect, useState } from "react";
 type Followup = {
   user: string;
   content: string;

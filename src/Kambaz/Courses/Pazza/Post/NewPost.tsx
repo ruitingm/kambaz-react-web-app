@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addPost } from "../postReducer";
 export default function NewPost() {
-  const { cid } = useParams();
+  const { cid } = useParams<{ cid: string }>();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function NewPost() {
   const addPostHandler = async () => {
     const newPost = await coursesClient.createPostForCourse(cid!, {
       user: currentUser,
-      course: cid,
+      course: cid!,
       subject: subject,
       type: type,
       private: privatePost,
@@ -41,6 +41,7 @@ export default function NewPost() {
       category: category,
       read: false,
       answered: false,
+      _id: "",
     });
     dispatch(addPost(newPost));
     setSubject("");
