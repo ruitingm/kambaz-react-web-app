@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import PazzaNavigation from "./PazzaNavigation";
-import PazzaQandA from "./QandA/PazzaQandA";
+import PazzaQandA from "./QandA/QA";
 import ManageClassScreen from "./ManageClass/ManageClassScreen";
 
 export default function Pazza() {

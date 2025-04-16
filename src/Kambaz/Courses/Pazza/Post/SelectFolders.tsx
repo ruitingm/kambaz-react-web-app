@@ -1,4 +1,8 @@
-export default function SelectFolders() {
+export default function SelectFolders({
+  setCategory,
+}: {
+  setCategory: (category: string) => void;
+}) {
   const links = [
     "hw1",
     "hw2",
@@ -23,6 +27,10 @@ export default function SelectFolders() {
             key={link}
             className="wd-pazza-blue wd-pazza-font-lucida wd-pazza-font-11pt wd-pazza-bg-light-blue
            ms-2 p-0 ps-1 pe-1 rounded-1 wd-text-no-decor btn "
+            onClick={(e) => {
+              e.preventDefault();
+              setCategory(link);
+            }}
           >
             {link}
           </a>

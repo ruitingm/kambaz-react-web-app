@@ -17,7 +17,6 @@ export default function Courses({ courses }: { courses: any[] }) {
   const fetchUsersForCourse = async () => {
     try {
       const users = await courseClient.findUsersForCourse(cid!);
-      console.log(users);
       setUsers(users);
     } catch (err) {
       console.error(err);

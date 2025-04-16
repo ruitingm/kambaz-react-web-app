@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Post } from "./Pazza/postReducer";
 const axiosWithCredentials = axios.create({ withCredentials: true });
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
@@ -52,5 +53,18 @@ export const createAssignmentForCourse = async (
 };
 export const findUsersForCourse = async (courseId: string) => {
   const response = await axios.get(`${COURSES_API}/${courseId}/users`);
+  return response.data;
+};
+export const findPostsForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/posts`
+  );
+  return response.data;
+};
+export const createPostForCourse = async (courseId: string, post: Post) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/posts`,
+    post
+  );
   return response.data;
 };

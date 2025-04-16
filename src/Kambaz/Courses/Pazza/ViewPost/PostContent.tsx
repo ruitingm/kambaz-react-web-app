@@ -2,13 +2,10 @@ import { CiUnlock } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoMdLink } from "react-icons/io";
 import { PiQuestionMarkFill } from "react-icons/pi";
-import ActionButton from "./ActionButton";
-import posts from "../../../Database/pazzaPosts.json";
-import { useParams } from "react-router";
-
-export default function PostContent() {
-  const { pid } = useParams();
-  const post = posts.find((p) => p._id === pid);
+import ActionButton from "./ButtonAction";
+import { Post } from "../postReducer";
+import { CgNotes } from "react-icons/cg";
+export default function PostContent({ post }: { post: Post }) {
   return (
     <div
       id="wd-pazza-view-post"
@@ -18,8 +15,13 @@ export default function PostContent() {
         id="wd-pazza-view-post-title "
         className="border border-bottom-1 wd-pazza-font-11pt align-content-center ps-2 pt-1 pb-1"
       >
-        <PiQuestionMarkFill className="fs-4 wd-pazza-red me-1" />
-        <b>question number @1</b>
+        {post.type === "note" && (
+          <CgNotes className="fs-5 wd-pazza-dark-grey me-1" />
+        )}
+        {post.type === "question" && (
+          <PiQuestionMarkFill className="fs-4 wd-pazza-red me-1" />
+        )}
+        <b>question number @{post._id}</b>
         <IoMdLink className="fs-6 wd-pazza-dark-grey ms-1" />
         <FaStar className="wd-pazza-dark-grey ms-1" />
         <CiUnlock className="fs-6 wd-pazza-dark-grey ms-1" />

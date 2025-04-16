@@ -1,7 +1,6 @@
-import { Navigate, Route, Routes } from "react-router";
-import PostScreen from "../Post/PostScreen";
-import ViewPostScreen from "../ViewPost/ViewPostScreen";
-import ClassAtGlance from "./ClassAtGlance";
+import { Navigate, Route, Routes, useParams } from "react-router";
+import PostScreen from "../ViewPost/PostScreen";
+import ClassAtGlance from "../ViewPost/ClassAtGlance";
 import FolderFilter from "./FolderFilter";
 import ListOfPosts from "./ListOfPosts";
 import PostControls from "./PostControls";
@@ -9,17 +8,43 @@ import { BiSolidInfoSquare } from "react-icons/bi";
 import { GoTriangleDown } from "react-icons/go";
 import { IoIosSettings } from "react-icons/io";
 import { RxTriangleLeft, RxTriangleRight } from "react-icons/rx";
-import { useState } from "react";
-// import PostContent from "../ViewPost/PostContent";
-
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPosts } from "../postReducer";
+import * as coursesClient from "../../client";
+import NewPost from "../Post/NewPost";
 export default function PazzaQandA() {
-  // const pid = "1";
   const category = "hw1";
   const lops = ["Unread", "Updated", "Unresovled"];
   const [sideBar, setSideBar] = useState(true);
   const toggleSideBar = () => {
     setSideBar(!sideBar);
   };
+  const { cid } = useParams();
+  const dispatch = useDispatch();
+  const fetchPostsForCourse = async () => {
+    try {
+      const posts = await coursesClient.findPostsForCourse(cid as string);
+      dispatch(setPosts(posts));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const [users, setUsers] = useState<any[]>([]);
+  const fetchUsersForCourse = async () => {
+    try {
+      const users = await coursesClient.findUsersForCourse(cid!);
+      setUsers(users);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    fetchUsersForCourse();
+  }, []);
+  useEffect(() => {
+    fetchPostsForCourse();
+  }, [cid]);
   return (
     <div id="wd-pazza-qa" className="wd-pazza-full-screen">
       <FolderFilter />
@@ -78,8 +103,8 @@ export default function PazzaQandA() {
               <Route path="/" element={<Navigate to="ClassAtGlance" />} />
               <Route path={category} element={<ClassAtGlance />} />
               <Route path="ClassAtGlance" element={<ClassAtGlance />} />
-              <Route path="Post/:pid" element={<ViewPostScreen />} />
-              <Route path="NewPost" element={<PostScreen />} />
+              <Route path="Post/:pid" element={<PostScreen users={users} />} />
+              <Route path="NewPost" element={<NewPost />} />
             </Routes>
           </div>
         </div>

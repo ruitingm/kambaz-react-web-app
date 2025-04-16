@@ -299,3 +299,6 @@ body * {
 .wd-pazza-full-screen {
   height: 100vh;
 }
+.wd-pazza-unread-circle {
+  height: 5pt;
+}

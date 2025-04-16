@@ -1,4 +1,11 @@
-export default function PostType() {
+export default function PostType({
+  setType,
+}: {
+  setType: (type: string) => void;
+}) {
+  const handleChange = (event: any) => {
+    setType(event.target.value);
+  };
   return (
     <div
       id="wd-pazza-post-type"
@@ -10,6 +17,8 @@ export default function PostType() {
           type="radio"
           className="form-check-input me-2"
           name="post-type"
+          value="question"
+          onChange={handleChange}
         />
         <label htmlFor="wd-pazza-post-type-question">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -26,6 +35,8 @@ export default function PostType() {
           type="radio"
           className="form-check-input me-2"
           name="post-type"
+          value="note"
+          onChange={handleChange}
         />
         <label htmlFor="wd-pazza-post-type-note">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -42,6 +53,7 @@ export default function PostType() {
           type="radio"
           className="form-check-input me-2"
           name="post-type"
+          value="poll"
         />
         <label htmlFor="wd-pazza-post-type-poll">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">

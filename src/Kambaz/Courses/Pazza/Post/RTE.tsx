@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-const RTE = () => {
+const RTE = ({ setPost }: { setPost: (post: string) => void }) => {
   const [content, setContent] = useState("");
   const modules = {
     toolbar: [
@@ -13,8 +12,14 @@ const RTE = () => {
       ["clean"],
     ],
   };
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
   const handleChange = (value: string) => {
     setContent(value);
+    setPost(stripHtml(value));
   };
   return (
     <div>

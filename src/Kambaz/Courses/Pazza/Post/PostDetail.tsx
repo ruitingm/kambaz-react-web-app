@@ -1,6 +1,10 @@
 import RTE from "./RTE";
 
-export default function PostDetail() {
+export default function PostDetail({
+  setPost,
+}: {
+  setPost: (post: string) => void;
+}) {
   return (
     <div id="wd-pazza-post-detail-screeen" className="mt-3 pe-3">
       <div className="d-flex">
@@ -48,7 +52,7 @@ export default function PostDetail() {
         </div>
       </div>
       <div>
-        <RTE />
+        <RTE setPost={setPost} />
       </div>
       <div className="wd-pazza-dark-grey wd-pazza-font-lucida wd-pazza-font-10pt ps-3">
         Option + F9 to move focus to Menu Bar; Option + F10 to move foucs to
