@@ -18,7 +18,7 @@ export const findRepliesForPost = async (postId: string) => {
   );
   return response.data;
 };
-export const createRepliesForPost = async (postId: string, reply: Reply) => {
+export const createReplyForPost = async (postId: string, reply: Reply) => {
   const response = await axiosWithCredentials.post(
     `${POST_API}/${postId}/replies`,
     reply

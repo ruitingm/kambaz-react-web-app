@@ -1,19 +1,39 @@
 import { BiSolidInfoSquare } from "react-icons/bi";
 import ActionButton from "./ButtonAction";
-type Followup = {
-  user: string;
-  content: string;
-}[];
+import * as postClient from "../client";
+import { useDispatch, useSelector } from "react-redux";
+import { Reply, updateReply } from "../replyReducer";
+import { useState } from "react";
+// type Followup = {
+//   user: string;
+//   content: string;
+// }[];
 export default function FollowupReply({
-  followups,
+  reply,
   users,
 }: {
-  followups: Followup;
+  reply: Reply;
   users: any[];
 }) {
   const getUser = (userId: string) => {
     const user = users.find((u: any) => u._id === userId);
     return user;
+  };
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const followups = reply.followup;
+  const dispatch = useDispatch();
+  const [newFollowups, setNewFollowups] = useState<
+    { user: string; content: string }[]
+  >([]);
+  const addFollowupHandler = (followupContent: string) => {
+    const newFollowupReply = { user: currentUser, content: followupContent };
+    setNewFollowups((prev) => [...prev, newFollowupReply]);
+  };
+  const updateReplyHandler = async () => {
+    const newReply = { ...reply, followup: newFollowups };
+    await postClient.updateReply(newReply);
+    dispatch(updateReply(newReply));
+    setNewFollowups([]);
   };
   return (
     <div id="wd-pazza-followup-reply-box" className="wd-pazza-bg-blue-grey">
@@ -62,15 +82,21 @@ export default function FollowupReply({
                 </div>
               </div>
             </div>
-            <input
-              id="wd-pazza-reply-followup"
-              type="text"
-              placeholder="Reply to this followup discussion"
-              className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1"
-            />
           </div>
         );
       })}
+      <input
+        id="wd-pazza-reply-followup"
+        type="text"
+        placeholder="Reply to this followup discussion"
+        className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1"
+        onChange={(e) => addFollowupHandler(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            updateReplyHandler();
+          }
+        }}
+      />
     </div>
   );
 }

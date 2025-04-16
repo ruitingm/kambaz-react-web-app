@@ -2,15 +2,33 @@ import DiscussionResolveButton from "./ButtonResolve";
 import { IoMdLink } from "react-icons/io";
 import FollowupReply from "./ReplyFollowup";
 import ActionButton from "./ButtonAction";
-import { useSelector } from "react-redux";
-import { Reply } from "../replyReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { addReply, Reply } from "../replyReducer";
+import * as postClient from "../client";
+import { useParams } from "react-router";
+import { useState } from "react";
 export default function FollowupDiscussion({ users }: { users: any[] }) {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { pid } = useParams();
+  const dispatch = useDispatch();
   const { replies } = useSelector((state: any) => state.repliesReducer) as {
     replies: Reply[];
   };
   const getUserName = (userId: string) => {
     const user = users.find((u: any) => u._id === userId);
     return `${user.firstName} ${user.lastName}`;
+  };
+  const [userReply, setUserReply] = useState("");
+  const addReplyHandler = async () => {
+    const newReply = await postClient.createReplyForPost(pid!, {
+      _id: "",
+      user: currentUser,
+      post: pid!,
+      followup: [],
+      reply: userReply,
+    });
+    dispatch(addReply(newReply));
+    setUserReply("");
   };
   return (
     <div id="wd-pazza-follow-up-screen" className="border border-1 rounded-1">
@@ -31,8 +49,9 @@ export default function FollowupDiscussion({ users }: { users: any[] }) {
                 <ActionButton />
               </div>
               <DiscussionResolveButton />
-              <span className="wd-pazza-blue ms-1">
-                <b>@{reply._id}</b>
+              <span className="wd-pazza-blue ms-1 wd-pazza-font-10pt">
+                <b>@</b>
+                {reply._id}
               </span>
               <IoMdLink className="wd-pazza-blue ms-1 fs-5" />
             </div>
@@ -60,7 +79,7 @@ export default function FollowupDiscussion({ users }: { users: any[] }) {
                     helpful <span className="wd-pazza-dark-grey"> | 0</span>
                   </span>
                 </div>
-                <FollowupReply followups={reply.followup} users={users} />
+                <FollowupReply reply={reply} users={users} />
               </div>
             </div>
           </div>
@@ -73,6 +92,12 @@ export default function FollowupDiscussion({ users }: { users: any[] }) {
           type="text"
           placeholder="Compose a new followup discussion"
           className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1"
+          onChange={(e) => setUserReply(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              addReplyHandler();
+            }
+          }}
         />
       </div>
     </div>
