@@ -20,7 +20,7 @@ export default function ClassAtGlance() {
   const studentResponses = totalPost - instructorResponses;
   const totalReply = replies.length;
   return (
-    <div id="wd-pazza-class-at-glance-screen" className="wd-pazza-full-screen">
+    <div id="wd-pazza-class-at-glance-screen">
       <div
         id="wd-pazza-class-at-glance-tile"
         className="wd-pazza-dark-grey mt-2 ms-3"

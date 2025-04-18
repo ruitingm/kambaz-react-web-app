@@ -68,3 +68,9 @@ export const createPostForCourse = async (courseId: string, post: Post) => {
   );
   return response.data;
 };
+export const findPostsByKeyword = async (courseId: string, keyword: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/posts/?keyword=${keyword}`
+  );
+  return response.data;
+};

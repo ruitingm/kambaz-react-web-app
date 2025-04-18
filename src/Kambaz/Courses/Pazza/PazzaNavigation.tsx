@@ -13,11 +13,11 @@ export default function PazzaNavigation() {
   return (
     <div
       id="wd-pazza-navigation"
-      className="d-flex flex-fill wd-pazza-bg-blue wd-pazza-nav-bar align-content-center"
+      className="d-flex  wd-pazza-bg-blue wd-pazza-nav-bar align-content-center"
     >
       <div
         id="wd-pazza-nav-application-logo"
-        className="wd-pazza-logo align-self-center col-md-2"
+        className="wd-pazza-logo align-self-center col-2"
       >
         <Link
           to={`/Kambaz/Courses/${cid}/Pazza`}
@@ -29,11 +29,11 @@ export default function PazzaNavigation() {
       </div>
       <div
         id="wd-pazza-nav-course"
-        className="wd-pazza-nav-tab align-content-center text-center pt-2 col-md-1 overflow-hidden"
+        className="wd-pazza-nav-tab align-content-center text-center pt-2 col-1 overflow-hidden"
       >
         {cid}
       </div>
-      <div id="wd-pazza-nav-items" className="col-md-6 wd-pazza-flex-items">
+      <div id="wd-pazza-nav-items" className="col-6 wd-pazza-flex-items">
         {links.map((link) => (
           <div
             id={`wd-pazza-nav-${link.path}`}
@@ -52,7 +52,7 @@ export default function PazzaNavigation() {
       </div>
       <div
         id="wd-pazza-nav-profile"
-        className="wd-pazza-nav-tab align-content-center overflow-hidden pt-1 pe-2 col-md-3 text-end"
+        className="wd-pazza-nav-tab align-content-center overflow-hidden pt-1 pe-2 col-3 text-end"
       >
         <Link to={`/Kambaz/Courses/${cid}/Pazza/Profile`}>
           <img

@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addPost } from "../postReducer";
-export default function NewPost() {
+export default function NewPost({ users }: { users: any[] }) {
   const { cid } = useParams<{ cid: string }>();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function NewPost() {
     getToday();
   }, []);
   return (
-    <div id="wd-pazza-post-screen">
+    <div id="wd-pazza-post-screen" className="mb-5">
       <table>
         <thead>
           <tr>
@@ -76,7 +76,7 @@ export default function NewPost() {
               </div>
             </td>
             <td>
-              <PostTo setPrivatePost={setPrivatePost} />
+              <PostTo setPrivatePost={setPrivatePost} users={users} />
             </td>
           </tr>
           <tr>

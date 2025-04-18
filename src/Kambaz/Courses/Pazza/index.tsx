@@ -5,9 +5,11 @@ import ManageClassScreen from "./ManageClass/ManageClassScreen";
 
 export default function Pazza() {
   return (
-    <div>
-      <PazzaNavigation />
-      <div className="flex-fill">
+    <div id="wd-pazza">
+      <div id="wd-pazza-navigation-bar">
+        <PazzaNavigation />
+      </div>
+      <div id="wd-pazza-main-content">
         <Routes>
           <Route path="/" element={<Navigate to="QandA" />} />
           <Route path="QandA/*" element={<PazzaQandA />} />

@@ -6,7 +6,7 @@ export default function ManageFoldersScreen() {
       id="wd-pazza-manage-folder-screen"
       className="d-flex wd-pazza-font-11pt"
     >
-      <div id="wd-pazza-manage-folder-description" className="col-2 ">
+      <div id="wd-pazza-manage-folder-description" className="col-2">
         <div className="border border-1 rounded-1 col-11 wd-pazza-bg-light-blue wd-pazza-blue wd-pazza-font-10pt text-center p-3 pt-2 pb-2 mt-2 ms-1">
           <span className="wd-pazza-font-10pt">
             Create folders to keep your class organized

@@ -20,7 +20,7 @@ export default function FolderFilter() {
   return (
     <div
       id="wd-pazza-folder-filter"
-      className="d-flex wd-pazza-bg-light-grey flex-fill"
+      className="d-flex wd-pazza-bg-light-grey flex-fill me-4"
     >
       <div
         id="wd-pazza-folder-filter-liveqa"

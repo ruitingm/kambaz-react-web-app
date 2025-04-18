@@ -19,6 +19,7 @@ export default function PostType({
           name="post-type"
           value="question"
           onChange={handleChange}
+          defaultChecked
         />
         <label htmlFor="wd-pazza-post-type-question">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
