@@ -3,9 +3,6 @@ export default function PostType({
 }: {
   setType: (type: string) => void;
 }) {
-  const handleChange = (event: any) => {
-    setType(event.target.value);
-  };
   return (
     <div
       id="wd-pazza-post-type"
@@ -18,7 +15,7 @@ export default function PostType({
           className="form-check-input me-2"
           name="post-type"
           value="question"
-          onChange={handleChange}
+          onChange={() => setType("question")}
           defaultChecked
         />
         <label htmlFor="wd-pazza-post-type-question">
@@ -37,7 +34,7 @@ export default function PostType({
           className="form-check-input me-2"
           name="post-type"
           value="note"
-          onChange={handleChange}
+          onChange={() => setType("note")}
         />
         <label htmlFor="wd-pazza-post-type-note">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -48,13 +45,15 @@ export default function PostType({
           </div>
         </label>
       </div>
-      <div id="wd-pazza-post-type-poll-tab" className="d-flex ms-4">
+      {/* <div id="wd-pazza-post-type-poll-tab" className="d-flex ms-4">
         <input
           id="wd-pazza-post-type-poll"
           type="radio"
           className="form-check-input me-2"
           name="post-type"
-          value="poll"
+          value="question"
+          // value="poll"
+          onChange={handleChange}
         />
         <label htmlFor="wd-pazza-post-type-poll">
           <div className="form-check-label wd-pazza-dark-grey wd-pazza-font-11pt">
@@ -64,7 +63,7 @@ export default function PostType({
             if you need a vote
           </div>
         </label>
-      </div>
+      </div> */}
     </div>
   );
 }

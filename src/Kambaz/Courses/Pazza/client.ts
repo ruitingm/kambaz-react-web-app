@@ -12,6 +12,10 @@ export const updatePost = async (post: Post) => {
   );
   return data;
 };
+export const deletePost = async (postId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${POST_API}/${postId}`);
+  return data;
+};
 export const findRepliesForPost = async (postId: string) => {
   const response = await axiosWithCredentials.get(
     `${POST_API}/${postId}/replies`
@@ -30,5 +34,9 @@ export const updateReply = async (reply: Reply) => {
     `${REPLY_API}/${reply._id}`,
     reply
   );
+  return data;
+};
+export const deleteReply = async (replyId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${REPLY_API}/${replyId}`);
   return data;
 };

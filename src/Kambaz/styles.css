@@ -400,3 +400,20 @@ body * {
 #wd-pazza-manage-folder-screen {
   width: 97%;
 }
+#wd-pazza-select-visible-to {
+  max-height: 140px;
+  overflow-y: auto;
+  min-width: 300px;
+  margin-bottom: 0;
+}
+
+.wd-pazza-rte-size {
+  display: block;
+  width: 100%;
+  min-height: 10px;
+  height: auto;
+  margin-bottom: 40px;
+  position: static;
+  z-index: auto;
+  padding-bottom: 0;
+}

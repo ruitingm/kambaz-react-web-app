@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPosts } from "../postReducer";
 import * as coursesClient from "../../client";
-import * as userClient from "../../../Account/client";
 import NewPost from "../Post/NewPost";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
@@ -25,7 +24,6 @@ export default function PazzaQandA() {
   const { cid } = useParams();
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
-  // const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
   const fetchPostsForCourse = async (key: string) => {
     try {
       setKeyword(key);
@@ -45,7 +43,7 @@ export default function PazzaQandA() {
   };
   const [users, setUsers] = useState<any[]>([]);
   const fetchUsers = async () => {
-    const users = await userClient.findAllUsers();
+    const users = await coursesClient.findUsersForCourse(cid as string);
     setUsers(users);
   };
   useEffect(() => {
@@ -75,7 +73,10 @@ export default function PazzaQandA() {
                   className="wd-pazza-flex-items align-content-center flex-grow-1 ps-1 pe-2"
                 >
                   {lops.map((lop) => (
-                    <div className="wd-pazza-lopc-tab align-content-center wd-pazza-font-9pt">
+                    <div
+                      className="wd-pazza-lopc-tab align-content-center wd-pazza-font-9pt"
+                      key={lop}
+                    >
                       {lop}
                     </div>
                   ))}
@@ -138,8 +139,14 @@ export default function PazzaQandA() {
           <div id="wd-pazza-ps" className="container-fluid p-0 flex-fill">
             <Routes>
               <Route path="/" element={<Navigate to="ClassAtGlance" />} />
-              <Route path={category} element={<ClassAtGlance />} />
-              <Route path="ClassAtGlance" element={<ClassAtGlance />} />
+              <Route
+                path={category}
+                element={<ClassAtGlance enrolledNumber={users.length} />}
+              />
+              <Route
+                path="ClassAtGlance"
+                element={<ClassAtGlance enrolledNumber={users.length} />}
+              />
               <Route path="Post/:pid" element={<PostScreen users={users} />} />
               <Route path="NewPost" element={<NewPost users={users} />} />
             </Routes>

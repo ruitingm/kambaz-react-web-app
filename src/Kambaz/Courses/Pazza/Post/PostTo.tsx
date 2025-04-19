@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function PostTo({
   setPrivatePost,
   users,
+  setVisible,
+  visible,
 }: {
   setPrivatePost: (privatePost: boolean) => void;
   users: any[];
+  setVisible: (visible: any[]) => void;
+  visible: string[];
 }) {
   const handleChange = (e: any) => {
     if (e.target.value === "class") {
@@ -13,7 +18,15 @@ export default function PostTo({
       setPrivatePost(true);
     }
   };
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [postIndividual, setPostIndividual] = useState(false);
+  const handleSelect = (user: string, currentVisible: string[]) => {
+    const isSelected = currentVisible.includes(user);
+    const updatedList = isSelected
+      ? currentVisible.filter((u) => u !== user)
+      : [...currentVisible, user];
+    setVisible(updatedList);
+  };
   return (
     <div id="wd-pazza-post-to-screen">
       <div className="d-flex align-content-center mt-3">
@@ -27,6 +40,7 @@ export default function PostTo({
             onChange={(e) => {
               handleChange(e);
               setPostIndividual(false);
+              setVisible(["All Users"]);
             }}
             defaultChecked
           />
@@ -47,6 +61,7 @@ export default function PostTo({
             onChange={(e) => {
               handleChange(e);
               setPostIndividual(true);
+              setVisible([]);
             }}
           />
           <label
@@ -60,30 +75,72 @@ export default function PostTo({
       {postIndividual && (
         <div
           id="wd-pazza-visible-to"
-          className="d-flex align-items-center mt-2 ms-4"
+          className="d-flex align-items-center mt-2 ms-4 wd-pazza-font-11pt"
         >
-          <select
-            id="wd-pazza-select-visible-to"
-            className="form-select w-50 me-2"
-          >
-            <option value="INSTRUCTORS">Instructors</option>
-            <option value="ALL">All Users</option>
-            {users && (
-              <div>
-                {users.map((user) => (
-                  <option value={user._id}>
-                    {user.firstName} {user.lastName}
-                  </option>
-                ))}
-              </div>
-            )}
-          </select>
-          <label
-            htmlFor="wd-pazza-select-visible-to"
-            className="form-label wd-pazza-font-11pt wd-pazza-dark-grey mt-2"
-          >
-            Select users who can view your post
-          </label>
+          <div>
+            <label
+              htmlFor="wd-pazza-select-visible-to"
+              className="form-label wd-pazza-font-11pt wd-pazza-black mb-0 ms-1"
+            >
+              Select who can view your post
+            </label>
+            <ul
+              id="wd-pazza-select-visible-to"
+              className="list-unstyled border rounded p-2 wd-pazza-black wd-pazza-font-11pt"
+            >
+              <li key="instructor" className="form-check">
+                <input
+                  id="wd-pazza-visible-to-instructor"
+                  className="form-check-input me-2"
+                  type="checkbox"
+                  value="Instructor"
+                  onChange={() => handleSelect("Instructor", visible)}
+                />
+                <label
+                  htmlFor="wd-pazza-visible-to-instructor"
+                  className="form-check-label"
+                >
+                  Instructor
+                </label>
+              </li>
+              <li key="All Users" className="form-check">
+                <input
+                  id="wd-pazza-visible-to-all"
+                  className="form-check-input me-2"
+                  type="checkbox"
+                  value="All Users"
+                  onChange={() => handleSelect("All Users", visible)}
+                />
+                <label
+                  htmlFor="wd-pazza-visible-to-all"
+                  className="form-check-label"
+                >
+                  All Users
+                </label>
+              </li>
+              {users &&
+                users.map(
+                  (user: any) =>
+                    user._id !== currentUser._id && (
+                      <li key={user._id} className="form-check">
+                        <input
+                          id={`wd-pazza-visible-to-${user._id}`}
+                          type="checkbox"
+                          className="form-check-input me-2"
+                          value={user._id}
+                          onChange={() => handleSelect(user._id, visible)}
+                        />
+                        <label
+                          htmlFor={`wd-pazza-visible-to-${user._id}`}
+                          className="form-check-label"
+                        >
+                          {user.firstName} {user.lastName}
+                        </label>
+                      </li>
+                    )
+                )}
+            </ul>
+          </div>
         </div>
       )}
     </div>

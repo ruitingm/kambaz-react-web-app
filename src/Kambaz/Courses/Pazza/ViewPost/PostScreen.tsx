@@ -27,7 +27,7 @@ export default function PostScreen({ users }: { users: any }) {
   return (
     <div id="wd-pazza-view-post-screen">
       <div>
-        <PostContent post={post} />
+        <PostContent post={post} users={users} />
       </div>
       <div className="m-2 mt-3 border border-1 bg-white">
         <FollowUpDiscussion users={users} />

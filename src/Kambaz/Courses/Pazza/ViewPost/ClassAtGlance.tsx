@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
 import { Post } from "../postReducer";
 import { Reply } from "../replyReducer";
-export default function ClassAtGlance() {
+export default function ClassAtGlance({
+  enrolledNumber,
+}: {
+  enrolledNumber: number;
+}) {
   const { cid } = useParams();
   const { posts } = useSelector((state: any) => state.postsReducer) as {
     posts: Post[];
@@ -105,8 +109,8 @@ export default function ClassAtGlance() {
             <td>students' responses</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">1 hr 20 min</td>
-            <td>avg. response time</td>
+            <td className="text-end pe-3 fw-bold">{enrolledNumber}</td>
+            <td>student enrolled</td>
           </tr>
         </div>
       </div>
