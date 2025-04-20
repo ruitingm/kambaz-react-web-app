@@ -9,7 +9,6 @@ import { Post, updatePost } from "../postReducer";
 import * as postClient from "../client";
 import { FaCircle } from "react-icons/fa";
 import { useState } from "react";
-import { current } from "@reduxjs/toolkit";
 interface GroupedPosts {
   [key: string]: Post[];
 }
@@ -163,13 +162,16 @@ export default function ListOfPosts() {
               categoryPosts.map((post) => (
                 <div
                   key={post._id}
-                  onClick={() => updatePostHandler({ ...post, read: true })}
+                  onClick={() => {
+                    updatePostHandler({ ...post, read: true });
+                    addView(post);
+                  }}
                 >
                   <Link
                     to={`/Kambaz/Courses/${cid}/Pazza/QandA/Post/${post._id}`}
                     className={"wd-text-no-decor"}
                   >
-                    <div className="d-flex" onClick={() => addView(post)}>
+                    <div className="d-flex">
                       {post.read === false && (
                         <div
                           className={`align-content-center  ${

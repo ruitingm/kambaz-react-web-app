@@ -3,12 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 export type FollowUp = {
   user: string;
   content: string;
+  date: string;
 };
 export type Reply = {
   _id: string;
   post: string;
   user: string;
   reply: string;
+  date: string;
+  role: string;
   followup: FollowUp[];
 };
 

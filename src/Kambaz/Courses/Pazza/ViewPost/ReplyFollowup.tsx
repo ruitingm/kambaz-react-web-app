@@ -42,9 +42,12 @@ export default function FollowupReply({
                   />
                 </div>
                 <div className="col-11 ps-1 pe-0">
-                  <div className="wd-pazza-pos-upper-right">
-                    <ActionButton />
-                  </div>
+                  {(currentUser._id === followup.user ||
+                    currentUser.role === "FACULTY") && (
+                    <div className="wd-pazza-pos-upper-right">
+                      <ActionButton />
+                    </div>
+                  )}
                   <div
                     id="wd-pazza-discussion-reply-user"
                     className="wd-pazza-font-11pt"

@@ -12,9 +12,11 @@ import * as postClient from "../client";
 export default function PostContent({
   post,
   users,
+  getTimeDiff,
 }: {
   post: Post;
   users: any[];
+  getTimeDiff: (postDate: string) => string;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const getUserName = (userId: string) => {
@@ -31,24 +33,7 @@ export default function PostContent({
   };
   const [newPost, setNewPost] = useState("");
   const [newSubject, setNewSubject] = useState("");
-  const getTimeDiff = (postDate: string) => {
-    const now = new Date();
-    const postDateTime = new Date(postDate.replace(" ", "T"));
-    const timeDiff = now.getTime() - postDateTime.getTime();
-    const diffinSeconds = Math.floor(timeDiff / 1000);
-    const diffInMinutes = Math.floor(timeDiff / (1000 * 60));
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffinSeconds < 60) {
-      return `${diffinSeconds} seconds ago`;
-    } else if (diffInMinutes < 60) {
-      return `${diffInMinutes} minutes ago`;
-    } else if (diffInHours < 24) {
-      return `${diffInHours} hours ago`;
-    } else {
-      return `${diffInDays} days ago`;
-    }
-  };
+
   const dispatch = useDispatch();
   const updatePostHandler = async (post: Post) => {
     post = { ...post, post: newPost, subject: newSubject };

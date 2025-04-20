@@ -14,6 +14,7 @@ import * as coursesClient from "../../client";
 import NewPost from "../Post/NewPost";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
+import { Folder, setFolders } from "../FolderReducer";
 export default function PazzaQandA() {
   const category = "hw1";
   const lops = ["Unread", "Updated", "Unresovled"];
@@ -46,6 +47,7 @@ export default function PazzaQandA() {
     const users = await coursesClient.findUsersForCourse(cid as string);
     setUsers(users);
   };
+
   useEffect(() => {
     fetchPostsForCourse(keyword);
     fetchUsers();
@@ -141,11 +143,11 @@ export default function PazzaQandA() {
               <Route path="/" element={<Navigate to="ClassAtGlance" />} />
               <Route
                 path={category}
-                element={<ClassAtGlance enrolledNumber={users.length} />}
+                element={<ClassAtGlance enrolledUsers={users} />}
               />
               <Route
                 path="ClassAtGlance"
-                element={<ClassAtGlance enrolledNumber={users.length} />}
+                element={<ClassAtGlance enrolledUsers={users} />}
               />
               <Route path="Post/:pid" element={<PostScreen users={users} />} />
               <Route path="NewPost" element={<NewPost users={users} />} />

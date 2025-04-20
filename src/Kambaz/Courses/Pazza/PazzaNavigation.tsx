@@ -3,13 +3,20 @@ import { useParams, useLocation, Link } from "react-router";
 export default function PazzaNavigation() {
   const { cid } = useParams();
   const { pathname } = useLocation();
-  const links = [
-    { path: "QandA", label: "Q & A" },
-    { path: "Resources", label: "Resources" },
-    { path: "Statistics", label: "Statistics" },
-    { path: "ManageClass", label: "Manage Class" },
-  ];
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const links =
+    currentUser.role === "FACULTY"
+      ? [
+          { path: "QandA", label: "Q & A" },
+          { path: "Resources", label: "Resources" },
+          { path: "Statistics", label: "Statistics" },
+          { path: "ManageClass", label: "Manage Class" },
+        ]
+      : [
+          { path: "QandA", label: "Q & A" },
+          { path: "Resources", label: "Resources" },
+          { path: "Statistics", label: "Statistics" },
+        ];
   return (
     <div
       id="wd-pazza-navigation"

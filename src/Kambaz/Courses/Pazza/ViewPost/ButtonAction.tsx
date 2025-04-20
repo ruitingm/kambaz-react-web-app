@@ -2,17 +2,23 @@ import { useEffect, useState } from "react";
 import * as client from "../client";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../postReducer";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { deleteReply } from "../replyReducer";
 export default function ActionButton({
   setEdit,
   postId,
+  replyId,
 }: {
   setEdit: (edit: boolean) => void;
   postId?: string;
+  replyId?: string;
 }) {
+  const { cid } = useParams();
   const [selectedAction, setSelectedAction] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const hasPid = postId ? true : false;
+  const hasRid = replyId ? true : false;
   const handleActionChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -21,16 +27,30 @@ export default function ActionButton({
     if (value === "edit") {
       setEdit(true);
     } else if (value === "delete") {
-      await deletePostHandler(postId!);
+      if (hasPid) {
+        await deletePostHandler(postId!);
+      } else if (hasRid) {
+        await deleteReplyHandler(replyId!);
+      }
     }
   };
   const deletePostHandler = async (pid: string) => {
     try {
       await client.deletePost(pid);
       dispatch(deletePost(pid));
-      navigate(-1);
+      navigate(`/Kambaz/Courses/${cid}/Pazza/QandA`, {
+        replace: true,
+      });
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error(error);
+    }
+  };
+  const deleteReplyHandler = async (rid: string) => {
+    try {
+      await client.deleteReply(rid);
+      dispatch(deleteReply(rid));
+    } catch (error) {
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -44,7 +64,7 @@ export default function ActionButton({
         value={selectedAction}
         onChange={handleActionChange}
       >
-        <option id="wd-pazza-post-action-option" value="" disabled selected>
+        <option id="wd-pazza-post-action-option" value="" disabled>
           action
         </option>
         <option id="wd-pazza-post-action-edit" value="edit">

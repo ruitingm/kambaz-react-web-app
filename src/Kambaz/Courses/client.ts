@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Post } from "./Pazza/postReducer";
+import { Folder } from "./Pazza/FolderReducer";
 const axiosWithCredentials = axios.create({ withCredentials: true });
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
@@ -71,6 +72,19 @@ export const createPostForCourse = async (courseId: string, post: Post) => {
 export const findPostsByKeyword = async (courseId: string, keyword: string) => {
   const response = await axiosWithCredentials.get(
     `${COURSES_API}/${courseId}/posts/?keyword=${keyword}`
+  );
+  return response.data;
+};
+export const findFoldersForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/folders`
+  );
+  return response.data;
+};
+export const createFolder = async (courseId: string, folder: Folder) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/folders`,
+    folder
   );
   return response.data;
 };

@@ -417,3 +417,29 @@ body * {
   z-index: auto;
   padding-bottom: 0;
 }
+#wd-pazza-manage-class-toc {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  z-index: 8;
+}
+#wd-pazza-manage-folder-screen {
+  position: relative;
+  width: 97%;
+  margin-top: 70px;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+}
+#wd-pazza-manage-folder-description {
+  overflow: hidden;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#wd-pazza-configure-folder {
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 30px;
+}

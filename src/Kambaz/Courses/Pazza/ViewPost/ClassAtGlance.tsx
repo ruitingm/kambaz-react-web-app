@@ -6,9 +6,9 @@ import { Link, useParams } from "react-router";
 import { Post } from "../postReducer";
 import { Reply } from "../replyReducer";
 export default function ClassAtGlance({
-  enrolledNumber,
+  enrolledUsers,
 }: {
-  enrolledNumber: number;
+  enrolledUsers: any[];
 }) {
   const { cid } = useParams();
   const { posts } = useSelector((state: any) => state.postsReducer) as {
@@ -23,6 +23,9 @@ export default function ClassAtGlance({
   const instructorResponses = posts.filter((p) => p.role === "FACULTY").length;
   const studentResponses = totalPost - instructorResponses;
   const totalReply = replies.length;
+  const enrolledStudents = enrolledUsers.filter(
+    (user) => user.role === "STUDENT"
+  );
   return (
     <div id="wd-pazza-class-at-glance-screen">
       <div
@@ -109,7 +112,7 @@ export default function ClassAtGlance({
             <td>students' responses</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">{enrolledNumber}</td>
+            <td className="text-end pe-3 fw-bold">{enrolledStudents.length}</td>
             <td>student enrolled</td>
           </tr>
         </div>

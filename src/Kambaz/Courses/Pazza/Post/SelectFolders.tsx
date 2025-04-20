@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
+import { Folder } from "../FolderReducer";
 export default function SelectFolders({
   category,
   setCategory,
@@ -9,19 +10,10 @@ export default function SelectFolders({
   setCategory: (category: string[]) => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const links = [
-    "hw1",
-    "hw2",
-    "hw3",
-    "hw4",
-    "hw5",
-    "hw6",
-    "project",
-    "exam",
-    "logistics",
-    "other",
-    "office_hours",
-  ];
+  const { folders } = useSelector((state: any) => state.foldersReducer) as {
+    folders: Folder[];
+  };
+  const links = folders[0].folder;
   const { cid } = useParams();
   const [selectedButton, setSeelectedButton] = useState<string[]>([]);
   const highlightClick = (button: string) => {
