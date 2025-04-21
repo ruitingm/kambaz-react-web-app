@@ -1,4 +1,11 @@
-import { Link, Navigate, Route, Routes, useParams } from "react-router";
+import {
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router";
 import PostScreen from "../ViewPost/PostScreen";
 import ClassAtGlance from "../ViewPost/ClassAtGlance";
 import FolderFilter from "./FolderFilter";
@@ -8,15 +15,16 @@ import { GoTriangleDown } from "react-icons/go";
 import { IoIosSettings } from "react-icons/io";
 import { RxTriangleLeft, RxTriangleRight } from "react-icons/rx";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../postReducer";
 import * as coursesClient from "../../client";
 import NewPost from "../Post/NewPost";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
-import { Folder, setFolders } from "../FolderReducer";
+import * as postClient from "../client";
 export default function PazzaQandA() {
-  const category = "hw1";
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const [fid, setFid] = useState("");
   const lops = ["Unread", "Updated", "Unresovled"];
   const [sideBar, setSideBar] = useState(true);
   const toggleSideBar = () => {
@@ -25,37 +33,57 @@ export default function PazzaQandA() {
   const { cid } = useParams();
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
+  const { pathname } = useLocation();
   const fetchPostsForCourse = async (key: string) => {
     try {
       setKeyword(key);
       if (key) {
         const posts = await coursesClient.findPostsByKeyword(
           cid as string,
+          currentUser._id,
+          currentUser.role,
           key
         );
         dispatch(setPosts(posts));
+      } else if (fid) {
+        const posts = await postClient.filterPostByFolder(
+          cid as string,
+          fid as string,
+          currentUser._id,
+          currentUser.role
+        );
+        dispatch(setPosts(posts));
       } else {
-        const posts = await coursesClient.findPostsForCourse(cid as string);
+        const posts = await coursesClient.findPostsForCourse(
+          cid as string,
+          currentUser._id,
+          currentUser.role
+        );
         dispatch(setPosts(posts));
       }
     } catch (err) {
       console.error(err);
     }
   };
+  console.log(keyword);
   const [users, setUsers] = useState<any[]>([]);
   const fetchUsers = async () => {
     const users = await coursesClient.findUsersForCourse(cid as string);
     setUsers(users);
   };
-
   useEffect(() => {
     fetchPostsForCourse(keyword);
     fetchUsers();
-  }, [cid]);
+  }, [cid, fid]);
+  useEffect(() => {
+    if (pathname.toLowerCase().endsWith("/classatglance")) {
+      setFid("");
+    }
+  }, [pathname]);
   return (
     <div id="wd-pazza-qa">
       <div id="wd-pazza-ff">
-        <FolderFilter />
+        <FolderFilter setFid={setFid} />
       </div>
       <div className="d-flex wd-pazza-bg-blue-grey">
         <div
@@ -142,14 +170,17 @@ export default function PazzaQandA() {
             <Routes>
               <Route path="/" element={<Navigate to="ClassAtGlance" />} />
               <Route
-                path={category}
+                path="Folder/:fid"
                 element={<ClassAtGlance enrolledUsers={users} />}
               />
               <Route
                 path="ClassAtGlance"
                 element={<ClassAtGlance enrolledUsers={users} />}
               />
-              <Route path="Post/:pid" element={<PostScreen users={users} />} />
+              <Route
+                path="Post/:pid"
+                element={<PostScreen users={users} setFid={setFid} />}
+              />
               <Route path="NewPost" element={<NewPost users={users} />} />
             </Routes>
           </div>

@@ -6,13 +6,16 @@
     "reply": "999 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-14-15 15:20",
     "role": "STUDENT",
+    "resolved": false,
     "followup": [
       {
+        "_id:": "1",
         "user": "123",
         "content": "123 Resolved and Unresolved buttons to toggle on whether the discussion has been resolved. Timestamp of when the discussion started.",
         "date": "2025-14-15 18:20"
       },
       {
+        "_id:": "2",
         "user": "345",
         "content": "345 Resolved and Unresolved buttons to toggle on whether the discussion has been resolved. Timestamp of when the discussion started.",
         "date": "2025-14-15 21:40"
@@ -26,8 +29,10 @@
     "reply": "998 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-03-12 21:22",
     "role": "STUDENT",
+    "resolved": false,
     "followup": [
       {
+        "_id:": "3",
         "user": "456",
         "content": "456 Resolved and Unresolved buttons to toggle on whether the discussion has been resolved. Timestamp of when the discussion started.",
         "date": "2025-03-13 09:01"
@@ -42,8 +47,10 @@
     "reply": "995 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-14-15 12:50",
     "role": "STUDENT",
+    "resolved": false,
     "followup": [
       {
+        "_id:": "4",
         "user": "234",
         "content": "234 Resolved and Unresolved buttons to toggle on whether the discussion has been resolved. Timestamp of when the discussion started.",
         "date": "2025-14-15 14:20"
@@ -57,15 +64,17 @@
     "reply": "994 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-03-11 12:19",
     "role": "FACULTY",
+    "resolved": false,
     "followup": []
   },
   {
     "_id": "993",
     "post": "2",
-    "user": "123",
+    "user": "234",
     "reply": "993 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-03-11 12:40",
-    "role": "FACULTY",
+    "role": "STUDENT",
+    "resolved": false,
     "followup": []
   },
   {
@@ -75,8 +84,10 @@
     "reply": "992 Under the answers (if any), FUD allows participants to enter a discussions with nested replies as shown here on the right. Start a new followup discussion field or textarea to start a new discussion.",
     "date": "2025-03-12 23:50",
     "role": "STUDENT",
+    "resolved": false,
     "followup": [
       {
+        "_id:": "5",
         "user": "123",
         "content": "123 Resolved and Unresolved buttons to toggle on whether the discussion has been resolved. Timestamp of when the discussion started.",
         "date": "2025-03-13 12:01"

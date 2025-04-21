@@ -4,7 +4,11 @@ import { setFolders } from "../FolderReducer";
 import { useEffect, useState } from "react";
 import * as courseClient from "../../client";
 import { useDispatch } from "react-redux";
-export default function FolderFilter() {
+export default function FolderFilter({
+  setFid,
+}: {
+  setFid: (fid: string) => void;
+}) {
   const { cid } = useParams();
   const { pathname } = useLocation();
   const [folder, setFolder] = useState<string[]>();
@@ -57,13 +61,14 @@ export default function FolderFilter() {
         id="wd-pazza-folder-filter-item"
         className="wd-pazza-flex-items flex-grow-1 border border-1 border-top-0 border-start-0 border-secondary-subtle pt-1 align-content-center"
       >
-        {folder?.map((f: any) => (
+        {folder?.map((f: string) => (
           <Link
             key={f}
             className={`wd-pazza-folder-filter-tab wd-text-no-decor align-content-center ${
               pathname.includes(f) ? "wd-pazza-active-bold" : ""
             }`}
-            to={`/Kambaz/Courses/${cid}/Pazza/QandA/${f}`}
+            to={`/Kambaz/Courses/${cid}/Pazza/QandA/Folder/${f}`}
+            onClick={() => setFid(f)}
           >
             {f}
           </Link>

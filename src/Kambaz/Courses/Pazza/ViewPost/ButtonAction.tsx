@@ -3,15 +3,21 @@ import * as client from "../client";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../postReducer";
 import { useNavigate, useParams } from "react-router";
-import { deleteReply } from "../replyReducer";
+import { deleteReply, FollowUp, Reply, updateReply } from "../replyReducer";
 export default function ActionButton({
   setEdit,
   postId,
   replyId,
+  followupId,
+  setClickedButton,
+  reply,
 }: {
   setEdit: (edit: boolean) => void;
   postId?: string;
   replyId?: string;
+  followupId?: string;
+  setClickedButton?: (button: string) => void;
+  reply?: Reply;
 }) {
   const { cid } = useParams();
   const [selectedAction, setSelectedAction] = useState("");
@@ -19,6 +25,7 @@ export default function ActionButton({
   const navigate = useNavigate();
   const hasPid = postId ? true : false;
   const hasRid = replyId ? true : false;
+  const hasFid = followupId ? true : false;
   const handleActionChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -26,12 +33,33 @@ export default function ActionButton({
     setSelectedAction(value);
     if (value === "edit") {
       setEdit(true);
+      if (followupId && setClickedButton) {
+        setClickedButton("");
+        setTimeout(() => {
+          setClickedButton(followupId);
+        }, 0);
+      }
     } else if (value === "delete") {
+      setEdit(false);
       if (hasPid) {
         await deletePostHandler(postId!);
       } else if (hasRid) {
         await deleteReplyHandler(replyId!);
+      } else if (hasFid && reply) {
+        await deleteFollowupHandler(followupId!, reply);
       }
+    }
+  };
+  const deleteFollowupHandler = async (fid: string, reply: Reply) => {
+    try {
+      const updatedFollowup = reply.followup.filter(
+        (f: FollowUp) => f._id !== fid
+      );
+      reply = { ...reply, followup: updatedFollowup };
+      await client.updateReply(reply);
+      dispatch(updateReply(reply));
+    } catch (error) {
+      console.error(error);
     }
   };
   const deletePostHandler = async (pid: string) => {

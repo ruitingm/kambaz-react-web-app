@@ -13,10 +13,12 @@ export default function PostContent({
   post,
   users,
   getTimeDiff,
+  setFid,
 }: {
   post: Post;
   users: any[];
   getTimeDiff: (postDate: string) => string;
+  setFid: (fid: string) => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const getUserName = (userId: string) => {
@@ -124,6 +126,9 @@ export default function PostContent({
                 <button
                   key={folder}
                   className="wd-pazza-blue wd-pazza-font-lucida  wd-pazza-bg-light-blue rounded-1 wd-text-no-decor btn p-1 ps-2 pe-2 mt-4 me-2 wd-pazza-font-10pt  "
+                  onClick={() => {
+                    setFid(folder);
+                  }}
                 >
                   {folder}
                 </button>

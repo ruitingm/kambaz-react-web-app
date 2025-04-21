@@ -40,3 +40,14 @@ export const deleteReply = async (replyId: string) => {
   const { data } = await axiosWithCredentials.delete(`${REPLY_API}/${replyId}`);
   return data;
 };
+export const filterPostByFolder = async (
+  courseId: string,
+  folderId: string,
+  userId: string,
+  role: string
+) => {
+  const { data } = await axiosWithCredentials.get(
+    `${POST_API}/${courseId}/${folderId}/?userId=${userId}&?role=${role}`
+  );
+  return data;
+};

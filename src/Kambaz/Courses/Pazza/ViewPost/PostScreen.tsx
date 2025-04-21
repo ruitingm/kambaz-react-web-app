@@ -7,7 +7,13 @@ import * as client from "../client";
 import { setReplies } from "../replyReducer";
 import { useEffect } from "react";
 import InstructorAnswer from "./InstructorAnswer";
-export default function PostScreen({ users }: { users: any }) {
+export default function PostScreen({
+  users,
+  setFid,
+}: {
+  users: any;
+  setFid: (fid: string) => void;
+}) {
   const { pid } = useParams();
   const { posts } = useSelector((state: any) => state.postsReducer) as {
     posts: Post[];
@@ -48,27 +54,36 @@ export default function PostScreen({ users }: { users: any }) {
   useEffect(() => {
     fetchRepliesForPost();
   }, [pid]);
-  console.log(new Date());
   return (
     <div id="wd-pazza-view-post-screen">
       <div>
-        <PostContent post={post} users={users} getTimeDiff={getTimeDiff} />
-      </div>
-      <div>
-        <InstructorAnswer
+        <PostContent
           post={post}
           users={users}
           getTimeDiff={getTimeDiff}
-          stripHtml={stripHtml}
+          setFid={setFid}
         />
       </div>
-      <div className="m-2 mt-3 border border-1 bg-white">
-        <FollowUpDiscussion
-          users={users}
-          getTimeDiff={getTimeDiff}
-          stripHtml={stripHtml}
-        />
-      </div>
+      {post.type === "question" && (
+        <>
+          <div>
+            <InstructorAnswer
+              post={post}
+              users={users}
+              getTimeDiff={getTimeDiff}
+              stripHtml={stripHtml}
+            />
+          </div>
+          <div className="m-2 mt-3 border border-1 bg-white">
+            <FollowUpDiscussion
+              users={users}
+              getTimeDiff={getTimeDiff}
+              stripHtml={stripHtml}
+              post={post}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

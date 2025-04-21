@@ -6,10 +6,11 @@ import Courses from "./Courses";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Session from "./Account/Session";
 import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
+import { Folder, setFolders } from "./Courses/Pazza/FolderReducer";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [courses, setCourses] = useState<any[]>([]);
@@ -65,9 +66,35 @@ export default function Kambaz() {
       })
     );
   };
+  const dispatch = useDispatch();
   const addNewCourse = async () => {
     const newCourse = await courseClient.createCourse(course);
     setCourses([...courses, newCourse]);
+    try {
+      const newCourse = await courseClient.createCourse(course);
+      setCourses([...courses, newCourse]);
+      const defaultFolders = [
+        "hw1",
+        "hw2",
+        "hw3",
+        "hw4",
+        "hw5",
+        "hw6",
+        "project",
+        "exam",
+        "logistics",
+        "other",
+        "office_hours",
+      ];
+      const cid = newCourse._id;
+      const newfolder = await courseClient.createFolder(
+        cid as string,
+        defaultFolders
+      );
+      dispatch(setFolders(newfolder));
+    } catch (error) {
+      console.error(error);
+    }
   };
   const deleteCourse = async (courseId: string) => {
     await courseClient.deleteCourse(courseId);

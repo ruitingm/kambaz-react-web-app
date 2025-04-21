@@ -10,14 +10,17 @@ import { useEffect, useState } from "react";
 import { BiSolidInfoSquare } from "react-icons/bi";
 import ReactQuill from "react-quill";
 import * as repliesClient from "../client";
+import { Post } from "../postReducer";
 export default function FollowupDiscussion({
   users,
   getTimeDiff,
   stripHtml,
+  post,
 }: {
   users: any[];
   getTimeDiff: (postDate: string) => string;
   stripHtml: (html: string) => string;
+  post: Post;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { pid } = useParams();
@@ -25,6 +28,7 @@ export default function FollowupDiscussion({
   const { replies } = useSelector((state: any) => state.repliesReducer) as {
     replies: Reply[];
   };
+  const postedReply = replies.find((r: Reply) => r.user === currentUser._id);
   const nonInsructorReplies = replies.filter((r) => r.role !== "FACULTY");
   const getUser = (userId: string) => {
     const user = users.find((u: any) => u._id.toString() === userId.toString());
@@ -51,6 +55,7 @@ export default function FollowupDiscussion({
       followup: [],
       reply: userReply,
       date: today,
+      resolved: false,
       role: currentUser.role,
     });
     dispatch(addReply(newReply));
@@ -70,7 +75,12 @@ export default function FollowupDiscussion({
     setEdit(false);
   };
   useEffect(() => {
-    getToday();
+    const interval = setInterval(() => {
+      getToday();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
     setEdit(false);
   }, []);
   return (
@@ -96,7 +106,7 @@ export default function FollowupDiscussion({
                     <ActionButton setEdit={setEdit} replyId={reply._id} />
                   </div>
                 )}
-                <DiscussionResolveButton />
+                <DiscussionResolveButton reply={reply} />
                 <span className="wd-pazza-blue ms-1 wd-pazza-font-10pt">
                   <b>@</b>
                   {reply._id}
@@ -139,16 +149,27 @@ export default function FollowupDiscussion({
                       >
                         <ReactQuill
                           defaultValue={reply.reply}
-                          onChange={() => {
-                            setNewReply;
-                            toggleEdit;
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              updateReplyHandler(newReply, reply);
-                            }
-                          }}
+                          onChange={(value) => setNewReply(value)}
                         />
+                        <button
+                          className="btn mt-2 wd-pazza-bg-light-grey wd-pazza-font-10pt wd-pazza-fit-content-btn float-end"
+                          onClick={() => {
+                            toggleEdit();
+                            setEdit(false);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="btn mt-2 wd-pazza-bg-blue text-white wd-pazza-font-10pt wd-pazza-fit-content-btn float-end"
+                          onClick={() => {
+                            updateReplyHandler(newReply, reply);
+                            toggleEdit();
+                            setEdit(false);
+                          }}
+                        >
+                          Save
+                        </button>
                       </div>
                     </div>
                   )}
@@ -160,28 +181,42 @@ export default function FollowupDiscussion({
                       helpful <span className="wd-pazza-dark-grey"> | 0</span>
                     </span>
                   </div>
-                  <FollowupReply reply={reply} users={users} />
+                  <FollowupReply
+                    reply={reply}
+                    users={users}
+                    today={today}
+                    getTimeDiff={getTimeDiff}
+                    stripHtml={stripHtml}
+                  />
                 </div>
               </div>
             </div>
           </div>
         );
       })}
-      <div className="mt-1 ms-3 me-3 wd-pazza-font-11pt">
-        <span className="ms-1">Start a new followup discussion</span>
-        <ReactQuill
-          id="wd-pazza-reply-followup"
-          placeholder="Compose a new followup discussion"
-          defaultValue={userReply}
-          className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1"
-          onChange={handleSetReply}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              addReplyHandler();
-            }
-          }}
-        />
-      </div>
+      {!postedReply && post.resolved === false && (
+        <div className="mt-1 ms-3 me-3 wd-pazza-font-11pt">
+          <span className="ms-1">Start a new followup discussion</span>
+          <div
+            id="wd-pazza-reply-editor-container"
+            className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1 p-2"
+          >
+            <ReactQuill
+              id="wd-pazza-reply-followup"
+              placeholder="Compose a new followup discussion"
+              onChange={handleSetReply}
+            />
+            <div className="d-flex justify-content-end mt-2">
+              <button
+                className="btn wd-pazza-bg-blue text-white wd-pazza-font-10pt wd-pazza-fit-content-btn"
+                onClick={addReplyHandler}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
