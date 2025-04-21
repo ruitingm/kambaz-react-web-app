@@ -4,9 +4,9 @@ import ManageFoldersScreen from "./ManageFoldersScreen.tsx";
 
 export default function ManageClassScreen() {
   return (
-    <div>
+    <div id="wd-pazza-mange-class-screen">
       <TOC />
-      <div className="flex-fill">
+      <div>
         <Routes>
           <Route path="/" element={<Navigate to="ManageFolders" />} />
           <Route path="ManageFolders" element={<ManageFoldersScreen />} />

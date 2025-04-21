@@ -4,18 +4,30 @@ import { GoTriangleDown } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
 import { Post } from "../postReducer";
-export default function ClassAtGlance() {
+import { Reply } from "../replyReducer";
+export default function ClassAtGlance({
+  enrolledUsers,
+}: {
+  enrolledUsers: any[];
+}) {
   const { cid } = useParams();
   const { posts } = useSelector((state: any) => state.postsReducer) as {
     posts: Post[];
+  };
+  const { replies } = useSelector((state: any) => state.repliesReducer) as {
+    replies: Reply[];
   };
   const totalPost = posts.length;
   const unreadPosts = posts.filter((p) => p.read === false).length;
   const unanweredPosts = posts.filter((p) => p.answered === false).length;
   const instructorResponses = posts.filter((p) => p.role === "FACULTY").length;
   const studentResponses = totalPost - instructorResponses;
+  const totalReply = replies.length;
+  const enrolledStudents = enrolledUsers.filter(
+    (user) => user.role === "STUDENT"
+  );
   return (
-    <div id="wd-pazza-class-at-glance-screen" className="wd-pazza-full-screen">
+    <div id="wd-pazza-class-at-glance-screen">
       <div
         id="wd-pazza-class-at-glance-tile"
         className="wd-pazza-dark-grey mt-2 ms-3"
@@ -88,7 +100,7 @@ export default function ClassAtGlance() {
             <td>total posts</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">{totalPost}</td>
+            <td className="text-end pe-3 fw-bold">{totalPost + totalReply}</td>
             <td>total contributions</td>
           </tr>
           <tr>
@@ -100,8 +112,8 @@ export default function ClassAtGlance() {
             <td>students' responses</td>
           </tr>
           <tr>
-            <td className="text-end pe-3 fw-bold">1 hr 20 min</td>
-            <td>avg. response time</td>
+            <td className="text-end pe-3 fw-bold">{enrolledStudents.length}</td>
+            <td>student enrolled</td>
           </tr>
         </div>
       </div>

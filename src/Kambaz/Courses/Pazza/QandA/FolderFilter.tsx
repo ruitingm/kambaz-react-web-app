@@ -1,26 +1,34 @@
 import { FaFolder } from "react-icons/fa";
 import { useParams, useLocation, Link } from "react-router";
-
-export default function FolderFilter() {
+import { setFolders } from "../folderReducer";
+import { useEffect, useState } from "react";
+import * as courseClient from "../../client";
+import { useDispatch } from "react-redux";
+export default function FolderFilter({
+  setFid,
+}: {
+  setFid: (fid: string) => void;
+}) {
   const { cid } = useParams();
   const { pathname } = useLocation();
-  const links = [
-    "hw1",
-    "hw2",
-    "hw3",
-    "hw4",
-    "hw5",
-    "hw6",
-    "project",
-    "exam",
-    "logistics",
-    "other",
-    "office_hours",
-  ];
+  const [folder, setFolder] = useState<string[]>();
+  const dispatch = useDispatch();
+  const fetchFoldersForCourse = async () => {
+    try {
+      const allFolders = await courseClient.findFoldersForCourse(cid as string);
+      setFolder(allFolders[0].folder);
+      dispatch(setFolders(allFolders));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    fetchFoldersForCourse();
+  }, [cid]);
   return (
     <div
       id="wd-pazza-folder-filter"
-      className="d-flex wd-pazza-bg-light-grey flex-fill"
+      className="d-flex wd-pazza-bg-light-grey flex-fill me-4"
     >
       <div
         id="wd-pazza-folder-filter-liveqa"
@@ -53,15 +61,16 @@ export default function FolderFilter() {
         id="wd-pazza-folder-filter-item"
         className="wd-pazza-flex-items flex-grow-1 border border-1 border-top-0 border-start-0 border-secondary-subtle pt-1 align-content-center"
       >
-        {links.map((link) => (
+        {folder?.map((f: string) => (
           <Link
-            key={link}
+            key={f}
             className={`wd-pazza-folder-filter-tab wd-text-no-decor align-content-center ${
-              pathname.includes(link) ? "wd-pazza-active-bold" : ""
+              pathname.includes(f) ? "wd-pazza-active-bold" : ""
             }`}
-            to={`/Kambaz/Courses/${cid}/Pazza/QandA/${link}`}
+            to={`/Kambaz/Courses/${cid}/Pazza/QandA/Folder/${f}`}
+            onClick={() => setFid(f)}
           >
-            {link}
+            {f}
           </Link>
         ))}
       </div>

@@ -28,16 +28,19 @@ body * {
   outline: none;
 }
 
+/* Pazza CSS */
 .wd-activity-profile-size {
   height: 100px;
   width: 100px;
 }
-
-/* Pazza CSS */
 /* PazzaNavigation */
 .wd-pazza-nav-bar {
   height: 60px;
-  position: sticky;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .wd-pazza-logo {
@@ -215,7 +218,9 @@ body * {
 .wd-pazza-bg-darker-grey {
   background-color: #f2f2f2;
 }
-
+.wd-pazza-bg-yellow {
+  background-color: #fff7ce;
+}
 /* Pazza Border Colors*/
 .wd-pazza-border-dark-grey {
   border-color: #7f7f7f;
@@ -301,4 +306,140 @@ body * {
 }
 .wd-pazza-unread-circle {
   height: 5pt;
+}
+
+.wd-courses-header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  height: 65px;
+}
+
+#wd-courses-navigation {
+  position: fixed;
+  top: 65px;
+  width: 130px;
+  height: calc(100vh - 65px);
+  overflow: hidden;
+  background-color: white;
+  z-index: 8;
+}
+.wd-fill-content {
+  margin-left: 130px;
+  margin-top: 30px;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+}
+
+#wd-pazza {
+  position: fixed;
+  top: 65px;
+  left: 230px;
+  width: calc(100% - 240px);
+  height: calc(100vh - 65px);
+  overflow: hidden;
+  padding-left: 30px;
+}
+#wd-pazza-navigation-bar {
+  padding-left: 30px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  overflow: hidden;
+}
+#wd-pazza-ff {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  z-index: 8;
+}
+#wd-pazza-lops {
+  height: 100%;
+  overflow: hidden;
+}
+#wd-pazza-qa {
+  margin-top: 100px;
+  height: calc(100vh - 155px);
+  overflow: hidden;
+}
+#wd-pazza-lops {
+  height: 100%;
+  overflow: hidden;
+}
+#wd-pazza-lop {
+  height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+#wd-pazza-ps {
+  height: calc(100vh - 155px);
+  overflow-y: auto;
+}
+#wd-pazza-lopc {
+  position: sticky;
+  top: 0;
+  z-index: 7;
+}
+.wd-pazza-np-bar {
+  position: sticky;
+  top: 28px;
+  z-index: 7;
+}
+#wd-pazza-mange-class-screen {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+}
+#wd-pazza-manage-folder-screen {
+  width: 97%;
+}
+#wd-pazza-select-visible-to {
+  max-height: 140px;
+  overflow-y: auto;
+  min-width: 300px;
+  margin-bottom: 0;
+}
+
+.wd-pazza-rte-size {
+  display: block;
+  width: 100%;
+  min-height: 10px;
+  height: auto;
+  margin-bottom: 40px;
+  position: static;
+  z-index: auto;
+  padding-bottom: 0;
+}
+#wd-pazza-manage-class-toc {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  z-index: 8;
+}
+#wd-pazza-manage-folder-screen {
+  position: relative;
+  width: 97%;
+  margin-top: 70px;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+}
+#wd-pazza-manage-folder-description {
+  overflow: hidden;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#wd-pazza-configure-folder {
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 30px;
 }

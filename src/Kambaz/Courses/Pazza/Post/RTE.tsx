@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-const RTE = ({ setPost }: { setPost: (post: string) => void }) => {
+const RTE = ({
+  setPost,
+  defaultValue = "",
+}: {
+  setPost: (post: string) => void;
+  defaultValue?: string;
+}) => {
   const [content, setContent] = useState("");
   const modules = {
     toolbar: [
@@ -21,6 +27,9 @@ const RTE = ({ setPost }: { setPost: (post: string) => void }) => {
     setContent(value);
     setPost(stripHtml(value));
   };
+  useEffect(() => {
+    setContent(defaultValue);
+  }, [defaultValue]);
   return (
     <div>
       <ReactQuill

@@ -9,6 +9,7 @@ import PeopleTable from "./People/Table";
 import Pazza from "./Pazza";
 import { useEffect, useState } from "react";
 import * as courseClient from "../Courses/client";
+import ProtectedRoute from "./ProtectedRoute";
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
   const { pathname } = useLocation();
@@ -27,7 +28,7 @@ export default function Courses({ courses }: { courses: any[] }) {
   }, []);
   return (
     <div id="wd-courses">
-      <h2 className="text-danger">
+      <h2 className="text-danger wd-courses-header">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
@@ -36,14 +37,21 @@ export default function Courses({ courses }: { courses: any[] }) {
         <div className="d-none d-md-block">
           <CoursesNavigation />
         </div>
-        <div className="flex-fill">
+        <div className="flex-fill wd-fill-content">
           <Routes>
             <Route path="/" element={<Navigate to="Home" />} />
             <Route path="Home" element={<Home />} />
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-            <Route path="Pazza/*" element={<Pazza />} />
+            <Route
+              path="Pazza/*"
+              element={
+                <ProtectedRoute users={users}>
+                  <Pazza />
+                </ProtectedRoute>
+              }
+            />
             <Route path="People" element={<PeopleTable users={users} />} />
           </Routes>
         </div>

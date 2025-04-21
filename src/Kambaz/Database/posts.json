@@ -7,12 +7,15 @@
     "type": "note",
     "private": false,
     "post": "123 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application.  Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-04-14",
+    "date": "2025-04-14 14:30",
     "liked": true,
     "role": "FACULTY",
     "category": "hw1",
     "read": false,
-    "answered": true
+    "answered": true,
+    "resolved": false,
+    "visible": ["123", "234", "345", "456"],
+    "view": []
   },
   {
     "_id": "2",
@@ -22,12 +25,15 @@
     "type": "question",
     "private": true,
     "post": "Now, let's explore the requirements for the screen where users can view and post answers to questions within the Pazza platform. This screen allows instructors and students to provide responses to queries posted by other students. Upon clicking a post in the List of Posts (LOP), it is displayed in the Post Screen (PS) as shown in the provided screenshot.",
-    "date": "2025-03-10",
+    "date": "2025-03-10 15:20",
     "liked": false,
     "role": "STUDENT",
     "category": "hw2",
     "read": false,
-    "answered": true
+    "answered": true,
+    "resolved": false,
+    "visible": ["Instructors"],
+    "view": []
   },
   {
     "_id": "3",
@@ -37,12 +43,15 @@
     "type": "note",
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
-    "date": "2025-03-20",
+    "date": "2025-03-20 20:13",
     "liked": false,
     "role": "TA",
     "category": "hw1",
     "read": false,
-    "answered": true
+    "answered": true,
+    "resolved": false,
+    "visible": ["123", "234", "345"],
+    "view": []
   },
   {
     "_id": "4",
@@ -52,12 +61,15 @@
     "type": "note",
     "private": false,
     "post": "456 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-02-20",
+    "date": "2025-02-20 09:12",
     "liked": true,
     "role": "STUDENT",
     "category": "hw1",
     "read": false,
-    "answered": true
+    "answered": true,
+    "resolved": false,
+    "visible": ["234", "345", "456"],
+    "view": []
   },
   {
     "_id": "5",
@@ -67,12 +79,15 @@
     "type": "question",
     "private": false,
     "post": "567 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-03-22",
+    "date": "2025-03-22 12:45",
     "liked": false,
     "role": "STUDENT",
     "category": "hw2",
     "read": false,
-    "answered": false
+    "answered": false,
+    "resolved": false,
+    "visible": ["All Users"],
+    "view": []
   },
   {
     "_id": "6",
@@ -82,12 +97,15 @@
     "type": "note",
     "private": false,
     "post": "234 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-04-10",
+    "date": "2025-04-10 23:20",
     "liked": false,
     "role": "STUDENT",
     "category": "hw2",
     "read": false,
-    "answered": false
+    "answered": false,
+    "resolved": false,
+    "visible": ["123", "234", "345", "456"],
+    "view": []
   },
   {
     "_id": "7",
@@ -97,12 +115,15 @@
     "type": "note",
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
-    "date": "2025-03-20",
+    "date": "2025-03-20 18:19",
     "liked": false,
     "role": "TA",
     "category": "hw1",
     "read": false,
-    "answered": false
+    "answered": false,
+    "resolved": false,
+    "visible": ["123", "234", "345", "456"],
+    "view": []
   },
   {
     "_id": "8",
@@ -112,12 +133,15 @@
     "type": "note",
     "private": false,
     "post": "456 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application. Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
-    "date": "2025-02-20",
+    "date": "2025-02-20 12:01",
     "liked": true,
     "role": "STUDENT",
     "category": "hw2",
     "read": false,
-    "answered": false
+    "answered": false,
+    "resolved": false,
+    "visible": ["123", "234", "345", "456"],
+    "view": []
   },
   {
     "_id": "9",
@@ -127,11 +151,32 @@
     "type": "note",
     "private": false,
     "post": "Here, the original question is prominently displayed at the top of the PS, with its summary highlighted as a bold header for easy reference. Below is a detailed list of requirements that define how this screen should function, ensuring a seamless and effective interaction for answering questions.",
-    "date": "2025-04-10",
+    "date": "2025-04-10 18:09",
     "liked": true,
     "role": "FACULTY",
     "category": "hw1",
     "read": false,
-    "answered": false
+    "answered": false,
+    "resolved": false,
+    "visible": ["123", "234", "345", "456"],
+    "view": []
+  },
+  {
+    "_id": "10",
+    "user": "345",
+    "course": "RS101",
+    "subject": "Subject 345",
+    "type": "question",
+    "private": false,
+    "post": "345 Question about assignment 1 Kambaz application and lab 1. Questions about Kambaz application.  Questions about final project Pazza final project Pazza application. Question about assignment 2 Kambaz application.",
+    "date": "2025-04-18 17:09",
+    "liked": false,
+    "role": "FACULTY",
+    "category": "hw1",
+    "read": false,
+    "answered": false,
+    "resolved": false,
+    "visible": ["All Users"],
+    "view": []
   }
 ]

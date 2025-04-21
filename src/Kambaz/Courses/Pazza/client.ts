@@ -12,13 +12,17 @@ export const updatePost = async (post: Post) => {
   );
   return data;
 };
+export const deletePost = async (postId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${POST_API}/${postId}`);
+  return data;
+};
 export const findRepliesForPost = async (postId: string) => {
   const response = await axiosWithCredentials.get(
     `${POST_API}/${postId}/replies`
   );
   return response.data;
 };
-export const createRepliesForPost = async (postId: string, reply: Reply) => {
+export const createReplyForPost = async (postId: string, reply: Reply) => {
   const response = await axiosWithCredentials.post(
     `${POST_API}/${postId}/replies`,
     reply
@@ -29,6 +33,21 @@ export const updateReply = async (reply: Reply) => {
   const { data } = await axiosWithCredentials.put(
     `${REPLY_API}/${reply._id}`,
     reply
+  );
+  return data;
+};
+export const deleteReply = async (replyId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${REPLY_API}/${replyId}`);
+  return data;
+};
+export const filterPostByFolder = async (
+  courseId: string,
+  folderId: string,
+  userId: string,
+  role: string
+) => {
+  const { data } = await axiosWithCredentials.get(
+    `${POST_API}/${courseId}/${folderId}/?userId=${userId}&?role=${role}`
   );
   return data;
 };

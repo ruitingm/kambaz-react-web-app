@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 export type Post = {
   _id: string;
   user: string;
@@ -11,9 +10,12 @@ export type Post = {
   date: string;
   liked: boolean;
   role: string;
-  category: string;
+  category: string[];
   read: boolean;
   answered: boolean;
+  resolved: boolean;
+  visible: string[];
+  view: string[];
 };
 
 const initialState = {
@@ -27,8 +29,7 @@ const postsSlice = createSlice({
       state.posts = posts;
     },
     addPost: (state, { payload: post }: { payload: Post }) => {
-      console.log(post);
-      state.posts = [...state.posts, { ...post, _id: uuidv4() }] as Post[];
+      state.posts = [...state.posts, post] as Post[];
     },
     deletePost: (state, { payload: postId }) => {
       state.posts = state.posts.filter((p: Post) => p._id !== postId);

@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 export type FollowUp = {
+  _id: string;
   user: string;
   content: string;
+  date: string;
 };
 export type Reply = {
   _id: string;
   post: string;
   user: string;
   reply: string;
+  date: string;
+  role: string;
+  resolved: boolean;
   followup: FollowUp[];
 };
 

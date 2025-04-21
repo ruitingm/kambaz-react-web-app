@@ -55,9 +55,13 @@ export const findUsersForCourse = async (courseId: string) => {
   const response = await axios.get(`${COURSES_API}/${courseId}/users`);
   return response.data;
 };
-export const findPostsForCourse = async (courseId: string) => {
+export const findPostsForCourse = async (
+  courseId: string,
+  userId: string,
+  role: string
+) => {
   const response = await axiosWithCredentials.get(
-    `${COURSES_API}/${courseId}/posts`
+    `${COURSES_API}/${courseId}/posts?userId=${userId}&role=${role}`
   );
   return response.data;
 };
@@ -65,6 +69,30 @@ export const createPostForCourse = async (courseId: string, post: Post) => {
   const response = await axiosWithCredentials.post(
     `${COURSES_API}/${courseId}/posts`,
     post
+  );
+  return response.data;
+};
+export const findPostsByKeyword = async (
+  courseId: string,
+  userId: string,
+  role: string,
+  keyword: string
+) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/posts?keyword=${keyword}&userId=${userId}&role=${role}`
+  );
+  return response.data;
+};
+export const findFoldersForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/folders`
+  );
+  return response.data;
+};
+export const createFolder = async (courseId: string, folder: string[]) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/folders`,
+    folder
   );
   return response.data;
 };
