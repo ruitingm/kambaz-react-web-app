@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Folder } from "../FolderReducer";
+import { Folder } from "../folderReducer";
 const axiosWithCredentials = axios.create({ withCredentials: true });
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 const FOLDER_API = `${REMOTE_SERVER}/api/folders`;

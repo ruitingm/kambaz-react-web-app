@@ -1,6 +1,6 @@
 import { FaFolder } from "react-icons/fa";
 import { useParams, useLocation, Link } from "react-router";
-import { setFolders } from "../FolderReducer";
+import { setFolders } from "../folderReducer";
 import { useEffect, useState } from "react";
 import * as courseClient from "../../client";
 import { useDispatch } from "react-redux";

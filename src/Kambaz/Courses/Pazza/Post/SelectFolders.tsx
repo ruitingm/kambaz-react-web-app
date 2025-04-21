@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
-import { Folder } from "../FolderReducer";
+import { Folder } from "../folderReducer";
 export default function SelectFolders({
   category,
   setCategory,

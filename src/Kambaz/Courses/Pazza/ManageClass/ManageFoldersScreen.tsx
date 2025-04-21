@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as folderClient from "./client.ts";
-import { Folder, updateFolder } from "../FolderReducer.ts";
+import { Folder, updateFolder } from "../folderReducer.ts";
 import { useState } from "react";
 import { FaAlignJustify, FaPlus, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";

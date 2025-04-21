@@ -5,7 +5,7 @@ import assignmentsReducer from "./Courses/Assignments/reducer";
 import enrollmentsReducer from "./Enrollment/reducer";
 import postsReducer from "./Courses/Pazza/postReducer";
 import repliesReducer from "./Courses/Pazza/replyReducer";
-import foldersReducer from "./Courses/Pazza/FolderReducer";
+import foldersReducer from "./Courses/Pazza/folderReducer";
 const store = configureStore({
   reducer: {
     modulesReducer,

@@ -21,7 +21,7 @@ export default function NewPost({ users }: { users: any[] }) {
   const [visible, setVisible] = useState<string[]>(["All Users"]);
   const [today, setToday] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [hasError, setHasError] = useState(false);
+  const [, setHasError] = useState(false);
   const postId = uuidv4();
   const getToday = () => {
     const date = new Date();

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Session from "./Account/Session";
 import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
-import { Folder, setFolders } from "./Courses/Pazza/FolderReducer";
+import { setFolders } from "./Courses/Pazza/folderReducer";
 export default function Kambaz() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [courses, setCourses] = useState<any[]>([]);
