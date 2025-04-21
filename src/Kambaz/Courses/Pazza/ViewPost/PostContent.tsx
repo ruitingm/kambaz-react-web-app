@@ -73,7 +73,7 @@ export default function PostContent({
       </div>
       <div id="wd-pazza-view-post-conctent" className="ps-4 pt-0 pb-3">
         <div className="wd-pazza-pos-upper-right">
-          <ActionButton setEdit={setEdit} postId={post._id} />
+          <ActionButton setEdit={setEdit} postId={post._id} disableEdit={false}/>
         </div>
         <div className="pt-4 pe-3">
           {!edit && (

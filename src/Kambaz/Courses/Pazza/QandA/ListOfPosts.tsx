@@ -172,18 +172,18 @@ export default function ListOfPosts() {
                     className={"wd-text-no-decor"}
                   >
                     <div className="d-flex">
-                      {post.read === false && (
-                        <div
-                          className={`align-content-center  ${
-                            pathname ===
-                            `/Kambaz/Courses/${cid}/Pazza/QandA/Post/${post._id}`
-                              ? "wd-pazza-bg-yellow"
-                              : "bg-white"
-                          }`}
-                        >
+                      <div
+                        className={`align-content-center  ${
+                          pathname ===
+                          `/Kambaz/Courses/${cid}/Pazza/QandA/Post/${post._id}`
+                            ? "wd-pazza-bg-yellow"
+                            : "bg-white"
+                        }`}
+                      >
+                        {!post.view.includes(currentUser._id) && (
                           <FaCircle className="wd-pazza-unread-circle wd-pazza-blue ps-1" />
-                        </div>
-                      )}
+                        )}
+                      </div>
                       <div
                         id="wd-pazza-lop-content"
                         className={`container-fluid wd-pazza-lop-content-box border border-0 border-bottom ${

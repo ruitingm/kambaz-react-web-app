@@ -14,6 +14,7 @@ export type Reply = {
   date: string;
   role: string;
   resolved: boolean;
+  type: "answer" | "followup";
   followup: FollowUp[];
 };
 
