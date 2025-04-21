@@ -10,17 +10,14 @@ import { useEffect, useState } from "react";
 import { BiSolidInfoSquare } from "react-icons/bi";
 import ReactQuill from "react-quill";
 import * as repliesClient from "../client";
-import { Post } from "../postReducer";
 export default function FollowupDiscussion({
   users,
   getTimeDiff,
   stripHtml,
-  post,
 }: {
   users: any[];
   getTimeDiff: (postDate: string) => string;
   stripHtml: (html: string) => string;
-  post: Post;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { pid } = useParams();
@@ -28,8 +25,7 @@ export default function FollowupDiscussion({
   const { replies } = useSelector((state: any) => state.repliesReducer) as {
     replies: Reply[];
   };
-  const postedReply = replies.find((r: Reply) => r.user === currentUser._id);
-  const nonInsructorReplies = replies.filter((r) => r.role !== "FACULTY");
+  const followupReplies = replies.filter((r: Reply) => r.type === "followup");
   const getUser = (userId: string) => {
     const user = users.find((u: any) => u._id.toString() === userId.toString());
     return user;
@@ -48,7 +44,7 @@ export default function FollowupDiscussion({
     setToday(formattedDate);
   };
   const addReplyHandler = async () => {
-    const newReply = await postClient.createReplyForPost(pid!, {
+    const newReplyObj = await postClient.createReplyForPost(pid!, {
       _id: "",
       user: currentUser._id,
       post: pid!,
@@ -56,18 +52,16 @@ export default function FollowupDiscussion({
       reply: userReply,
       date: today,
       resolved: false,
+      type: "followup",
       role: currentUser.role,
     });
-    dispatch(addReply(newReply));
+    dispatch(addReply(newReplyObj));
     setUserReply("");
   };
   const handleSetReply = (reply: string) => {
     setUserReply(stripHtml(reply));
   };
   const [edit, setEdit] = useState(false);
-  const toggleEdit = () => {
-    setEdit(!edit);
-  };
   const updateReplyHandler = async (newContent: string, reply: Reply) => {
     reply = { ...reply, reply: stripHtml(newContent) };
     await repliesClient.updateReply(reply);
@@ -94,7 +88,7 @@ export default function FollowupDiscussion({
           for lingering questions and comments
         </span>
       </div>
-      {nonInsructorReplies.map((reply) => {
+      {followupReplies.map((reply) => {
         const user = getUser(reply.user);
         return (
           <div>
@@ -103,7 +97,11 @@ export default function FollowupDiscussion({
                 {(currentUser.role === "FACULTY" ||
                   reply.user === currentUser._id) && (
                   <div className="wd-pazza-pos-upper-right">
-                    <ActionButton setEdit={setEdit} replyId={reply._id} />
+                    <ActionButton
+                      setEdit={setEdit}
+                      replyId={reply._id}
+                      disableEdit={false}
+                    />
                   </div>
                 )}
                 <DiscussionResolveButton reply={reply} />
@@ -154,7 +152,6 @@ export default function FollowupDiscussion({
                         <button
                           className="btn mt-2 wd-pazza-bg-light-grey wd-pazza-font-10pt wd-pazza-fit-content-btn float-end"
                           onClick={() => {
-                            toggleEdit();
                             setEdit(false);
                           }}
                         >
@@ -164,7 +161,6 @@ export default function FollowupDiscussion({
                           className="btn mt-2 wd-pazza-bg-blue text-white wd-pazza-font-10pt wd-pazza-fit-content-btn float-end"
                           onClick={() => {
                             updateReplyHandler(newReply, reply);
-                            toggleEdit();
                             setEdit(false);
                           }}
                         >
@@ -194,29 +190,27 @@ export default function FollowupDiscussion({
           </div>
         );
       })}
-      {!postedReply && post.resolved === false && (
-        <div className="mt-1 ms-3 me-3 wd-pazza-font-11pt">
-          <span className="ms-1">Start a new followup discussion</span>
-          <div
-            id="wd-pazza-reply-editor-container"
-            className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1 p-2"
-          >
-            <ReactQuill
-              id="wd-pazza-reply-followup"
-              placeholder="Compose a new followup discussion"
-              onChange={handleSetReply}
-            />
-            <div className="d-flex justify-content-end mt-2">
-              <button
-                className="btn wd-pazza-bg-blue text-white wd-pazza-font-10pt wd-pazza-fit-content-btn"
-                onClick={addReplyHandler}
-              >
-                Save
-              </button>
-            </div>
+      <div className="mt-1 ms-3 me-3 wd-pazza-font-11pt">
+        <span className="ms-1">Start a new followup discussion</span>
+        <div
+          id="wd-pazza-reply-editor-container"
+          className="form-control wd-pazza-border-light-grey wd-pazza-font-11pt mb-2 mt-1 p-2"
+        >
+          <ReactQuill
+            id="wd-pazza-reply-followup"
+            placeholder="Compose a new followup discussion"
+            onChange={handleSetReply}
+          />
+          <div className="d-flex justify-content-end mt-2">
+            <button
+              className="btn wd-pazza-bg-blue text-white wd-pazza-font-10pt wd-pazza-fit-content-btn"
+              onClick={addReplyHandler}
+            >
+              Save
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

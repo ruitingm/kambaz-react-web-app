@@ -1,16 +1,23 @@
-import { useState } from "react";
-import { Reply } from "../replyReducer";
+import { useEffect, useState } from "react";
+import { Reply, updateReply } from "../replyReducer";
+import * as repliesClient from "../client";
+import { useDispatch } from "react-redux";
 export default function DiscussionResolveButton({ reply }: { reply: Reply }) {
   const [resolved, setResolved] = useState(reply.resolved);
-
+  const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value === "resolved";
     setResolved(newValue);
-
-    // If needed: update the actual reply object or notify parent
-    // e.g., dispatch(updateReply({ ...reply, resolved: newValue }));
-    console.log("Updated resolved to:", newValue);
   };
+
+  const updateReplyHandler = async (resolved: boolean) => {
+    reply = { ...reply, resolved };
+    await repliesClient.updateReply(reply);
+    dispatch(updateReply(reply));
+  };
+  useEffect(() => {
+    updateReplyHandler(resolved);
+  }, [resolved]);
 
   return (
     <div

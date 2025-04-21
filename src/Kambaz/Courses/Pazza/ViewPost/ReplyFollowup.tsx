@@ -66,6 +66,7 @@ export default function FollowupReply({
                         followupId={followup._id}
                         setClickedButton={setClickedButton}
                         reply={reply}
+                        disableEdit={false}
                       />
                     </div>
                   )}

@@ -2,14 +2,12 @@ import ActionButton from "./ButtonAction";
 import { Post } from "../postReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { BiSolidInfoSquare } from "react-icons/bi";
+import { TbCircleLetterSFilled } from "react-icons/tb";
 import ReactQuill from "react-quill";
 import * as repliesClient from "../client";
 import { addReply, Reply, updateReply } from "../replyReducer";
 import * as postClient from "../client";
-
-const isInstructor = (role: string) => ["FACULTY", "TA"].includes(role);
-export default function InstructorAnswer({
+export default function StudentAnswer({
   post,
   users,
   getTimeDiff,
@@ -24,17 +22,15 @@ export default function InstructorAnswer({
   const { replies } = useSelector((state: any) => state.repliesReducer) as {
     replies: Reply[];
   };
-  const instructorReply = replies.find(
-    (r: Reply) => isInstructor(r.role) && r.type === "answer"
+  const studentReply = replies.find(
+    (r: Reply) => r.role === "STUDENT" && r.type === "answer"
   );
-  const replyExist = instructorReply !== undefined;
+  const replyExist = studentReply !== undefined;
   const getUser = (userId: string) => {
     const user = users.find((u) => u._id === userId);
     return user;
   };
-  const replyUser = instructorReply
-    ? getUser(instructorReply?.user)
-    : undefined;
+  const replyUser = studentReply ? getUser(studentReply?.user) : undefined;
   const [edit, setEdit] = useState(false);
   const toggleEdit = () => {
     setEdit((v) => !v);
@@ -75,47 +71,46 @@ export default function InstructorAnswer({
     const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
     return formattedDate;
   };
-  const currentUserIsInstructor = isInstructor(currentUser.role);
-  if (!currentUserIsInstructor && !replyExist) return;
+  if (currentUser.role !== "STUDENT" && !replyExist) return;
   return (
-    <div id="wd-pazza-instructor-answer-screen">
+    <div id="wd-pazza-student-answer-screen">
       <div
-        id="wd-pazza-instructor-answer"
+        id="wd-pazza-student-answer"
         className="m-2 border border-1 rounded-1 bg-white"
       >
         <div
-          id="wd-pazza-view-instructor-answer-title "
+          id="wd-pazza-view-student-answer-title "
           className="border border-bottom-1 wd-pazza-font-11pt align-content-center ps-2 pt-1 pb-1 d-flex justify-content-between"
         >
           <div>
-            <BiSolidInfoSquare className="fs-4 wd-pazza-yellow me-1 rounded-1" />
-            <b>the instructors' answer,&nbsp;</b>
+            <TbCircleLetterSFilled className="fs-4 wd-pazza-green me-1 rounded-1" />
+            <b>the students' answer,&nbsp;</b>
             <span className="fst-italic">
-              where instructors collectively construct a single answer
+              where students collectively construct a single answer
             </span>
           </div>
           <div className="wd-pazza-pos-upper-right float-end">
             <ActionButton
               setEdit={setEdit}
-              replyId={instructorReply?._id}
+              replyId={studentReply?._id}
               disableEdit={!replyExist}
             />
           </div>
         </div>
         <div
-          id="wd-pazza-instructor-answer-conctent"
+          id="wd-pazza-student-answer-conctent-main"
           className="ps-4 pt-0 pb-3 pe-4"
         >
           <div
-            id="wd-pazza-instructor-answer-content"
+            id="wd-pazza-student-answer-content"
             className="wd-pazza-font-11pt wd-pazza-black mt-3"
           >
-            {!edit && instructorReply?.reply}
+            {!edit && studentReply?.reply}
           </div>
-          {currentUserIsInstructor && ((replyExist && edit) || !replyExist) && (
+          {((replyExist && edit) || !replyExist) && (
             <ReactQuill
               onChange={setNewAnswer}
-              defaultValue={instructorReply?.reply}
+              defaultValue={studentReply?.reply}
             />
           )}
         </div>
@@ -128,7 +123,7 @@ export default function InstructorAnswer({
               <button
                 id="wd-pazza-save-answer-button"
                 className="btn wd-pazza-bg-blue wd-pazza-font-10pt text-white wd-pazza-fit-content-btn float-start me-2 ms-4"
-                onClick={() => updateReplyHandler(newAnswer, instructorReply)}
+                onClick={() => updateReplyHandler(newAnswer, studentReply)}
               >
                 Save Edit
               </button>
@@ -140,9 +135,9 @@ export default function InstructorAnswer({
               </button>
             </>
           )}
-          {currentUserIsInstructor && !replyExist && !edit && (
+          {currentUser.role === "STUDENT" && !replyExist && !edit && (
             <button
-              id="wd-pazza-anwer-edit-btn"
+              id="wd-pazza-student-anwer-edit-btn"
               className="btn wd-pazza-bg-blue border border-1 rounded-1 text-white wd-pazza-font-lucida wd-pazza-border-dark-grey wd-pazza-font-11pt ps-2 pe-2 pt-1 pb-1 ms-4"
               onClick={() => {
                 addReplyHandler();
@@ -152,7 +147,7 @@ export default function InstructorAnswer({
               Save
             </button>
           )}
-          {currentUserIsInstructor && replyExist && !edit && (
+          {currentUser.role === "STUDENT" && replyExist && !edit && (
             <>
               <button
                 id="wd-pazza-anwer-edit-btn"
@@ -173,7 +168,7 @@ export default function InstructorAnswer({
               <span className="wd-pazza-dark-grey wd-pazza-font-10pt float-end pt-2 me-2">
                 {replyUser && (
                   <>
-                    Updated {getTimeDiff(instructorReply.date)} by
+                    Updated {getTimeDiff(studentReply.date)} by
                     {replyUser.firstName} {replyUser.lastName}
                   </>
                 )}

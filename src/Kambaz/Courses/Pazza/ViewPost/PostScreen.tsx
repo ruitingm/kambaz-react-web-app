@@ -7,6 +7,7 @@ import * as client from "../client";
 import { setReplies } from "../replyReducer";
 import { useEffect } from "react";
 import InstructorAnswer from "./InstructorAnswer";
+import StudentAnswer from "./StudentAnswer";
 export default function PostScreen({
   users,
   setFid,
@@ -18,7 +19,7 @@ export default function PostScreen({
   const { posts } = useSelector((state: any) => state.postsReducer) as {
     posts: Post[];
   };
-  const post = posts.find((p) => p._id === pid) as Post;
+  const post = posts.find((p: Post) => p._id === pid);
   const dispatch = useDispatch();
   const fetchRepliesForPost = async () => {
     try {
@@ -54,6 +55,7 @@ export default function PostScreen({
   useEffect(() => {
     fetchRepliesForPost();
   }, [pid]);
+  if (!post) return;
   return (
     <div id="wd-pazza-view-post-screen">
       <div>
@@ -65,25 +67,28 @@ export default function PostScreen({
         />
       </div>
       {post.type === "question" && (
-        <>
-          <div>
-            <InstructorAnswer
-              post={post}
-              users={users}
-              getTimeDiff={getTimeDiff}
-              stripHtml={stripHtml}
-            />
-          </div>
-          <div className="m-2 mt-3 border border-1 bg-white">
-            <FollowUpDiscussion
-              users={users}
-              getTimeDiff={getTimeDiff}
-              stripHtml={stripHtml}
-              post={post}
-            />
-          </div>
-        </>
+        <div>
+          <StudentAnswer
+            post={post}
+            users={users}
+            getTimeDiff={getTimeDiff}
+            stripHtml={stripHtml}
+          />
+          <InstructorAnswer
+            post={post}
+            users={users}
+            getTimeDiff={getTimeDiff}
+            stripHtml={stripHtml}
+          />
+        </div>
       )}
+      <div className="m-2 mt-3 border border-1 bg-white">
+        <FollowUpDiscussion
+          users={users}
+          getTimeDiff={getTimeDiff}
+          stripHtml={stripHtml}
+        />
+      </div>
     </div>
   );
 }

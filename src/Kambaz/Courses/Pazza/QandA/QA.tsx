@@ -65,7 +65,6 @@ export default function PazzaQandA() {
       console.error(err);
     }
   };
-  console.log(keyword);
   const [users, setUsers] = useState<any[]>([]);
   const fetchUsers = async () => {
     const users = await coursesClient.findUsersForCourse(cid as string);

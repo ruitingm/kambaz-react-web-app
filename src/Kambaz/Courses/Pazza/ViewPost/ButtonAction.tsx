@@ -11,6 +11,7 @@ export default function ActionButton({
   followupId,
   setClickedButton,
   reply,
+  disableEdit,
 }: {
   setEdit: (edit: boolean) => void;
   postId?: string;
@@ -18,6 +19,7 @@ export default function ActionButton({
   followupId?: string;
   setClickedButton?: (button: string) => void;
   reply?: Reply;
+  disableEdit: boolean;
 }) {
   const { cid } = useParams();
   const [selectedAction, setSelectedAction] = useState("");
@@ -34,10 +36,7 @@ export default function ActionButton({
     if (value === "edit") {
       setEdit(true);
       if (followupId && setClickedButton) {
-        setClickedButton("");
-        setTimeout(() => {
-          setClickedButton(followupId);
-        }, 0);
+        setClickedButton(followupId);
       }
     } else if (value === "delete") {
       setEdit(false);
@@ -95,7 +94,11 @@ export default function ActionButton({
         <option id="wd-pazza-post-action-option" value="" disabled>
           action
         </option>
-        <option id="wd-pazza-post-action-edit" value="edit">
+        <option
+          id="wd-pazza-post-action-edit"
+          value="edit"
+          disabled={disableEdit}
+        >
           Edit
         </option>
         <option id="wd-pazza-post-action-delete" value="delete">

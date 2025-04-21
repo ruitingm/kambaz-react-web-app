@@ -7,6 +7,7 @@
     "date": "2025-14-15 15:20",
     "role": "STUDENT",
     "resolved": false,
+    "type": "followup",
     "followup": [
       {
         "_id:": "1",
@@ -30,6 +31,7 @@
     "date": "2025-03-12 21:22",
     "role": "STUDENT",
     "resolved": false,
+    "type": "followup",
     "followup": [
       {
         "_id:": "3",
@@ -48,6 +50,7 @@
     "date": "2025-14-15 12:50",
     "role": "STUDENT",
     "resolved": false,
+    "type": "followup",
     "followup": [
       {
         "_id:": "4",
@@ -65,6 +68,7 @@
     "date": "2025-03-11 12:19",
     "role": "FACULTY",
     "resolved": false,
+    "type": "answer",
     "followup": []
   },
   {
@@ -75,6 +79,7 @@
     "date": "2025-03-11 12:40",
     "role": "STUDENT",
     "resolved": false,
+    "type": "answer",
     "followup": []
   },
   {
@@ -85,6 +90,7 @@
     "date": "2025-03-12 23:50",
     "role": "STUDENT",
     "resolved": false,
+    "type":"followup",
     "followup": [
       {
         "_id:": "5",
