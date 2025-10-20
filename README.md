@@ -1,52 +1,42 @@
-# cs5610-kambaz-react-web-app
+## Application Overview
 
-# React + TypeScript + Vite
+**Kambaz & Pazza** is a web-based learning management platform inspired by Canvas and Piazza.  
+It provides an **intuitive and responsive environment** for students, instructors, and administrators to manage courses, modules, assignments, people, and Q&A discussions in real time.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The platform uses **role-based authentication** to tailor the user experience for different roles — students, instructors, teaching assistants, and admins — ensuring a secure and interactive learning environment.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+- **Frontend:** React, HTML/CSS, Bootstrap — deployed on Netlify
+- **Backend:** Node.js, Express.js, MongoDB, Redux — deployed on Render
+- **Frontend Repo:** https://github.com/ruitingm/kambaz-react-web-app
+- **Backend Repo:** https://github.com/ruitingm/kambaz-node-server-app
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Key Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+- **User Registration** — Simple and minimalist interface for a smooth sign-up process.
+- **Role-Based Access** — Tailored interfaces and permissions for students, instructors, and admins.
+- **Course Navigation** — Intuitive and responsive navigation between courses and modules.
+- **Course Dashboard** — View and access enrolled courses in a clean dashboard.
+- **Piazza-Style Q&A Forum** — Threaded discussions allowing students and instructors to post, reply, and collaborate.
+- **Responsive UI** — Fully functional across different device sizes.
+- **People Management** — View and manage course enrollments and participants.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### For Students
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+- **Course Registration** — Browse and enroll in available courses.
+- **Access Learning Materials** — View course content, assignments, and participate in discussions.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+### For Instructors
+
+- **Course Creation & Management** — Create and update courses.
+- **Assignments & Modules** — Add learning materials and assignments.
+- **Forum Engagement** — Add announcement and provide answers to students' questions.
+
+---
+
+## Application Demo

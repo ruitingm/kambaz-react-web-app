@@ -1,7 +1,7 @@
 import { BsCheckSquareFill, BsFillExclamationSquareFill } from "react-icons/bs";
 import { FaUnlockAlt } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
 import { Post } from "../postReducer";
 export default function ClassAtGlance() {
