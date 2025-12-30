@@ -8,7 +8,6 @@ import * as repliesClient from "../client";
 import { addReply, Reply, updateReply } from "../replyReducer";
 import * as postClient from "../client";
 
-const isInstructor = (role: string) => ["FACULTY", "TA"].includes(role);
 export default function InstructorAnswer({
   post,
   users,
@@ -24,14 +23,41 @@ export default function InstructorAnswer({
   const { replies } = useSelector((state: any) => state.repliesReducer) as {
     replies: Reply[];
   };
+
+  const isInstructor = (role: string) =>
+    ["FACULTY", "TA"].includes((role || "").trim().toUpperCase());
+
   const instructorReply = replies.find(
-    (r: Reply) => isInstructor(r.role) && r.type === "answer"
+    (r: Reply) =>
+      String(r.post).trim() === String(post._id).trim() &&
+      isInstructor(r.role) &&
+      String(r.type).trim() === "answer"
   );
   const replyExist = instructorReply !== undefined;
   const getUser = (userId: string) => {
     const user = users.find((u) => u._id === userId);
     return user;
   };
+  console.log("post._id raw:", post._id, typeof post._id);
+  console.log("replies raw:", replies);
+
+  if (replies[0]) {
+    const r = replies[0];
+    console.log("r.post raw:", r.post, typeof r.post);
+    console.log("r.type raw:", JSON.stringify(r.type));
+    console.log("r.role raw:", JSON.stringify(r.role));
+
+    console.log(
+      "matchPost:",
+      String(r.post).trim() === String(post._id).trim()
+    );
+    console.log("matchType:", String(r.type).trim() === "answer");
+    console.log(
+      "matchRole:",
+      ["FACULTY", "TA"].includes(String(r.role).trim().toUpperCase())
+    );
+  }
+  console.log("instructorReply:", instructorReply);
   const replyUser = instructorReply
     ? getUser(instructorReply?.user)
     : undefined;
@@ -50,6 +76,15 @@ export default function InstructorAnswer({
   useEffect(() => {
     setEdit(false);
   }, []);
+  console.log(
+    "Redux reply snapshot:",
+    replies.map((r) => ({
+      id: r._id,
+      post: r.post,
+      type: r.type,
+      role: r.role,
+    }))
+  );
   const addReplyHandler = async () => {
     const newReply = await postClient.createReplyForPost(post._id!, {
       _id: "",
@@ -65,6 +100,7 @@ export default function InstructorAnswer({
     dispatch(addReply(newReply));
     setNewAnswer("");
   };
+
   const getToday = () => {
     const date = new Date();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");

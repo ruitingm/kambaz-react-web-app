@@ -40,8 +40,13 @@ export default function Users() {
   };
   const { uid } = useParams();
   const fetchUsers = async () => {
-    const users = await client.findAllUsers();
-    setUsers(users);
+    if (uid) {
+      const user = await client.findUsersById(uid);
+      setUsers([user]);
+    } else {
+      const users = await client.findAllUsers();
+      setUsers(users);
+    }
   };
   useEffect(() => {
     fetchUsers();

@@ -51,7 +51,7 @@ export default function Signin() {
           Sign up
         </Link>
       </div>
-      <div
+      {/* <div
         id="wd-project-team-info"
         className="mt-5 border border-1 rounded p-3"
       >
@@ -65,7 +65,7 @@ export default function Signin() {
         <h4>
           Node Repo: https://github.com/ruitingm/cs5610-kambaz-node-server-app
         </h4>
-      </div>
+      </div> */}
     </div>
   );
 }

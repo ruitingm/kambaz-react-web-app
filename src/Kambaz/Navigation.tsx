@@ -1,7 +1,7 @@
 import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
-import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 export default function KambazNavigation() {
@@ -11,7 +11,7 @@ export default function KambazNavigation() {
     { label: "Courses", path: "/Kambaz/Courses/*", icon: LiaBookSolid },
     { label: "Calendar", path: "/Kambaz/Calendar", icon: IoCalendarOutline },
     { label: "Inbox", path: "/Kambaz/Inbox", icon: FaInbox },
-    { label: "Labs", path: "/Labs", icon: LiaCogSolid },
+    // { label: "Labs", path: "/Labs", icon: LiaCogSolid },
   ];
   return (
     <div

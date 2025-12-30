@@ -2,6 +2,7 @@ import { FaUserCircle } from "react-icons/fa";
 import PeopleDetails from "./Details";
 import { Link } from "react-router";
 export default function PeopleTable({ users = [] }: { users?: any[] }) {
+  console.log(users);
   return (
     <div id="wd-people-table">
       <table className="table table-striped">
